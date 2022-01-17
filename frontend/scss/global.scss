@@ -1,7 +1,51 @@
 body {
     padding: 0.5rem;
+    font-family: $font-family-base !important;
+}
+
+a:hover {
+    color: $color-w-0 !important;
+    text-decoration: underline;
+}
+
+.btn.btn-fancy {
+    border-radius: 0;
+    border: 3px solid $color-w-0;
+    background-color: white;
+    color: $color-w-0;
+    font-family: $font-family-calmius-extrabold;
+    text-transform: uppercase;
+    font-size: 1em;
+    padding: 1em;
+    letter-spacing: 1px;
+
+    &.btn-primary {
+        background-color: $color-w-5;
+    }
+
+    &.btn-secondary {
+        color: $color-w-2;
+        border: 3px solid $color-w-2;
+    }
+
+    &:hover, &:active, &:focus {
+        background-color: $color-w-1 !important;
+        border: 3px solid $color-w-1 !important;
+        color: white;
+    }
 }
 
 #main-container {
     padding: 1em 2em;
 }
+
+#home {
+    background-color: $color-w-6;
+}
+
+.subtitle {
+    font-family: $font-family-calmius-mediumitalic;
+    font-size: 1em;
+    color: $color-w-0;
+}
+

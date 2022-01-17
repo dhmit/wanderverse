@@ -1,4 +1,16 @@
 .navbar {
+    padding: 2em 1em !important;
+
+    &.bg-light {
+        background-color: $color-w-4 !important;
+    }
+
+    a {
+        color: $color-w-0;
+        font-family: $font-family-calmius-extrabold;
+        letter-spacing: 1px;
+    }
+
     .link-home {
         font-size: 1.25rem;
         font-weight: bold;

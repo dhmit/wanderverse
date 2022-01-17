@@ -3,7 +3,6 @@
  */
 
 
-
 /**
  * Get the value of a cookie, given its name
  * Adapted from https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax
@@ -23,4 +22,22 @@ export function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+export const colors = [
+    "#0C00FF",
+    "#3D2DFD",
+    "#6D5BFB",
+    "#9E88FA",
+    "#CEB6F8",
+    "#FFE3F6",
+];
+
+export function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+
+export function shuffleArray(arr) {
+    return arr.sort(() => Math.random() - 0.5);
 }

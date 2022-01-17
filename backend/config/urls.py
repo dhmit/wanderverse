@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # API endpoints
     path('', views.index),
+    path('about/', views.about),
+    path('instructions/', views.instructions),
     path('example/', views.example),
     path('example/<example_id>', views.example),
 ]

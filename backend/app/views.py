@@ -33,11 +33,35 @@ def index(request):
 
     context = {
         'page_metadata': {
-            'title': 'Home page'
+            'title': 'Home page',
+            'id': 'home'
         },
         'component_name': 'Home'
     }
 
+    return render(request, 'index.html', context)
+
+
+def about(request):
+    context = {
+        'page_metadata': {
+            'title': 'About page',
+            'id': 'about'
+        },
+        'component_name': 'About'
+    }
+    return render(request, 'index.html', context)
+
+
+
+def instructions(request):
+    context = {
+        'page_metadata': {
+            'title': 'Instructions page',
+            'id': 'instructions'
+        },
+        'component_name': 'Instructions'
+    }
     return render(request, 'index.html', context)
 
 
