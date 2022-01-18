@@ -29,6 +29,7 @@ urlpatterns = [
     path('', views.index),
     path('about/', views.about),
     path('instructions/', views.instructions),
+    path('random/', views.random_wanderverse),
     path('example/', views.example),
     path('example/<example_id>', views.example),
 ]

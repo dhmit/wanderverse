@@ -16,7 +16,8 @@ const Home = () => {
             <br/><br/>
             <SymbolDivider width={"75px"}/>
             <br/><br/>
-            <FancyButton title={"read a wanderverse"}
+            <FancyButton title={"random wanderverse"}
+                         href={"random/"}
                          extraClass={"btn-secondary"}/>
             <br/><br/>
             <SectionSymbols/>

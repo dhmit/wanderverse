@@ -20,6 +20,6 @@ class FancyButton extends React.Component {
             </button>}
         </>;
     }
-};
+}
 
 export default FancyButton;
