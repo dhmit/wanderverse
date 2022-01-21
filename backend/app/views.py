@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 from app.models import Wanderverse
-from app.helpers import get_random_obj
+from app.helpers import get_random_id
 from app.rules import Rules
 
 
@@ -47,24 +48,6 @@ def instructions(request):
     return render(request, 'index.html', context)
 
 
-def random_wanderverse(request):
-    qs = Wanderverse.objects.all()
-    random_w = get_random_obj(qs)
-    context = {
-        'page_metadata': {
-            'title': 'Instructions page',
-            'id': 'instructions',
-        },
-        'component_props': {
-            'data': str(random_w).split("\\")
-        },
-        'component_name': 'Random'
-    }
-    print(context)
-
-    return render(request, 'index.html', context)
-
-
 def example(request, example_id=None):
     """
     Example page
@@ -80,3 +63,40 @@ def example(request, example_id=None):
         'component_name': 'ExampleId'
     }
     return render(request, 'index.html', context)
+
+
+def play(request):
+    qs = Wanderverse.objects.all()
+    random_id = get_random_id(qs)
+    print("getting id", random_id)
+    w = Wanderverse.objects.get(id=random_id)
+    context = {
+        'page_metadata': {
+            'title': 'Wanderverse',
+            'id': 'play',
+        },
+        'component_props': {
+            'data': {
+                'exquisite_verse': str(w.exquisite()),
+                'id': random_id,
+            }
+        },
+        'component_name': 'Random'
+    }
+    return render(request, 'index.html', context)
+
+
+def wanderverse(request, wanderverse_id=None, exquisite=False):
+    if request.POST:
+        # check last line added timestamp
+        # if all good, add line
+        # else, create clone of object, add line
+        # save obj
+        pass
+    if wanderverse_id:
+        w = Wanderverse.objects.get(id=wanderverse_id)
+        exquisite = request.GET.get("exquisite", "False")
+        if exquisite == "True":
+            return JsonResponse({"w": str(w.exquisite())})
+        else:
+            return JsonResponse({"w": str(w).split("\\")})

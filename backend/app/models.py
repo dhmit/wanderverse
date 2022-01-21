@@ -7,6 +7,9 @@ class Wanderverse(models.Model):
     def __str__(self):
         return "\\".join(self.verse_set.all().order_by('id').values_list('text', flat=True))
 
+    def exquisite(self):
+        return self.verse_set.order_by('id').last()
+
 
 class Verse(models.Model):
     id = models.BigAutoField(primary_key=True)

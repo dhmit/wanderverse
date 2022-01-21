@@ -25,7 +25,7 @@ class Rules:
         # choose book num
         book_num = random.randint(1, self.book_nums)
         suffixed_num = f"{get_suffix(book_num)}"
-        self.all.append(f"Get the {suffixed_num} book you see")
+        self.all.append(f"Get the {suffixed_num} book you see from the shelf.")
         # choose part of book
         book_part = random.choice(self.triple)
         self.all.append(f"Flip to the {book_part} of the book")

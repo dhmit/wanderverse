@@ -1,10 +1,10 @@
 import random
+import nltk
 
 
-def get_random_obj(qs):
+def get_random_id(qs):
     max_count = qs.count()
-    random_int = random.randint(0, max_count - 1)
-    return qs[random_int]
+    return random.randint(1, max_count)
 
 
 def get_suffix(n):
