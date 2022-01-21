@@ -85,6 +85,26 @@ def play(request):
     }
     return render(request, 'index.html', context)
 
+def read(request):
+    qs = Wanderverse.objects.all()
+    random_id = get_random_id(qs)
+    print("getting id", random_id)
+    w = Wanderverse.objects.get(id=random_id)
+    context = {
+        'page_metadata': {
+            'title': 'Wanderverse',
+            'id': 'read',
+        },
+        'component_props': {
+            'data': {
+                'exquisite_verse': str(w).split("\\"),
+                'id': random_id,
+            }
+        },
+        'component_name': 'Random'
+    }
+    return render(request, 'index.html', context)
+
 
 def wanderverse(request, wanderverse_id=None, exquisite=False):
     if request.POST:

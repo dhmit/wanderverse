@@ -14,6 +14,7 @@ urlpatterns = [
     path('about/', views.about),
     path('instructions/', views.instructions),
     path('play/', views.play),
+    path('read/', views.read),
     path('example/', views.example),
     path('example/<example_id>', views.example),
     path('wanderverses/<wanderverse_id>', views.wanderverse),
