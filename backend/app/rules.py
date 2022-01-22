@@ -63,7 +63,7 @@ book_part = {
 
 book_part_options = ["Flip three times.",
                      "Flip four times.",
-                     "Flip five pages",
+                     "Flip five times.",
                      "Flip three pages from the back.",
                      "Go to page twelve.", ]
 
@@ -166,7 +166,7 @@ class Rules:
         num_of_options = options[str(self.floor)][step]
         choice = roll_dice(num_of_options)
         if step == "stack":
-            return f"Go to stack number {choice}."
+            return f"Go to stack number {choice + 1}."
 
         suffixed = get_suffix(choice)
         if step == "book":
