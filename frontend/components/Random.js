@@ -1,14 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import * as PropTypes from "prop-types";
 import W from "../images/icons/w.svg";
 
 const Random = ({data}) => {
-
-    const [tracker, setTracker] = useState(0);
-
-    const onButtonClick = () => {
-        setTracker(previousState => previousState + 1);
-    };
 
     return (
         <div className={"text-center"}>
