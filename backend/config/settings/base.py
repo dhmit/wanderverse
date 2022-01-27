@@ -151,3 +151,6 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(PROJECT_ROOT, 'webpack-stats.json'),
     }
 }
+
+# This flag exists to pre-populate our DB faster
+CREATE_NEW = True

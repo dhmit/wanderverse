@@ -12,9 +12,10 @@ urlpatterns = [
     # API endpoints
     path('', views.index),
     path('about/', views.about),
-    path('instructions/', views.instructions),
     path('play/', views.play),
     path('read/', views.read),
+    path('add-verse/', views.add_verse),
+    path('rules/', views.rules),
     path('example/', views.example),
     path('example/<example_id>', views.example),
     path('wanderverses/<wanderverse_id>', views.wanderverse),

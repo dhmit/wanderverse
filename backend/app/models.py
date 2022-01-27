@@ -18,9 +18,9 @@ class Verse(models.Model):
                                     on_delete=models.DO_NOTHING)
     date = models.DateTimeField(auto_now_add=True)
     author = models.TextField(blank=True, null=False)
-    page_number = models.IntegerField(blank=True, null=False)
+    page_number = models.IntegerField(blank=True, null=True)
     book_title = models.TextField(blank=True, null=False)
-    genre = models.TextField(blank=True, null=False)
+    genre = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.text

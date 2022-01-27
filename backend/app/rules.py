@@ -49,9 +49,13 @@ book_options = ["Find a big book.", "Pick up a small book.",
                 "Find a book with the loveliest title.",
                 "Find a book with a title that reminds you of yesterday.",
                 "Find a book with a title that reminds you of your favorite person.",
-                "Find a book with a title that sounds heavy.", "Find an orange book.",
-                "Find a book with a title that sounds light.", "Find the book that finds you.",
-                "Find a blue book.", "Pick up a book with a jacket the color of the sky."]
+                "Find a book with a title that sounds heavy.",
+                "Find an orange book.",
+                "Find a book with a title that sounds light.",
+                "Find the book that finds you.",
+                "Find a blue book.",
+                "Pick up a book with a jacket the color of the sky.",
+                "Pick up a book that looks like it has the answer."]
 
 book["0"] += book_options
 book["1"] += book_options
@@ -61,11 +65,11 @@ book_part = {
     "1": ["function:robot"]
 }
 
-book_part_options = ["Flip three times.",
-                     "Flip four times.",
-                     "Flip five times.",
+book_part_options = ["Flip to a random page. Do it again.",
+                     "Flip to a random page. Do it again, and again.",
+                     "Flip to a random page. Do it again, and again, and once more.",
                      "Flip three pages from the back.",
-                     "Go to page twelve.", ]
+                     "Go to page twelve."]
 
 book_part["0"] += book_part_options
 book_part["1"] += book_part_options
@@ -113,6 +117,7 @@ class Rules:
         # choice = self.expand(choice, "position")
         # self.all.append(choice)
         steps = roll_dice(3)
+
         # if steps is 0, we just need to pick a book
 
         end = self.choose("end")
