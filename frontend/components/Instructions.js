@@ -1,5 +1,4 @@
 import React from "react";
-import W from "../images/icons/w.svg";
 import * as PropTypes from "prop-types";
 
 
@@ -11,7 +10,6 @@ const Instructions = ({rules}) => {
 
     return (
         <div className={"text-center"}>
-            <a href={"/"}><W height={"80px"} className={"2 mb-4"}/></a>
             <div>Instructions</div>
             <ul className="list">
                 {rulesList}

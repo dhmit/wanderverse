@@ -107,3 +107,16 @@ $font-family-base: "Baskerville", serif;
 $font-family-calmius: calmiusregular, "Baskerville", serif;
 $font-family-calmius-extrabold: calmiusextra_bold, "Baskerville", serif;
 $font-family-calmius-mediumitalic: calmiusmedium_italic, "Baskerville", serif;
+
+
+.font-calmius {
+    font-family: $font-family-calmius;
+}
+
+.font-calmius-extrabold {
+    font-family: $font-family-calmius-extrabold;
+}
+
+.font-calmius-mediumitalic {
+    font-family: $font-family-calmius-mediumitalic;
+}

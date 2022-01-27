@@ -1,0 +1,101 @@
+#exquisite-verse {
+    background-color: $color-black;
+    color: white;
+    padding: 0.5em;
+    letter-spacing: 0.02em;
+}
+
+#play {
+    .w {
+        .cls-1 {
+            fill: $color-black !important;
+        }
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .hr {
+        width: 100%;
+        border-bottom: 2px solid $color-black;
+    }
+
+    .rules {
+        border-bottom: 2px solid $color-black;
+    }
+
+    .rules-list {
+        max-height: 226px;
+        overflow-y: scroll;
+    }
+
+    .rules-list > li {
+        font-size: 1.4em;
+        list-style: line inside;
+    }
+
+    .instructions-overlay {
+        z-index: 9999;
+        box-shadow: 0 4px 2px -2px gray;
+        border-bottom: 2px solid $color-w-0;
+        background-color: $color-bluer;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        transition: all 500ms ease;
+        overflow-y: scroll;
+
+        &.dismissed {
+            top: -36em;
+            position: fixed;
+        }
+    }
+
+    .btn-dismiss {
+        text-transform: uppercase;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+
+    .w-form {
+        position: absolute;
+        top: 0;
+        margin-bottom: 2em;
+
+        label {
+            color: $color-w-0;
+            font-size: 1.35em;
+            padding: 0;
+        }
+
+        textarea {
+            border: 0.1em solid $color-w-0;
+            min-height: 6em;
+        }
+
+        input {
+            border: 0;
+            border-bottom: 0.1em solid $color-w-0;
+        }
+
+        input.form-control {
+            padding: 0;
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+                border-bottom: 0.1em solid $color-w-4;
+            }
+
+        }
+
+        .form-group.row {
+            margin: 0.75em 0.25em;
+        }
+
+        .btn {
+            margin: 0 auto;
+        }
+    }
+}

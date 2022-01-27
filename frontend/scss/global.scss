@@ -1,6 +1,13 @@
 body {
-    padding: 0.5rem;
     font-family: $font-family-base !important;
+    color: $color-black;
+}
+
+ul {
+    padding: 0;
+    li {
+        list-style: none;
+    }
 }
 
 a:hover {
@@ -8,9 +15,13 @@ a:hover {
     text-decoration: underline;
 }
 
+.btn, .form-control {
+    border-radius: 0 !important;
+}
+
 .btn.btn-fancy {
     border-radius: 0;
-    border: 3px solid $color-w-0;
+    border: 2px solid $color-w-0;
     background-color: white;
     color: $color-w-0;
     font-family: $font-family-calmius-extrabold;
@@ -25,7 +36,7 @@ a:hover {
 
     &.btn-secondary {
         color: $color-w-2;
-        border: 3px solid $color-w-2;
+        border-color: $color-w-2;
     }
 
     &:hover, &:active, &:focus {
@@ -36,16 +47,23 @@ a:hover {
 }
 
 #main-container {
-    padding: 1em 2em;
+    //padding: 1em 1em;
 }
 
 #home {
     background-color: $color-w-6;
 }
 
+.page-title {
+    font-weight: bold;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 .subtitle {
     font-family: $font-family-calmius-mediumitalic;
-    font-size: 1em;
+    font-size: 0.85em;
     color: $color-w-0;
 }
 
