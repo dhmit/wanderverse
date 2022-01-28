@@ -96,9 +96,10 @@ const Play = ({data}) => {
                 </div>
                 <div className={"rules text-left mt-4 pb-4"}>
                     <div className={"instructions-title"}>
-                        <h3 className={"page-title text-left d-inline"}>Instructions
-                            <div className={"d-inline-block hr"}/>
-                        </h3>
+                        <div className={"page-title row mb-4 mr-1"}>
+                            <div className={"col-auto"}>Instructions</div>
+                            <div className={"col hr mb-2"}/>
+                        </div>
 
                     </div>
                     <ul className="rules-list">
@@ -107,13 +108,13 @@ const Play = ({data}) => {
                         })}
                     </ul>
                 </div>
-                <button className={"btn btn-tertiary btn-dismiss mt-3"}
+                <button className={"btn btn-tertiary btn-dismiss mt-2"}
                         onClick={dismissModal}>
                     {instructionsText}
                     <br/>
-                    {instructionsText.indexOf("Exit") > -1 ?
-                        <X width={"10px"} height={"10px"} /> :
-                        <DownArrow width={"10px"} height={"10px"} />
+                    {instructionsText.indexOf("Exit") > -1
+                        ? <X width={"10px"} height={"10px"} />
+                        : <DownArrow width={"10px"} height={"10px"} />
                     }
                 </button>
             </div>
@@ -123,9 +124,7 @@ const Play = ({data}) => {
                         The last line of the poem to extend:
                     </label>
                     <p id={"verse"}>&ldquo;{verse}&rdquo;</p>
-                    <label>
 
-                    </label>
                     <div className={"form-group"}>
                         <label htmlFor="verse-input">Your found text</label>
                         <p>Add your verse to extend the poem above.</p>
@@ -135,32 +134,32 @@ const Play = ({data}) => {
                                   id={"verse-input"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-2 pt-2"}>Title</label>
+                        <label className={"col-auto mr-2"}>Title</label>
                         <input name={bookTitle}
                                onChange={e => setBookTitle(e.target.value)}
-                               className={"form-control col-10"}/>
+                               className={"form-control col"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-5 pt-2"}>Page number</label>
+                        <label className={"col-auto mr-2"}>Page number</label>
                         <input name={bookPageNumber}
                                onChange={e => setBookPageNumber(e.target.value)}
-                               className={"form-control col-7"}
+                               className={"form-control col"}
                                type={"number"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-3 pt-2"}>Author</label>
+                        <label className={"col-auto mr-2"}>Author</label>
                         <input name={bookAuthor}
                                onChange={e => setBookAuthor(e.target.value)}
-                               className={"form-control col-9"}/>
+                               className={"form-control col"}/>
                     </div>
                     <div className={"form-group row mb-6"}>
-                        <label className={"col-3 pt-2"}>Genre</label>
+                        <label className={"col-auto mr-2"}>Genre</label>
                         <input name={bookGenre}
                                onChange={e => setBookGenre(e.target.value)}
-                               className={"form-control col-9"}/>
+                               className={"form-control col"}/>
                     </div>
                     <div className={"row"}>
-                        <button className={"col-4 btn btn-primary text-center"}
+                        <button className={"col-auto btn btn-primary btn-submit text-center"}
                                 type={"submit"}>
                             ADD VERSE
                         </button>

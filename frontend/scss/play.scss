@@ -1,8 +1,10 @@
 #exquisite-verse {
     background-color: $color-black;
     color: white;
-    padding: 0.5em;
+    padding: 0.8em;
     letter-spacing: 0.02em;
+    max-height: 75px;
+    overflow-y: scroll;
 }
 
 #play {
@@ -17,7 +19,6 @@
     }
 
     .hr {
-        width: 100%;
         border-bottom: 2px solid $color-black;
     }
 
@@ -47,7 +48,7 @@
         overflow-y: scroll;
 
         &.dismissed {
-            top: -36em;
+            top: -39.5em;
             position: fixed;
         }
     }
@@ -81,7 +82,7 @@
 
         input.form-control {
             padding: 0;
-
+            height: 100%;
             &:focus {
                 box-shadow: none;
                 outline: none;
@@ -96,6 +97,18 @@
 
         .btn {
             margin: 0 auto;
+        }
+        .btn-submit {
+            background-color: $color-w-5;
+            border: 0.1em solid $color-w-2;
+            color: $color-w-2;
+            font-family: $font-family-calmius-extrabold;
+            letter-spacing: 0.05em;
+            font-size: 0.9em;
+            &:hover, &:active, &:focus {
+                background-color: $color-w-3;
+                color: $color-w-6;
+            }
         }
     }
 }
