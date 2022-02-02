@@ -31,15 +31,17 @@ const Instructions = ({instructionsText, instructionsClass, rules, dismissModal,
                     })}
                 </ul>
             </div>
-            <button className={"btn btn-tertiary btn-dismiss mt-2"}
-                    onClick={dismissModal}>
-                {instructionsText}
-                <br/>
-                {instructionsText.indexOf("Exit") > -1
-                    ? <X width={"10px"} height={"10px"}/>
-                    : <DownArrow width={"10px"} height={"10px"}/>
-                }
-            </button>
+            <div className={"row btn-row"}>
+                <button className={"btn btn-tertiary btn-dismiss mt-2 mx-auto"}
+                        onClick={dismissModal}>
+                    {instructionsText}
+                    <br/>
+                    {instructionsText.indexOf("Exit") > -1
+                        ? <X width={"10px"} height={"10px"}/>
+                        : <DownArrow width={"10px"} height={"10px"}/>
+                    }
+                </button>
+            </div>
         </div>
     );
 };

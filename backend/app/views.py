@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from app.models import Wanderverse, Verse
 from app.helpers import get_random_id
+from app.validators import verse_is_valid
 from app.rules import Rules
 
 
@@ -136,40 +137,35 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-    print("add_verse content:", content)
     wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
     last_verse = wanderverse_to_extend.verse_set.last()
     last_verse_text = content['last_verse']
-    # TODO: add some validations
+    verse_text = content['verse'].strip()
+
+    # Check if text is clean:
+    if not verse_is_valid(content):
+        return JsonResponse({"valid": False, "message": "Not allowed"}, status=422)
+
     if last_verse.text == last_verse_text:
-        # TODO: check for date conflicts
-        # TODO: check if clean, return error if not
-        verse = Verse.objects.create(text=content['verse'].strip(),
+        verse = Verse.objects.create(text=verse_text,
                                      author=content['author'],
                                      book_title=content['book_title'],
                                      wanderverse=wanderverse_to_extend)
-        try:
-            if 'page_number' in content:
-                verse.page_number = int(content['page_number'])
-                verse.save()
-        except Exception:
-            pass
-    if (content['start_new'] and content['start_new'] == "true") or last_verse.text != \
-        last_verse_text:
+        if 'page_number' in content and content['page_number'].isdigit():
+            verse.page_number = int(content['page_number'])
+            verse.save()
+    if ('start_new' in content and content['start_new'] == "true") or \
+        last_verse.text != last_verse_text:
         new_wanderverse = Wanderverse.objects.create()
-        new_verse = Verse.objects.create(text=content['verse'].strip(),
+        new_verse = Verse.objects.create(text=verse_text,
                                          author=content['author'],
                                          book_title=content['book_title'],
                                          wanderverse=new_wanderverse)
-        try:
-            if 'page_number' in content:
-                new_verse.page_number = int(content['page_number'])
-                new_verse.save()
-        except Exception:
-            pass
+        if 'page_number' in content and content['page_number'].isdigit():
+            new_verse.page_number = int(content['page_number'])
+            new_verse.save()
 
         new_verse.wanderverse = new_wanderverse
         new_verse.save()
 
-    # return redirect(reverse("read_wanderverse"), wanderverse_id=wanderverse_to_extend.id)
     return JsonResponse(content, status=200)

@@ -81,6 +81,8 @@ const Play = ({data}) => {
             }).then(() => {
             clearLocalStorage();
             window.location.assign("/read/?id=" + id);
+        }).catch((error) => {
+            console.log("catching", error);
         })
     }
 

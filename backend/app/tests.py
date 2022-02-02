@@ -11,9 +11,9 @@ from app.views import play
 from app.models import Wanderverse, Verse
 
 
-def create_sentence(max_word_length=3):
+def create_sentence(min_word_length=3, max_word_length=6):
     sentence = ""
-    random_word_length = random.randint(1, max_word_length)
+    random_word_length = random.randint(min_word_length, max_word_length)
     for i in range(0, random_word_length):
         random_char_length = random.randint(0, 20)
         sentence += fuzzy.FuzzyText(length=random_char_length).fuzz() + " "
@@ -50,9 +50,9 @@ class MainTests(TestCase):
             "id": wanderverse_id,
             "verse": create_sentence(),
             "book_title": create_sentence(max_word_length=3),
-            "author": create_sentence(max_word_length=2),
-            "genre": create_sentence(max_word_length=1),
-            "page_number": fuzzy.FuzzyInteger(0, 200).fuzz(),
+            "author": create_sentence(min_word_length=1, max_word_length=2),
+            "genre": create_sentence(min_word_length=1, max_word_length=1),
+            "page_number": str(fuzzy.FuzzyInteger(0, 200).fuzz()),
             "last_verse": w.verse_set.last().text,
             "start_new": "false"
         }
