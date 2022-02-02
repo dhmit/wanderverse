@@ -8,7 +8,12 @@ class Wanderverse(models.Model):
         return "\\".join(self.verse_set.all().order_by('id').values_list('text', flat=True))
 
     def exquisite(self):
+        # return last verse only
         return self.verse_set.order_by('id').last()
+
+    def verse_objects(self):
+        return list(self.verse_set.order_by('id').values('id', 'text', 'author', 'page_number',
+                                                    'book_title'))
 
 
 class Verse(models.Model):

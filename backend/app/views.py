@@ -87,9 +87,16 @@ def play(request):
 
 
 def read(request):
-    qs = Wanderverse.objects.all()
-    random_id = get_random_id(qs)
-    w = Wanderverse.objects.get(id=random_id)
+    params = request.GET
+    if "id" in params:
+        wanderverse_id = params.get("id")
+        w = Wanderverse.objects.get(id=wanderverse_id)
+    else:
+        qs = Wanderverse.objects.all()
+        wanderverse_id = get_random_id(qs)
+        w = Wanderverse.objects.get(id=wanderverse_id)
+    verses = json.dumps(w.verse_objects())
+
     context = {
         'page_metadata': {
             'title': 'Wanderverse',
@@ -97,11 +104,11 @@ def read(request):
         },
         'component_props': {
             'data': {
-                'exquisite_verse': str(w).split("\\"),
-                'id': random_id,
+                'verses': verses,
+                'id': wanderverse_id,
             }
         },
-        'component_name': 'Random'
+        'component_name': 'Read'
     }
     return render(request, 'index.html', context)
 
@@ -129,23 +136,38 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
+    print("add_verse content:", content)
     wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
     last_verse = wanderverse_to_extend.verse_set.last()
     last_verse_text = content['last_verse']
     # TODO: add some validations
-    if last_verse.text != last_verse_text:
+    if last_verse.text == last_verse_text:
         # TODO: check for date conflicts
-        # wanderverse_to_extend.verse_set.filter()
-        return JsonResponse({"ok": "no"})
-        # and datetime.now().timestamp() > \
-        # last_verse.date.timestamp():
-        #
-    # TODO: check if clean, return error if not
-    Verse.objects.create(text=content['verse'], wanderverse=wanderverse_to_extend)
-
-    if content['start_new'] and content['start_new'] == "true":
-        new_verse = Verse.objects.create(text=content['verse'].strip())
+        # TODO: check if clean, return error if not
+        verse = Verse.objects.create(text=content['verse'].strip(),
+                                     author=content['author'],
+                                     book_title=content['book_title'],
+                                     wanderverse=wanderverse_to_extend)
+        try:
+            if 'page_number' in content:
+                verse.page_number = int(content['page_number'])
+                verse.save()
+        except:
+            pass
+    if (content['start_new'] and content['start_new'] == "true") or last_verse.text != \
+        last_verse_text:
         new_wanderverse = Wanderverse.objects.create()
+        new_verse = Verse.objects.create(text=content['verse'].strip(),
+                                         author=content['author'],
+                                         book_title=content['book_title'],
+                                         wanderverse=new_wanderverse)
+        try:
+            if 'page_number' in content:
+                new_verse.page_number = int(content['page_number'])
+                new_verse.save()
+        except:
+            pass
+
         new_verse.wanderverse = new_wanderverse
         new_verse.save()
 

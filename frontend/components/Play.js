@@ -62,12 +62,14 @@ const Play = ({data}) => {
         let params = {
             id: id,
             verse: newVerse,
-            title: bookTitle,
+            book_title: bookTitle,
             author: bookAuthor,
             genre: bookGenre,
-            page_number: bookPageNumber,
             last_verse: verse,
             start_new: startNew
+        }
+        if (bookPageNumber) {
+            params[page_number] = bookPageNumber
         }
 
         axios.post(addVerseURL,
@@ -77,8 +79,8 @@ const Play = ({data}) => {
                     "X-CSRFToken": cookie
                 }
             }).then(() => {
-                clearLocalStorage();
-                axios.get("read/", )
+            clearLocalStorage();
+            window.location.assign("/read/?id=" + id);
         })
     }
 
