@@ -57,21 +57,27 @@ class MainTests(TestCase):
             "genre": create_sentence(max_word_length=1),
             "page_number": fuzzy.FuzzyInteger(0, 200).fuzz(),
             "last_verse": w.verse_set.last().text,
+            "start_new": "false"
         }
 
-        settings.CREATE_NEW = False
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
+        print("getting response?", response.json(), response.status_code)
         assert response.status_code == 200
         # assert that we have extended the wanderverse
         w = Wanderverse.objects.get(id=wanderverse_id)
         assert w.verse_set.count() == w_length + 1
         assert Wanderverse.objects.count() == total_wanderverse_count
 
-        settings.CREATE_NEW = True
+        w.refresh_from_db()
+
+        data["start_new"] = "true"
+        data["verse"] = create_sentence()
+        data["last_verse"] = w.verse_set.last().text
 
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
+
         assert response.status_code == 200
         # assert that we have extended the wanderverse
         w = Wanderverse.objects.get(id=wanderverse_id)

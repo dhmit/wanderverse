@@ -1,7 +1,7 @@
 import json
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from config import settings
 from app.models import Wanderverse, Verse
 from app.helpers import get_random_id
 from app.rules import Rules
@@ -89,7 +89,6 @@ def play(request):
 def read(request):
     qs = Wanderverse.objects.all()
     random_id = get_random_id(qs)
-    print("getting id", random_id)
     w = Wanderverse.objects.get(id=random_id)
     context = {
         'page_metadata': {
@@ -133,7 +132,7 @@ def add_verse(request):
     wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
     last_verse = wanderverse_to_extend.verse_set.last()
     last_verse_text = content['last_verse']
-    print("last_verse", last_verse, last_verse_text)
+    # TODO: add some validations
     if last_verse.text != last_verse_text:
         # TODO: check for date conflicts
         # wanderverse_to_extend.verse_set.filter()
@@ -142,13 +141,13 @@ def add_verse(request):
         # last_verse.date.timestamp():
         #
     # TODO: check if clean, return error if not
-    verse = Verse.objects.create(text=content['verse'])
-    verse.wanderverse = wanderverse_to_extend
-    verse.save()
-    if settings.base.CREATE_NEW:
-        new_verse = Verse.objects.create(text=content['verse'])
+    Verse.objects.create(text=content['verse'], wanderverse=wanderverse_to_extend)
+
+    if content['start_new'] and content['start_new'] == "true":
+        new_verse = Verse.objects.create(text=content['verse'].strip())
         new_wanderverse = Wanderverse.objects.create()
         new_verse.wanderverse = new_wanderverse
         new_verse.save()
 
+    # return redirect(reverse("read_wanderverse"), wanderverse_id=wanderverse_to_extend.id)
     return JsonResponse(content, status=200)
