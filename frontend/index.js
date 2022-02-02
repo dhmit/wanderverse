@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Instructions from "./components/Instructions";
 import About from "./components/About";
 import Play from "./components/Play";
+import Random from "./components/Random";
 const COMPONENT_PROPS_RAW = document.getElementById("component_props").text;
 const COMPONENT_NAME_RAW = document.getElementById("component_name").text;
 const COMPONENT_PROPS = JSON.parse(COMPONENT_PROPS_RAW);
@@ -21,6 +22,7 @@ const COMPONENTS = {
     Instructions,
     About,
     Play,
+    Random,
 };
 
 const PreselectedComponent = COMPONENTS[COMPONENT_NAME || "ErrorNotFoundComponent"];

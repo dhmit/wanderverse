@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import * as PropTypes from "prop-types";
-import W from "../images/icons/w.svg";
-import X from "../images/icons/x.svg";
-import DownArrow from "../images/icons/down-arrow.svg";
 import {getCookie} from "../common";
+import Instructions from "./Instructions";
 
 const cookie = getCookie("csrftoken");
 
@@ -22,6 +20,7 @@ const Play = ({data}) => {
     const [bookPageNumber, setBookPageNumber] = useState("");
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookGenre, setBookGenre] = useState("");
+    const [startNew, setStartNew] = useState("true");
 
     useEffect(() => {
         /* If rules already exist, use those */
@@ -58,7 +57,6 @@ const Play = ({data}) => {
         setInstructionsText(text);
     }
     const handleSubmit = (evt) => {
-        console.log("getting name?", newVerse, bookTitle, evt)
         evt.preventDefault();
         let id = localStorage.getItem("wanderverseID")
         let params = {
@@ -69,7 +67,7 @@ const Play = ({data}) => {
             genre: bookGenre,
             page_number: bookPageNumber,
             last_verse: verse,
-
+            start_new: startNew
         }
 
         axios.post(addVerseURL,
@@ -78,46 +76,19 @@ const Play = ({data}) => {
                     "X-Requested-With": "XMLHttpRequest",
                     "X-CSRFToken": cookie
                 }
-            }).then((res) => {
-            console.log("verse added", res.data);
-            clearLocalStorage();
+            }).then(() => {
+                clearLocalStorage();
+                axios.get("read/", )
         })
     }
 
     return (
         <>
-            <div className={`instructions-overlay text-center pt-4 pl-4 pr-4 pb-2 ${instructionsClass}`}>
-                <a href={"/"}>
-                    <W height={"80px"} fill={"black"} stroke={"black"} className={"w mb-4"}/></a>
-                <h1 className={"page-title"}>Play</h1>
-                <h2 className={"text-left"}>Last line of poem to extend:</h2>
-                <div id={"exquisite-verse"} className={"font-calmius text-left"}>
-                    {verse}
-                </div>
-                <div className={"rules text-left mt-4 pb-4"}>
-                    <div className={"instructions-title"}>
-                        <div className={"page-title row mb-4 mr-1"}>
-                            <div className={"col-auto"}>Instructions</div>
-                            <div className={"col hr mb-2"}/>
-                        </div>
-
-                    </div>
-                    <ul className="rules-list">
-                        {rules.map((line, idx) => {
-                            return <li key={idx}>{line}</li>;
-                        })}
-                    </ul>
-                </div>
-                <button className={"btn btn-tertiary btn-dismiss mt-2"}
-                        onClick={dismissModal}>
-                    {instructionsText}
-                    <br/>
-                    {instructionsText.indexOf("Exit") > -1
-                        ? <X width={"10px"} height={"10px"} />
-                        : <DownArrow width={"10px"} height={"10px"} />
-                    }
-                </button>
-            </div>
+            <Instructions rules={rules}
+                          verse={verse}
+                          dismissModal={dismissModal}
+                          instructionsClass={instructionsClass}
+                          instructionsText={instructionsText}/>
             <div className={"w-form  p-4"}>
                 <form className={"mt-5"} onSubmit={handleSubmit}>
                     <label htmlFor={"verse"}>
@@ -129,6 +100,7 @@ const Play = ({data}) => {
                         <label htmlFor="verse-input">Your found text</label>
                         <p>Add your verse to extend the poem above.</p>
                         <textarea name={newVerse}
+                                  required
                                   onChange={e => setNewVerse(e.target.value)}
                                   className={"form-control"}
                                   id={"verse-input"}/>
@@ -136,6 +108,7 @@ const Play = ({data}) => {
                     <div className={"form-group row"}>
                         <label className={"col-auto mr-2"}>Title</label>
                         <input name={bookTitle}
+                               required
                                onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
                     </div>
@@ -149,6 +122,7 @@ const Play = ({data}) => {
                     <div className={"form-group row"}>
                         <label className={"col-auto mr-2"}>Author</label>
                         <input name={bookAuthor}
+                               required
                                onChange={e => setBookAuthor(e.target.value)}
                                className={"form-control col"}/>
                     </div>
@@ -157,6 +131,15 @@ const Play = ({data}) => {
                         <input name={bookGenre}
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
+                    </div>
+                    <div className={"form-group row mb-6"}>
+                        <input name={startNew}
+                               type={"checkbox"}
+                               defaultChecked={startNew}
+                               onChange={e => setStartNew(e.target.value)}
+                               className={"col-1 mr-2"}/>
+                        <label className={"col-auto text-small"}>Use this verse as a seed for a new
+                            poem, too.</label>
                     </div>
                     <div className={"row"}>
                         <button className={"col-auto btn btn-primary btn-submit text-center"}
