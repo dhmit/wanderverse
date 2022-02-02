@@ -28,4 +28,4 @@ class Verse(models.Model):
     genre = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.text
+        return str(self.text)

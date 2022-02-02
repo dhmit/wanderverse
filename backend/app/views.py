@@ -1,6 +1,5 @@
 import json
-from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse
 from app.models import Wanderverse, Verse
 from app.helpers import get_random_id
@@ -119,7 +118,7 @@ def wanderverse(request, wanderverse_id=None, exquisite=False):
         # if all good, add line
         # else, create clone of object, add line
         # save obj
-        pass
+        return JsonResponse({})
     if wanderverse_id:
         w = Wanderverse.objects.get(id=wanderverse_id)
         exquisite = request.GET.get("exquisite", "False")
@@ -127,6 +126,7 @@ def wanderverse(request, wanderverse_id=None, exquisite=False):
             return JsonResponse({"w": str(w.exquisite())})
         else:
             return JsonResponse({"w": str(w).split("\\")})
+    return JsonResponse({})
 
 
 def rules(request):
@@ -152,7 +152,7 @@ def add_verse(request):
             if 'page_number' in content:
                 verse.page_number = int(content['page_number'])
                 verse.save()
-        except:
+        except Exception:
             pass
     if (content['start_new'] and content['start_new'] == "true") or last_verse.text != \
         last_verse_text:
@@ -165,7 +165,7 @@ def add_verse(request):
             if 'page_number' in content:
                 new_verse.page_number = int(content['page_number'])
                 new_verse.save()
-        except:
+        except Exception:
             pass
 
         new_verse.wanderverse = new_wanderverse

@@ -1,14 +1,11 @@
-"""
-Tests
-"""
-# pylint: disable-msg=C0116
+# pylint: disable-msg = C0116
+# pylint: disable-msg = E0401
 # ignoring pylint's `missing-function-docstring` errors
 import json
 import random
 from factory import fuzzy
 from django.test import TestCase
 from django.urls import reverse
-from django.conf import settings
 
 from app.views import play
 from app.models import Wanderverse, Verse
@@ -29,9 +26,9 @@ class MainTests(TestCase):
     """
 
     def setUp(self):
-        for n in range(3):
+        for _ in range(3):
             w = Wanderverse.objects.create()
-            for i in range(5):
+            for _ in range(5):
                 Verse.objects.create(text=create_sentence(max_word_length=10), wanderverse=w)
         assert Wanderverse.objects.count() == 3
 

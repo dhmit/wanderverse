@@ -116,42 +116,43 @@ class Rules:
         # choice = self.choose("stack")
         # choice = self.expand(choice, "position")
         # self.all.append(choice)
-        steps = roll_dice(3)
+        steps_to_take = roll_dice(3)
 
-        # if steps is 0, we just need to pick a book
+        # if steps_to_take is 0, we just need to pick a book
 
-        end = self.choose("end")
-        end = self.expand(end, "end")
+        where_we_end = self.choose("end")
+        where_we_end = self.expand(where_we_end, "end")
 
-        if steps == 0:
+        if steps_to_take == 0:
             choice = self.choose("book")
             choice = self.expand(choice, "book")
             self.all.append(choice)
-            self.all.append(end)
+            self.all.append(where_we_end)
             return
 
-        # if steps is 1, stack + book
+        # if steps_to_take is 1, stack + book
         choice = self.choose("stack")
         choice = self.expand(choice, "stack")
         self.all.append(choice)
         choice = self.choose("book")
         choice = self.expand(choice, "book")
         self.all.append(choice)
-        if steps == 1:
-            self.all.append(end)
+        if steps_to_take == 1:
+            self.all.append(where_we_end)
             return
 
-        # if steps is 2, stack + book + part of book
+        # if steps_to_take is 2, stack + book + part of book
         choice = self.choose("book_part")
         choice = self.expand(choice, "book_part")
         self.all.append(choice)
-        self.all.append(end)
+        self.all.append(where_we_end)
         return
 
     def choose_book(self):
-        choice = roll_dice()
-        if choice == 0:
-            self.robot_rules()
+        # TODO: create more choices for book step
+        # choice = roll_dice()
+        # if choice == 0:
+        self.robot_rules("book")
 
     def expand(self, choice, step):
         """Run function if function chosen"""
@@ -177,7 +178,7 @@ class Rules:
         if step == "book":
             return f"Pick up the {suffixed} book you see."
 
-        pass
+        return ""
 
     def __str__(self):
         return "\\".join(self.all)

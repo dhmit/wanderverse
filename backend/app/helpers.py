@@ -10,13 +10,13 @@ def get_random_id(qs):
 def get_suffix(n):
     j = n % 10
     k = n % 100
-    if j is 1 and k is not 11:
+    if j == 1 and k != 11:
         return str(n) + "st"
 
-    if j is 2 and k is not 12:
+    if j == 2 and k != 12:
         return str(n) + "nd"
 
-    if j is 3 and k is not 13:
+    if j == 3 and k != 13:
         return str(n) + "rd"
 
     return str(n) + "th"
