@@ -1,6 +1,6 @@
 import random
 import nltk
-
+nltk.download('punkt')
 
 def get_random_id(qs):
     max_count = qs.count()
