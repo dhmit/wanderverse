@@ -49,7 +49,7 @@ class MainTests(TestCase):
         data = {
             "id": wanderverse_id,
             "verse": create_sentence(),
-            "title": create_sentence(max_word_length=3),
+            "book_title": create_sentence(max_word_length=3),
             "author": create_sentence(max_word_length=2),
             "genre": create_sentence(max_word_length=1),
             "page_number": fuzzy.FuzzyInteger(0, 200).fuzz(),
@@ -59,7 +59,6 @@ class MainTests(TestCase):
 
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
-        print("getting response?", response.json(), response.status_code)
         assert response.status_code == 200
         # assert that we have extended the wanderverse
         w = Wanderverse.objects.get(id=wanderverse_id)
