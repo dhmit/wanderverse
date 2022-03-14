@@ -77,9 +77,6 @@ const Instructions = ({rules, verse}) => {
 
 Instructions.propTypes = {
     rules: PropTypes.array,
-    instructionsText: PropTypes.array,
-    instructionsClass: PropTypes.string,
-    dismissModal: PropTypes.func,
     verse: PropTypes.string
 };
 export default Instructions;
