@@ -1,15 +1,44 @@
-import React from "react";
+import React, {useEffect, useState, useRef} from "react";
 import * as PropTypes from "prop-types";
 import W from "../images/icons/w.svg";
 import X from "../images/icons/x.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 
 
-const Instructions = ({instructionsText, instructionsClass, rules, dismissModal, verse}) => {
+const Instructions = ({rules, verse}) => {
+    const [height, setHeight] = useState(0);
+    const [style, setStyle] = useState({});
+    const [instructionsClass, setDismissInstructionsClass] = useState("");
+    const [instructionsText, setInstructionsText] = useState("Exit to add a new verse");
+
+    const ref = useRef(null);
+
+    useEffect(() => {
+        setHeight(ref.current.clientHeight);
+        window.addEventListener('resize', () => resize(setHeight));
+        return () => {
+            window.removeEventListener('resize', () => resize(setHeight));
+        };
+    }, []);
+
+    function resize(setHeight) {
+        setHeight(ref.current.clientHeight);
+    }
+
+    const dismissModal = () => {
+        let val = instructionsClass === "dismissed" ? "" : "dismissed";
+        setDismissInstructionsClass(val);
+        // if dismissed is called, remove instructions
+        let styles = val === "dismissed" ? {top: (-1 * (ref.current.clientHeight - 60) + "px")} : {};
+        setStyle(styles);
+        let text = instructionsClass === "dismissed" ? "Exit to add a new verse" : "Show" +
+            " instructions";
+        setInstructionsText(text);
+    }
 
     return (
-        <div
-            className={`instructions-overlay text-center pt-4 pl-4 pr-4 pb-2 ${instructionsClass}`}>
+        <div ref={ref} style={style}
+             className={`instructions-overlay text-center pt-4 pl-4 pr-4 pb-2 ${instructionsClass}`}>
             <a href={"/"}>
                 <W height={"80px"} fill={"black"} stroke={"black"} className={"w mb-4"}/></a>
             <h1 className={"page-title"}>Play</h1>
@@ -51,6 +80,6 @@ Instructions.propTypes = {
     instructionsText: PropTypes.array,
     instructionsClass: PropTypes.string,
     dismissModal: PropTypes.func,
-    verse: PropTypes.array
+    verse: PropTypes.string
 };
 export default Instructions;
