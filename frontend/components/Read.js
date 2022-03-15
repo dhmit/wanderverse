@@ -4,6 +4,7 @@ import W from "../images/icons/w.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
 import SectionSymbols from "./SectionSymbols";
+import FancyButton from "./FancyButton";
 
 const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
@@ -28,7 +29,7 @@ const Read = ({data}) => {
     const toggleCitations = () => {
         showCites(!citesShown);
     }
-    
+
     return (
         <div id="read" className={"text-center pt-4 pl-4 pr-4 pb-2"}>
             <a href={"/"}><W height={"80px"} className={"2 mb-4"} fill={"#9E88FA"}/></a>
@@ -41,7 +42,8 @@ const Read = ({data}) => {
                     {verses}
                 </ul>
             </div>
-            <SectionSymbols/>
+            {/*<SectionSymbols/>*/}
+            <button className={"btn btn-secondary"} href={"/read"}>Read Another</button>
         </div>
     );
 };
