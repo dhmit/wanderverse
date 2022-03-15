@@ -13,6 +13,6 @@ DEBUG = False
 
 ADMINS = [('Aizman', 'aizman@mit.edu')]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["w.dhlab.mit.edu"]
 
 CORS_ORIGIN_WHITELIST = []
