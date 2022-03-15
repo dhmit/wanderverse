@@ -60,10 +60,10 @@ const Play = ({data}) => {
             author: bookAuthor,
             genre: bookGenre,
             last_verse: verse,
-            start_new: startNew
+            start_new: startNew,
         }
         if (bookPageNumber) {
-            params[page_number] = bookPageNumber
+            params.page_number = bookPageNumber
         }
 
         axios.post(addVerseURL,
