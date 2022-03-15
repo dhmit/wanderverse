@@ -9,6 +9,7 @@ main {
 
 ul {
     padding: 0;
+
     li {
         list-style: none;
     }
@@ -47,8 +48,8 @@ a:hover {
 
     &:hover, &:active, &:focus {
         background-color: $color-w-1 !important;
-        border: 3px solid $color-w-1 !important;
-        color: white;
+        border: 2px solid $color-w-1 !important;
+        color: white !important;
     }
 }
 

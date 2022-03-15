@@ -6,24 +6,11 @@ import DownArrow from "../images/icons/down-arrow.svg";
 
 
 const Instructions = ({rules, verse}) => {
-    const [height, setHeight] = useState(0);
     const [style, setStyle] = useState({});
     const [instructionsClass, setDismissInstructionsClass] = useState("");
     const [instructionsText, setInstructionsText] = useState("Exit to add a new verse");
 
     const ref = useRef(null);
-
-    useEffect(() => {
-        setHeight(ref.current.clientHeight);
-        window.addEventListener('resize', () => resize(setHeight));
-        return () => {
-            window.removeEventListener('resize', () => resize(setHeight));
-        };
-    }, []);
-
-    function resize(setHeight) {
-        setHeight(ref.current.clientHeight);
-    }
 
     const dismissModal = () => {
         let val = instructionsClass === "dismissed" ? "" : "dismissed";
