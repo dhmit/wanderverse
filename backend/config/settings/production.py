@@ -11,5 +11,8 @@ DEBUG = False
 
 # SECRET_KEY = os.environ['DJANGO_SECRET_KEY']  # set in venv activate
 
+ADMINS = [('Aizman', 'aizman@mit.edu')]
+
+ALLOWED_HOSTS = ["w.dhlab.mit.edu"]
 
 CORS_ORIGIN_WHITELIST = []

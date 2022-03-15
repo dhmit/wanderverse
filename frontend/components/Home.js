@@ -1,7 +1,5 @@
 import React from "react";
-import SectionSymbols from "./SectionSymbols";
 import FancyButton from "./FancyButton";
-import SymbolDivider from "../images/icons/symbol-divider.svg";
 import W from "../images/icons/w.svg";
 
 const Home = () => {
@@ -15,14 +13,10 @@ const Home = () => {
             <FancyButton title={"Play"}
                          href={"play/"}
                          extraClass={"btn-primary"}/>
-            <br/><br/>
-            <SymbolDivider width={"30px"}/>
-            <br/><br/>
-            <FancyButton title={"Read a Wanderverse"}
+            <FancyButton title={"Read"}
                          href={"read/"}
                          extraClass={"btn-secondary"}/>
             <br/><br/>
-            <SectionSymbols/>
         </div>
     );
 };

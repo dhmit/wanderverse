@@ -11,8 +11,6 @@ const addVerseURL = "/add-verse/"
 const Play = ({data}) => {
     const [rules, setRules] = useState([]);
     const [verse, setVerse] = useState([]);
-    const [instructionsClass, setDismissInstructionsClass] = useState("");
-    const [instructionsText, setInstructionsText] = useState("Exit to add a new verse");
 
     // form values
     const [newVerse, setNewVerse] = useState("");
@@ -21,6 +19,7 @@ const Play = ({data}) => {
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookGenre, setBookGenre] = useState("");
     const [startNew, setStartNew] = useState("true");
+
 
     useEffect(() => {
         /* If rules already exist, use those */
@@ -34,6 +33,7 @@ const Play = ({data}) => {
             })
         }
     }, []);
+
     useEffect(() => {
         if (localStorage.getItem("verse")) {
             setVerse(JSON.parse(localStorage.getItem("verse")))
@@ -43,19 +43,13 @@ const Play = ({data}) => {
             localStorage.setItem("wanderverseID", data.id.toString())
         }
     }, []);
+
     const clearLocalStorage = () => {
         localStorage.removeItem("verse");
         localStorage.removeItem("wanderverseID");
         localStorage.removeItem("rules");
     }
 
-    const dismissModal = () => {
-        let val = instructionsClass === "dismissed" ? "" : "dismissed";
-        setDismissInstructionsClass(val);
-        let text = instructionsClass === "dismissed" ? "Exit to add a new verse" : "Show" +
-            " instructions";
-        setInstructionsText(text);
-    }
     const handleSubmit = (evt) => {
         evt.preventDefault();
         let id = localStorage.getItem("wanderverseID")
@@ -66,10 +60,10 @@ const Play = ({data}) => {
             author: bookAuthor,
             genre: bookGenre,
             last_verse: verse,
-            start_new: startNew
+            start_new: startNew,
         }
         if (bookPageNumber) {
-            params[page_number] = bookPageNumber
+            params.page_number = bookPageNumber
         }
 
         axios.post(addVerseURL,
@@ -89,10 +83,7 @@ const Play = ({data}) => {
     return (
         <>
             <Instructions rules={rules}
-                          verse={verse}
-                          dismissModal={dismissModal}
-                          instructionsClass={instructionsClass}
-                          instructionsText={instructionsText}/>
+                          verse={verse}/>
             <div className={"w-form  p-4"}>
                 <form className={"mt-5"} onSubmit={handleSubmit}>
                     <label htmlFor={"verse"}>
