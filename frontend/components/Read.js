@@ -3,8 +3,6 @@ import * as PropTypes from "prop-types";
 import W from "../images/icons/w.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
-import SectionSymbols from "./SectionSymbols";
-import FancyButton from "./FancyButton";
 
 const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
@@ -32,17 +30,16 @@ const Read = ({data}) => {
 
     return (
         <div id="read" className={"text-center pt-4 pl-4 pr-4 pb-2"}>
-            <a href={"/"}><W height={"80px"} className={"2 mb-4"} fill={"#9E88FA"}/></a>
+            <a href={"/"}><W height={"80px"} className={"w mb-4"} fill={"#9E88FA"}/></a>
             <h3 className={"page-title col-auto"}>A Wanderverse</h3>
             <div className="wanderverse-container text-left">
-                {citesShown && <HideIcon onClick={toggleCitations}/>}
-                {!citesShown && <CiteIcon style={{width: "20px"}} onClick={toggleCitations}/>}
+                {citesShown && <HideIcon className={"pointer"} onClick={toggleCitations}/>}
+                {!citesShown && <CiteIcon className={"pointer"} style={{width: "20px"}} onClick={toggleCitations}/>}
 
                 <ul className="list">
                     {verses}
                 </ul>
             </div>
-            {/*<SectionSymbols/>*/}
             <button className={"btn btn-secondary"} href={"/read"}>Read Another</button>
         </div>
     );

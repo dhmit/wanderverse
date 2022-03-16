@@ -2,4 +2,13 @@
     background-color: $color-black;
     color: white;
     padding: 1.5em;
+    .navbar.bg-light {
+        background-color: $color-w-1 !important;
+        .nav-item, .nav-item > a {
+            color: $color-w-4;
+            &:hover, &:active, &:focus {
+                color: $color-w-5 !important;
+            }
+        }
+    }
 }

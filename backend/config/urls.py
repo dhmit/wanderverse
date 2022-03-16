@@ -18,5 +18,6 @@ urlpatterns = [
     path('rules/', views.rules, name="rules"),
     path('example/', views.example),
     path('example/<example_id>', views.example),
+    path('wanderverses', views.wanderverse),
     path('wanderverses/<wanderverse_id>', views.wanderverse),
 ]

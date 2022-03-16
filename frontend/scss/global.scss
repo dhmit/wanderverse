@@ -24,6 +24,12 @@ a:hover {
     border-radius: 0 !important;
 }
 
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn.btn-fancy {
     z-index: 9999;
     position: relative;
@@ -53,8 +59,8 @@ a:hover {
     }
 }
 
-#main-container {
-    //padding: 1em 1em;
+.pointer {
+    cursor: pointer;
 }
 
 #home {

@@ -44,10 +44,12 @@ const FancyButton = ({href, extraClass, title}) => {
             <div className={"row"}>
 
                 <div className={"col-4 p-0"}>{leftSymbols}</div>
-                <div className={"col-4 p-0"} style={{left: "-5%"}}>
-                    <a href={href} className={`btn btn-fancy ${extraClass}`}>
-                        {title}
-                    </a>
+                <div className={"col-4 p-0"}>
+                    <div className={"btn-container"}>
+                        <a href={href} className={`btn btn-fancy ${extraClass}`}>
+                            {title}
+                        </a>
+                    </div>
                 </div>
                 <div className={"col-4 p-0"}>
                     {rightSymbols}

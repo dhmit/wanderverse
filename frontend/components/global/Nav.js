@@ -11,9 +11,9 @@ const Nav = () => {
                     <a href="/about">ABOUT</a>
                 </li>
             </ul>
-            <a className="lab-link" href="https://digitalhumanities.mit.edu/" target="_blank"
+            <a className="nav-item lab-link" href="https://digitalhumanities.mit.edu/" target="_blank"
                rel="noreferrer">
-                <img className="lab-image" src={DH_LOGO}/>
+                DH
             </a>
         </nav>
     );

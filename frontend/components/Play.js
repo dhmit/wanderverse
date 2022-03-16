@@ -44,6 +44,16 @@ const Play = ({data}) => {
         }
     }, []);
 
+    const refreshVerse = () => {
+        clearLocalStorage();
+        console.log("refreshVerse")
+        axios.get("/wanderverses").then(res => {
+            console.log("data", res.data.w);
+            setVerse(res.data.w)
+            localStorage.setItem("verse", JSON.stringify(res.data.w));
+        })
+    }
+
     const clearLocalStorage = () => {
         localStorage.removeItem("verse");
         localStorage.removeItem("wanderverseID");
@@ -83,7 +93,9 @@ const Play = ({data}) => {
     return (
         <>
             <Instructions rules={rules}
-                          verse={verse}/>
+                          verse={verse}
+                          refresh={refreshVerse}
+            />
             <div className={"w-form  p-4"}>
                 <form className={"mt-5"} onSubmit={handleSubmit}>
                     <label htmlFor={"verse"}>

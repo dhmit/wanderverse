@@ -1,11 +1,12 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useState, useRef} from "react";
 import * as PropTypes from "prop-types";
 import W from "../images/icons/w.svg";
 import X from "../images/icons/x.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
+import RefreshIcon from "../images/icons/refresh.svg";
 
 
-const Instructions = ({rules, verse}) => {
+const Instructions = ({rules, verse, refresh}) => {
     const [style, setStyle] = useState({});
     const [instructionsClass, setDismissInstructionsClass] = useState("");
     const [instructionsText, setInstructionsText] = useState("Exit to add a new verse");
@@ -27,12 +28,17 @@ const Instructions = ({rules, verse}) => {
         <div ref={ref} style={style}
              className={`instructions-overlay text-center pt-4 pl-4 pr-4 pb-2 ${instructionsClass}`}>
             <a href={"/"}>
-                <W height={"80px"} fill={"black"} stroke={"black"} className={"w mb-4"}/></a>
+                <W height={"80px"} fill={"black"} className={"w mb-4"}/></a>
             <h1 className={"page-title"}>Play</h1>
             <h2 className={"text-left"}>Last line of poem to extend:</h2>
+
             <div id={"exquisite-verse"} className={"font-calmius text-left"}>
                 {verse}
             </div>
+            <a className={"btn btn-default btn-refresh"} onClick={refresh} style={{position: "absolute", right: "1em"}}>
+
+                <RefreshIcon height={"20px"} fill={"blue"}/>Get another
+            </a>
             <div className={"rules text-left mt-4 pb-2"}>
                 <div className={"instructions-title"}>
                     <div className={"page-title row mb-2 mr-1"}>
@@ -64,6 +70,7 @@ const Instructions = ({rules, verse}) => {
 
 Instructions.propTypes = {
     rules: PropTypes.array,
-    verse: PropTypes.string
+    verse: PropTypes.string,
+    refresh: PropTypes.func
 };
 export default Instructions;

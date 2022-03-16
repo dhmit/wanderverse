@@ -113,7 +113,7 @@ def read(request):
     return render(request, 'index.html', context)
 
 
-def wanderverse(request, wanderverse_id=None, exquisite=False):
+def wanderverse(request, wanderverse_id=None):
     if request.POST:
         # check last line added timestamp
         # if all good, add line
@@ -127,6 +127,12 @@ def wanderverse(request, wanderverse_id=None, exquisite=False):
             return JsonResponse({"w": str(w.exquisite())})
         else:
             return JsonResponse({"w": str(w).split("\\")})
+    else:
+        qs = Wanderverse.objects.all()
+        wanderverse_id = get_random_id(qs)
+        w = Wanderverse.objects.get(id=wanderverse_id)
+        return JsonResponse({"w": str(w.exquisite())})
+
     return JsonResponse({})
 
 
