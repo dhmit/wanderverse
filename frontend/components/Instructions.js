@@ -9,7 +9,7 @@ import RefreshIcon from "../images/icons/refresh.svg";
 const Instructions = ({rules, verse, refresh}) => {
     const [style, setStyle] = useState({});
     const [instructionsClass, setDismissInstructionsClass] = useState("");
-    const [instructionsText, setInstructionsText] = useState("Exit to add a new verse");
+    const [instructionsText, setInstructionsText] = useState("Add a new verse");
 
     const ref = useRef(null);
 
@@ -19,7 +19,7 @@ const Instructions = ({rules, verse, refresh}) => {
         // if dismissed is called, remove instructions
         let styles = val === "dismissed" ? {top: (-1 * (ref.current.clientHeight - 60) + "px")} : {};
         setStyle(styles);
-        let text = instructionsClass === "dismissed" ? "Exit to add a new verse" : "Show" +
+        let text = instructionsClass === "dismissed" ? "Add a new verse" : "Show" +
             " instructions";
         setInstructionsText(text);
     }
@@ -36,8 +36,7 @@ const Instructions = ({rules, verse, refresh}) => {
                 {verse}
             </div>
             <a className={"btn btn-default btn-refresh"} onClick={refresh} style={{position: "absolute", right: "1em"}}>
-
-                <RefreshIcon height={"20px"} fill={"blue"}/>Get another
+                <RefreshIcon className={"icon-refresh"} fill={"blue"}/>Get another
             </a>
             <div className={"rules text-left mt-4 pb-2"}>
                 <div className={"instructions-title"}>
@@ -45,7 +44,6 @@ const Instructions = ({rules, verse, refresh}) => {
                         <div className={"col-auto"}>Instructions</div>
                         <div className={"col hr mb-2"}/>
                     </div>
-
                 </div>
                 <ul className="rules-list">
                     {rules.map((line, idx) => {

@@ -133,7 +133,6 @@ def wanderverse(request, wanderverse_id=None):
         w = Wanderverse.objects.get(id=wanderverse_id)
         return JsonResponse({"w": str(w.exquisite())})
 
-    return JsonResponse({})
 
 
 def rules(request):

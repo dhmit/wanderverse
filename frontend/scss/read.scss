@@ -2,9 +2,20 @@
     .page-title {
         color: $color-w-3;
     }
+
     .wanderverse-container {
         .verse {
             font-size: 1.3em;
         }
+    }
+
+    .btn.btn-secondary {
+        background-color: #FFE3F6;
+        border: 1px solid #6D5BFB;
+        color: #6D5BFB;
+        font-family: calmiusextra_bold, "Baskerville", serif;
+        letter-spacing: 0.05em;
+        font-size: 0.9em;
+        text-transform: uppercase;
     }
 }
