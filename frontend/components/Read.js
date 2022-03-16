@@ -9,13 +9,29 @@ import SectionSymbols from "./SectionSymbols";
 const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
     // adding line dividers until the last line of the poem
-    console.log("Getting data?", data);
     const content = JSON.parse(data.verses);
-    const verses = content.map((line, idx) => {
-        let info = <span
+
+    const getInfo = (line) => {
+        let infoText = "("
+        if (line.page_number) {
+            infoText += "p. " + line.page_number + ", ";
+        }
+        if (line.book_title) {
+            infoText += line.book_title + ", ";
+        }
+        if (line.author) {
+            infoText += line.author;
+        }
+        infoText += ")";
+        infoText = infoText === "()" ? "" : infoText;
+        return <span
             className={"text-blue"}>
-            (p. {line.page_number}, {line.book_title}, {line.author})
+            {infoText}
         </span>
+    }
+
+    const verses = content.map((line, idx) => {
+        let info = getInfo(line)
         return <>{idx === content.length - 1
             ? <li key={idx} className={"verse"}>{line.text}
                 {citesShown && info}</li>
@@ -25,8 +41,6 @@ const Read = ({data}) => {
         }
         </>;
     });
-
-
     const refreshPage = () => {
         window.location.reload(false);
     }

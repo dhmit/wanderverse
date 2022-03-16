@@ -32,11 +32,12 @@ const Instructions = ({rules, verse, refresh}) => {
 
             <div id={"exquisite-verse"} className={"font-calmius text-left"}>
                 {verse}
+                <a className={"btn btn-default btn-refresh"} onClick={refresh}
+                   style={{position: "absolute", right: "1em"}}>
+                    <RefreshIcon className={"icon-refresh"} height={"16px"} fill={"#8aadff"}/>
+                </a>
             </div>
-            <a className={"btn btn-default btn-refresh"} onClick={refresh}
-               style={{position: "absolute", right: "1em"}}>
-                <RefreshIcon className={"icon-refresh"} fill={"blue"}/>Get another
-            </a>
+
             <div className={"rules text-left mt-4 pb-2"}>
                 <div className={"instructions-title"}>
                     <div className={"page-title row mb-2 mr-1"}>

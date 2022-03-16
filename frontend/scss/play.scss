@@ -34,6 +34,7 @@
     .rules-list > li {
         font-size: 1.4em;
         list-style: line inside;
+
         svg {
             left: -10px;
             position: relative;
@@ -61,10 +62,12 @@
         text-transform: uppercase;
         font-family: $font-family-calmius-medium;
         font-size: 0.7em;
-
+        position: relative;
         svg {
-            height: 10px;
+            position: relative;
+            right: 10px;
         }
+
     }
 
     .btn-dismiss {
@@ -79,6 +82,7 @@
             outline: none !important;
             box-shadow: none;
         }
+
         &:hover {
             color: $color-w-0;
         }
