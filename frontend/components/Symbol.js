@@ -30,24 +30,23 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag}) => {
             position: "relative",
             fill: color,
             marginRight: "2em",
-            height: randomHeight+"px",
+            height: randomHeight + "px",
         }));
     }, []);
 
-    return ( <>
-        { spanTag ? <span className={extraClass} style={{
-            position: "relative",
-            top: top,
-            left: left,
-            transform: `rotate(${rotation}deg)`
+    return (<>
+            {spanTag ? <span className={extraClass} style={{
+                    position: "relative",
+                    top: top,
+                    left: left,
+                    transform: `rotate(${rotation}deg)`
                 }}>{newSymbol}</span>
-                :
-        <div className={extraClass} style={{
-            position: "relative",
-            top: top,
-            left: left,
-            transform: `rotate(${rotation}deg)`
-        }}>{newSymbol}</div> }
+                : <div className={extraClass} style={{
+                    position: "relative",
+                    top: top,
+                    left: left,
+                    transform: `rotate(${rotation}deg)`
+                }}>{newSymbol}</div>}
         </>
     )
 }

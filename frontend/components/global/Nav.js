@@ -7,7 +7,7 @@ const Nav = () => {
         <nav className="navbar fixed-bottom navbar-light bg-light navbar-expand-sm">
             <ul className="nav mr-auto">
                 <li className="nav-item mr-2">
-                    <a href={"/"}>
+                    <a href={"/"} className={"w-logo"}>
                         <W width={"20px"} fill={"#0C00FF"}/>
                     </a>
                 </li>

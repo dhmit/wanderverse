@@ -69,7 +69,7 @@ const Read = ({data}) => {
                 </ul>
             </div>
             <br/>
-            <SectionSymbols className={"mt-4"}/>
+            <SectionSymbols otherClass={"fixed-bottom symbols-bottom mb-4"}/>
         </div>
     );
 };

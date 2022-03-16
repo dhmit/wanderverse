@@ -4,9 +4,24 @@
     }
 
     .wanderverse-container {
+        min-height: 50%;
+        overflow-y: scroll;
+
         .verse {
             font-size: 1.3em;
         }
+    }
+
+    .btn-refresh {
+        &:focus, &:active, &:hover {
+            svg {
+                fill: $color-w-0;
+            }
+        }
+    }
+
+    .list {
+
     }
 
     .btn.btn-secondary {
@@ -18,5 +33,11 @@
         font-size: 0.9em;
         text-transform: uppercase;
         width: 120px;
+    }
+
+    .symbols-bottom {
+        margin-bottom: 1.5rem !important;
+        position: absolute;
+        bottom: 4em;
     }
 }
