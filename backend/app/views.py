@@ -134,7 +134,6 @@ def wanderverse(request, wanderverse_id=None):
         return JsonResponse({"w": str(w.exquisite())})
 
 
-
 def rules(request):
     rules_list = Rules().all
     return JsonResponse({'rules': rules_list})

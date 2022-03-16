@@ -46,10 +46,8 @@ const Play = ({data}) => {
 
     const refreshVerse = () => {
         clearLocalStorage();
-        console.log("refreshVerse")
         axios.get("/wanderverses").then(res => {
-            console.log("data", res.data.w);
-            setVerse(res.data.w)
+            setVerse(res.data.w);
             localStorage.setItem("verse", JSON.stringify(res.data.w));
         })
     }

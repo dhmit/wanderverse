@@ -1,6 +1,9 @@
 .navbar {
     padding: 1em !important;
-
+    svg {
+        position: relative;
+        top: -0.4em;
+    }
     &.bg-light {
         background-color: $color-w-4 !important;
     }

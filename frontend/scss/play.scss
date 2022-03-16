@@ -34,6 +34,10 @@
     .rules-list > li {
         font-size: 1.4em;
         list-style: line inside;
+        svg {
+            left: -10px;
+            position: relative;
+        }
     }
 
     .instructions-overlay {
@@ -44,7 +48,7 @@
         position: absolute;
         top: 0;
         width: 100%;
-        height: 92%;
+        height: 93%;
         transition: all 500ms ease;
         overflow-y: scroll;
 
