@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import * as PropTypes from "prop-types";
-import W from "../images/icons/w.svg";
+import ALogo from "../images/a-wanderverse.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
+import RefreshIcon from "../images/icons/refresh.svg";
+import SectionSymbols from "./SectionSymbols";
 
 const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
@@ -24,23 +26,36 @@ const Read = ({data}) => {
         </>;
     });
 
+
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     const toggleCitations = () => {
         showCites(!citesShown);
     }
 
     return (
         <div id="read" className={"text-center pt-4 pl-4 pr-4 pb-2"}>
-            <a href={"/"}><W height={"80px"} className={"w mb-4"} fill={"#9E88FA"}/></a>
-            <h3 className={"page-title col-auto"}>A Wanderverse</h3>
+            <a href={"/"}>
+                <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
+            </a>
+            <div>
+                <a onClick={refreshPage} className={"btn btn-refresh"}>
+                    <RefreshIcon fill={"#9E88FA"} width={"14px"}/>
+                </a>
+            </div>
             <div className="wanderverse-container text-left">
                 {citesShown && <HideIcon className={"pointer"} onClick={toggleCitations}/>}
-                {!citesShown && <CiteIcon className={"pointer"} style={{width: "20px"}} onClick={toggleCitations}/>}
+                {!citesShown &&
+                <CiteIcon className={"pointer"} style={{width: "20px"}} onClick={toggleCitations}/>}
 
                 <ul className="list">
                     {verses}
                 </ul>
             </div>
-            <button className={"btn btn-secondary"} href={"/read"}>Read Another</button>
+            <br/>
+            <SectionSymbols className={"mt-4"}/>
         </div>
     );
 };

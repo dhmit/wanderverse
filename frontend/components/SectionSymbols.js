@@ -13,7 +13,7 @@ let colorsDup = shuffleArray(colors.splice(0, 5));
 class SectionSymbols extends React.Component {
 
     render() {
-        return <>
+        return <div className={"section-symbols"}>
             <Symbol0 fill={colorsDup[0]} height={"15px"}/>&nbsp;&nbsp;
             <Symbol1 fill={colorsDup[1]} height={"15px"}/>&nbsp;&nbsp;
             <Symbol2 fill={colorsDup[2]} height={"15px"}/>&nbsp;&nbsp;
@@ -21,7 +21,7 @@ class SectionSymbols extends React.Component {
             <Symbol4 fill={colorsDup[4]} height={"15px"}/>&nbsp;&nbsp;
             <Symbol5 fill={colorsDup[1]} height={"15px"}/>&nbsp;&nbsp;
             <Symbol6 fill={colorsDup[0]} height={"15px"}/>
-        </>;
+        </div>;
     }
 }
 
