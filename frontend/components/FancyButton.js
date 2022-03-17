@@ -54,6 +54,7 @@ const FancyButton = ({href, extraClass, title}) => {
                     <div className={"btn-container"}>
                         <a href={href} onMouseEnter={refreshSymbols}
                            onMouseLeave={refreshSymbols}
+                           onTouchStart={refreshSymbols}
                            className={`btn btn-fancy ${extraClass}`}>
                             {title}
                         </a>
