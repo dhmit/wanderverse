@@ -17,13 +17,14 @@ import M from "../images/icons/symbol-12.svg";
 import N from "../images/icons/symbol-13.svg";
 import O from "../images/icons/symbol-14.svg";
 import P from "../images/icons/symbol-15.svg";
+import Q from "../images/icons/symbol-divider.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 
 
 const Symbol = ({top, left, extraClass, fill, stop, spanTag}) => {
     const [newSymbol, setNewSymbol] = useState(<X style={{height: "10px"}}/>);
     const [rotation, setRotation] = useState(0);
-    const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P];
+    const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q];
     useEffect(() => {
         let randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
         let randomHeight = Math.floor(Math.random() * (20 - 10) + 10);
