@@ -141,7 +141,13 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-    wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
+
+    try:
+        wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
+    except Wanderverse.DoesNotExist:
+        wanderverse_to_extend = Wanderverse.objects.create()
+        Verse.objects.create(text=content['last_verse'], wanderverse=wanderverse_to_extend)
+
     last_verse = wanderverse_to_extend.verse_set.last()
     last_verse_text = content['last_verse']
     verse_text = content['verse'].strip()
@@ -150,7 +156,8 @@ def add_verse(request):
     if not verse_is_valid(content):
         return JsonResponse({"valid": False, "message": "Not allowed"}, status=422)
 
-    if last_verse.text == last_verse_text:
+    # if last_verse doesn't exist OR it exists and matches the actual last verse text
+    if last_verse and last_verse.text == last_verse_text:
         verse = Verse.objects.create(text=verse_text,
                                      author=content['author'],
                                      book_title=content['book_title'],
@@ -158,7 +165,9 @@ def add_verse(request):
         if 'page_number' in content and content['page_number'].isdigit():
             verse.page_number = int(content['page_number'])
             verse.save()
-    if ('start_new' in content and content['start_new'] == "true") or \
+
+    # if no last verse or start new is ticked true
+    if not last_verse or ('start_new' in content and content['start_new'] == "true") or \
         last_verse.text != last_verse_text:
         new_wanderverse = Wanderverse.objects.create()
         new_verse = Verse.objects.create(text=verse_text,
