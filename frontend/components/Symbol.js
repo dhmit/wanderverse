@@ -29,7 +29,6 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag}) => {
         setNewSymbol(randomSymbol({
             position: "relative",
             fill: color,
-            marginRight: "2em",
             height: randomHeight + "px",
         }));
     }, []);

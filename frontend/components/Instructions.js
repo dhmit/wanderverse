@@ -28,7 +28,7 @@ const Instructions = ({rules, verse, refresh}) => {
         <div ref={ref} style={style}
              className={`instructions-overlay text-center pt-4 pl-4 pr-4 pb-2 ${instructionsClass}`}>
             <h1 className={"page-title mb-4"}>CONTINUE THE POEM</h1>
-            <h2 className={"text-left"}>Last line of poem to extend:</h2>
+            <h2 className={"text-left"}>That ends with:</h2>
 
             <div id={"exquisite-verse"} className={"font-calmius text-left"}>
                 {verse}

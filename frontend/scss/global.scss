@@ -1,6 +1,7 @@
 body {
     font-family: $font-family-base !important;
     color: $color-black;
+    height: 100vh;
 }
 
 main {
@@ -65,6 +66,10 @@ a:hover {
 
 #home {
     background-color: $color-w-6;
+
+    .col-4.p-0 {
+        height: 200px !important;
+    }
 }
 
 .page-title {

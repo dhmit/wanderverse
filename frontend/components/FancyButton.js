@@ -35,10 +35,15 @@ const FancyButton = ({href, extraClass, title}) => {
         return arr;
     }
 
-    useEffect(() => {
+    const refreshSymbols = () => {
         setLeftSymbols(createRandomSymbols("left"));
         setRightSymbols(createRandomSymbols("right"));
+    }
+
+    useEffect(() => {
+        refreshSymbols();
     }, [])
+
     return (
         <>
             <div className={"row"}>
@@ -47,7 +52,9 @@ const FancyButton = ({href, extraClass, title}) => {
                 <div className={"col-4 p-0"}>
                     {title &&
                     <div className={"btn-container"}>
-                        <a href={href} className={`btn btn-fancy ${extraClass}`}>
+                        <a href={href} onMouseEnter={refreshSymbols}
+                           onMouseLeave={refreshSymbols}
+                           className={`btn btn-fancy ${extraClass}`}>
                             {title}
                         </a>
                     </div>
