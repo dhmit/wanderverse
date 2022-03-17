@@ -54,11 +54,13 @@ const Read = ({data}) => {
             <a href={"/"}>
                 <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
             </a>
+            {window.location.href.indexOf("?id=") === -1 &&
             <div>
                 <a onClick={refreshPage} className={"btn btn-refresh"}>
                     <RefreshIcon fill={"#9E88FA"} width={"14px"}/>
                 </a>
             </div>
+            }
             <div className="wanderverse-container text-left">
                 {citesShown && <HideIcon className={"pointer"} onClick={toggleCitations}/>}
                 {!citesShown &&
