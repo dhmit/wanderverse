@@ -11,10 +11,14 @@ def verify(modeladmin, request, queryset):
     queryset.update(verified=True)
 
 
+def unverify(modeladmin, request, queryset):
+    queryset.update(verified=False)
+
+
 @admin.register(Verse)
 class VerseAdmin(admin.ModelAdmin):
     list_display = ['id', 'text', 'verified', 'wanderverse_id', 'date']
-    actions = [verify]
+    actions = [verify, unverify]
 
 
 @admin.register(Wanderverse)
