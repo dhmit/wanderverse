@@ -45,7 +45,7 @@ const FancyButton = ({href, extraClass, title}) => {
     }, [])
 
     return (
-        <>
+        <div className={"fancy-btn-container"}>
             <div className={"row"}>
 
                 <div className={"col-4 p-0"}>{leftSymbols}</div>
@@ -65,7 +65,7 @@ const FancyButton = ({href, extraClass, title}) => {
                     {rightSymbols}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

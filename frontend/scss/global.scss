@@ -21,8 +21,19 @@ a:hover {
     text-decoration: underline;
 }
 
+#app_root {
+//    max-width: 400px;
+//    margin: 0 auto;
+    height: 100vh;
+}
+
 .btn, .form-control {
     border-radius: 0 !important;
+}
+
+.fancy-btn-container {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .btn-container {
@@ -30,6 +41,7 @@ a:hover {
     justify-content: center;
     align-items: center;
 }
+
 
 .btn.btn-fancy {
     z-index: 9999;
@@ -66,7 +78,6 @@ a:hover {
 
 #home {
     background-color: $color-w-6;
-
     .col-4.p-0 {
         height: 200px !important;
     }

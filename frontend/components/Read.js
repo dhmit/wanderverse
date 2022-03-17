@@ -55,7 +55,7 @@ const Read = ({data}) => {
                 <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
             </a>
             <div>
-                <a onClick={refreshPage} onTouchStart={refreshPage} className={"btn btn-refresh"}>
+                <a onClick={refreshPage} className={"btn btn-refresh"}>
                     <RefreshIcon fill={"#9E88FA"} width={"14px"}/>
                 </a>
             </div>
@@ -63,7 +63,7 @@ const Read = ({data}) => {
                 {citesShown && <HideIcon className={"pointer"} onClick={toggleCitations}/>}
                 {!citesShown &&
                 <CiteIcon className={"pointer"} style={{width: "20px"}}
-                          onTouchStart={toggleCitations} onClick={toggleCitations}/>}
+                          onClick={toggleCitations}/>}
 
                 <ul className="list">
                     {verses}

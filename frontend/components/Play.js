@@ -148,10 +148,8 @@ const Play = ({data}) => {
                         ? <CheckIcon
                             stroke={"#0C00FF"}
                             className={"btn-icon mr-2 mb-1 ml-1"}
-                            onTouchStart={triggerStartNew}
                             onClick={triggerStartNew}
-                        /> : <CircleIcon onTouchStart={triggerStartNew}
-                                         onClick={triggerStartNew}
+                        /> : <CircleIcon onClick={triggerStartNew}
                                          className={"btn-icon"}
                                          stroke={"#0C00FF"}/>}
                         </span>
