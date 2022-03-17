@@ -12,13 +12,18 @@ import H from "../images/icons/symbol-7.svg";
 import I from "../images/icons/symbol-8.svg";
 import J from "../images/icons/symbol-9.svg";
 import K from "../images/icons/symbol-10.svg";
+import L from "../images/icons/symbol-11.svg";
+import M from "../images/icons/symbol-12.svg";
+import N from "../images/icons/symbol-13.svg";
+import O from "../images/icons/symbol-14.svg";
+import P from "../images/icons/symbol-15.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 
 
 const Symbol = ({top, left, extraClass, fill, stop, spanTag}) => {
     const [newSymbol, setNewSymbol] = useState(<X style={{height: "10px"}}/>);
     const [rotation, setRotation] = useState(0);
-    const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K];
+    const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P];
     useEffect(() => {
         let randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
         let randomHeight = Math.floor(Math.random() * (20 - 10) + 10);
