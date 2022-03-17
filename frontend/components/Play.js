@@ -3,6 +3,8 @@ import React, {useEffect, useState} from "react";
 import * as PropTypes from "prop-types";
 import {getCookie} from "../common";
 import Instructions from "./Instructions";
+import CircleIcon from "../images/icons/circle.svg";
+import CheckIcon from "../images/icons/plus-circle.svg";
 
 const cookie = getCookie("csrftoken");
 
@@ -18,7 +20,7 @@ const Play = ({data}) => {
     const [bookPageNumber, setBookPageNumber] = useState("");
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookGenre, setBookGenre] = useState("");
-    const [startNew, setStartNew] = useState("true");
+    const [startNew, setStartNew] = useState(true);
 
 
     useEffect(() => {
@@ -43,6 +45,11 @@ const Play = ({data}) => {
             localStorage.setItem("wanderverseID", data.id.toString())
         }
     }, []);
+
+    const triggerStartNew = () => {
+        console.log("triggerStartNew", !startNew)
+        setStartNew(!startNew);
+    }
 
     const refreshVerse = () => {
         clearLocalStorage();
@@ -97,7 +104,7 @@ const Play = ({data}) => {
             <div className={"w-form  p-4"}>
                 <form className={"mt-5"} onSubmit={handleSubmit}>
                     <label htmlFor={"verse"}>
-                        The last line of the poem to extend:
+                        Last line of the poem to extend:
                     </label>
                     <p id={"verse"}>&ldquo;{verse}&rdquo;</p>
 
@@ -137,16 +144,20 @@ const Play = ({data}) => {
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
                     </div>
-                    <div className={"form-group row mb-6"}>
-                        <input name={startNew}
-                               type={"checkbox"}
-                               defaultChecked={startNew}
-                               onChange={e => setStartNew(e.target.value)}
-                               className={"col-1 mr-2"}/>
-                        <label className={"col-auto text-small"}>Use this verse as a seed for a new
-                            poem, too.</label>
-                    </div>
-                    <div className={"row"}>
+                    <span>{startNew
+                        ? <CheckIcon
+                            stroke={"#0C00FF"}
+                            className={"btn-icon mr-2 mb-1 ml-1"}
+                            onTouchStart={triggerStartNew}
+                            onClick={triggerStartNew}
+                        /> : <CircleIcon onTouchStart={triggerStartNew}
+                                         onClick={triggerStartNew}
+                                         className={"btn-icon"}
+                                         stroke={"#0C00FF"}/>}
+                        </span>
+                    <label className={"col-auto text-small"}>Use this verse to seed a new
+                        poem, too.</label>
+                    <div className={"row mt-4"}>
                         <button className={"col-auto btn btn-primary btn-submit text-center"}
                                 type={"submit"}>
                             ADD VERSE

@@ -103,13 +103,13 @@
         }
 
         textarea {
-            border: 0.1em solid $color-w-0;
+            border: 2px solid $color-w-0;
             min-height: 6em;
         }
 
         input {
             border: 0;
-            border-bottom: 0.1em solid $color-w-0;
+            border-bottom: 2px solid $color-w-0;
         }
 
         input.form-control {
@@ -135,7 +135,7 @@
 
         .btn-submit {
             background-color: $color-w-5;
-            border: 0.1em solid $color-w-2;
+            border: 2px solid $color-w-2;
             color: $color-w-2;
             font-family: $font-family-calmius-extrabold;
             letter-spacing: 0.05em;
