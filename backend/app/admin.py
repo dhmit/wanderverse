@@ -4,8 +4,19 @@ This file controls the administrative interface for the web app.
 
 from django.contrib import admin
 
-models_to_register = [
-]
+from app.models import Verse, Wanderverse
 
-for model in models_to_register:
-    admin.site.register(model)
+
+def verify(modeladmin, request, queryset):
+    queryset.update(verified=True)
+
+
+@admin.register(Verse)
+class VerseAdmin(admin.ModelAdmin):
+    list_display = ['id', 'text', 'verified', 'wanderverse_id', 'date']
+    actions = [verify]
+
+
+@admin.register(Wanderverse)
+class WanderverseAdmin(admin.ModelAdmin):
+    list_display = ['id', 'exquisite']

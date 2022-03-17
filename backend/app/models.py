@@ -13,7 +13,7 @@ class Wanderverse(models.Model):
 
     def verse_objects(self):
         return list(self.verse_set.order_by('id').values('id', 'text', 'author', 'page_number',
-                                                    'book_title'))
+                                                         'book_title'))
 
 
 class Verse(models.Model):
@@ -26,6 +26,7 @@ class Verse(models.Model):
     page_number = models.IntegerField(blank=True, null=True)
     book_title = models.TextField(blank=True, null=False)
     genre = models.TextField(blank=True, null=True)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.text)
