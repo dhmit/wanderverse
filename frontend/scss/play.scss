@@ -63,10 +63,13 @@
         text-transform: uppercase;
         font-family: $font-family-calmius-medium;
         font-size: 0.7em;
-        position: relative;
+        position: absolute;
+        right: 0.6em;
+
         svg {
             position: relative;
-            right: 10px;
+            right: 0.6em;
+            margin-top: -10px;
         }
 
     }

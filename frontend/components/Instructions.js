@@ -31,11 +31,10 @@ const Instructions = ({rules, verse, refresh}) => {
             <h2 className={"text-left"}>That ends with:</h2>
 
             <div id={"exquisite-verse"} className={"font-calmius text-left"}>
-                {verse}
-                <a className={"btn btn-default btn-refresh"} onClick={refresh}
-                   style={{position: "absolute", right: "1em"}}>
+                <a className={"btn btn-default btn-refresh"} onClick={refresh}>
                     <RefreshIcon className={"icon-refresh"} height={"16px"} fill={"#8aadff"}/>
                 </a>
+                {verse}
             </div>
 
             <div className={"rules text-left mt-4 pb-2"}>
