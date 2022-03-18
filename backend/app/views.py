@@ -93,7 +93,6 @@ def read(request):
     else:
         qs = Wanderverse.objects.all()
         w = get_random_instance(qs)
-        print("id", w.id)
     verses = json.dumps(w.verse_objects())
 
     context = {

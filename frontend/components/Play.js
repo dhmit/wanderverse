@@ -150,7 +150,7 @@ const Play = ({data}) => {
                             className={"btn-icon mr-2 mb-1 ml-1"}
                             onClick={triggerStartNew}
                         /> : <CircleIcon onClick={triggerStartNew}
-                                         className={"btn-icon"}
+                                         className={"btn-icon mr-2 mb-1 ml-1"}
                                          stroke={"#0C00FF"}/>}
                         </span>
                     <label className={"col-auto text-small"}>Use this verse to seed a new

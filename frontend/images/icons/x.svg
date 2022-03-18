@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.96 29.96"><defs><style>.cls-1{fill:#0c00ff;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M30,4.84l-10.14,10L30,25.12,25.12,30,15,19.71,4.84,30,0,25.12,10.14,14.87l-10-10L5,0,15,10,25.12,0Z"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.96 29.96">
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <path class="cls-1"
+                  d="M30,4.84l-10.14,10L30,25.12,25.12,30,15,19.71,4.84,30,0,25.12,10.14,14.87l-10-10L5,0,15,10,25.12,0Z"/>
+        </g>
+    </g>
+</svg>

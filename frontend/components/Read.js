@@ -1,10 +1,12 @@
 import React, {useState} from "react";
+import {colors2} from "../common";
 import * as PropTypes from "prop-types";
-import ALogo from "../images/a-wanderverse.svg";
+import ALogo from "../images/logo-small.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
-import RefreshIcon from "../images/icons/refresh.svg";
+import Symbol from "./Symbol";
 import SectionSymbols from "./SectionSymbols";
+
 
 const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
@@ -25,25 +27,32 @@ const Read = ({data}) => {
         infoText += ")";
         infoText = infoText === "()" ? "" : infoText;
         return <span
-            className={"text-blue"}>
+            className={"text-citation"}>
             {infoText}
         </span>
     }
 
+    const getRandomColor = () => {
+        return colors2[Math.floor(Math.random() * colors2.length)];
+    }
+
     const verses = content.map((line, idx) => {
         let info = getInfo(line)
-        return <>{idx === content.length - 1
-            ? <li key={idx} className={"verse"}>{line.text}
-                {citesShown && info}</li>
-            : <li key={idx} className={"verse"}>
-                {line.text} {citesShown && info} <span className={"text-blue"}>/</span>
-            </li>
-        }
+        return <>
+            <div className={"verse-container"}>
+                <Symbol extraClass={"symbol-icon mt-2"} fill={"#F4782F"} spanTag={true}
+                        stop={true}/>
+                {idx === content.length - 1
+                    ? <li key={idx} className={"verse"}>
+                        {line.text}
+                        &nbsp;{citesShown && info}</li>
+                    : <li key={idx} className={"verse"}>
+                        {line.text} {citesShown && info} <span className={"text-citation"}>/</span>
+                    </li>
+                }
+            </div>
         </>;
     });
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
 
     const toggleCitations = () => {
         showCites(!citesShown);
@@ -54,15 +63,16 @@ const Read = ({data}) => {
             <a href={"/"}>
                 <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
             </a>
-            {window.location.href.indexOf("?id=") === -1 &&
-            <div>
-                <a onClick={refreshPage} className={"btn btn-refresh"}>
-                    <RefreshIcon fill={"#9E88FA"} width={"14px"}/>
-                </a>
-            </div>
-            }
+            {/*{window.location.href.indexOf("?id=") === -1 &&*/}
+            {/*<div>*/}
+            {/*    <a onClick={refreshPage} className={"btn btn-refresh"}>*/}
+            {/*        <RefreshIcon fill={"#9E88FA"} width={"14px"}/>*/}
+            {/*    </a>*/}
+            {/*</div>*/}
+            {/*}*/}
             <div className="wanderverse-container text-left">
-                {citesShown && <HideIcon className={"pointer"} onClick={toggleCitations}/>}
+                {citesShown &&
+                <HideIcon className={"pointer"} fill={"#6D5BFB"} onClick={toggleCitations}/>}
                 {!citesShown &&
                 <CiteIcon className={"pointer"} style={{width: "20px"}}
                           onClick={toggleCitations}/>}

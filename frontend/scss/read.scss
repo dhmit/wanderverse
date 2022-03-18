@@ -3,13 +3,37 @@
         color: $color-w-3;
     }
 
+    .navbar.bg-light {
+        background-color: $color-w-11 !important;
+    }
+
     .wanderverse-container {
         min-height: 50%;
         overflow-y: scroll;
 
-        .verse {
-            font-size: 1.3em;
+        .verse-container {
+            width: 100%;
+            display: grid;
+            grid-template-areas: "symbol verse";
         }
+
+        .symbol-icon {
+            width: 3em;
+            margin-left: 0.5em;
+            grid-area: symbol;
+            max-width: 20px;
+            left: -5px;
+            position: relative;
+        }
+
+        .verse {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            font-size: 1.3em;
+            line-height: 1.4em;
+            grid-area: verse;
+        }
+
     }
 
     .btn-refresh {
@@ -39,5 +63,9 @@
         margin-bottom: 1.5rem !important;
         position: absolute;
         bottom: 4em;
+    }
+
+    .text-citation {
+        color: $color-w-7;
     }
 }

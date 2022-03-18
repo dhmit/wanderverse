@@ -1,5 +1,5 @@
 import React from "react";
-import {shuffleArray, colors} from "../common";
+import {shuffleArray, colors2} from "../common";
 import Symbol0 from "../images/icons/symbol-0.svg";
 import Symbol1 from "../images/icons/symbol-1.svg";
 import Symbol2 from "../images/icons/symbol-2.svg";
@@ -9,7 +9,7 @@ import Symbol5 from "../images/icons/symbol-5.svg";
 import Symbol6 from "../images/icons/symbol-6.svg";
 import * as PropTypes from "prop-types";
 
-let colorsDup = shuffleArray(colors.splice(0, 5));
+let colorsDup = shuffleArray(colors2.splice(0, 5));
 
 const SectionSymbols = ({otherClass}) => {
 

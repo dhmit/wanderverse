@@ -33,8 +33,23 @@ export const colors = [
     "#FFE3F6",
 ];
 
+
+export const colors2 = [
+    "#EE3F23",
+    "#F15B29",
+    "#F4782F",
+    "#F89435",
+    "#FBB03B",
+];
+
+
 export function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
+}
+
+export function getRandomColor2() {
+    console.log("getRandomColor2", colors2[Math.floor(Math.random() * colors2.length)]);
+    return colors2[Math.floor(Math.random() * colors2.length)];
 }
 
 
