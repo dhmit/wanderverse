@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from app.models import Wanderverse, Verse
-from app.helpers import get_random_id
+from app.helpers import get_random_instance
 from app.validators import verse_is_valid
 from app.rules import Rules
 
@@ -68,8 +68,7 @@ def example(request, example_id=None):
 
 def play(request):
     qs = Wanderverse.objects.all()
-    random_id = get_random_id(qs)
-    w = Wanderverse.objects.get(id=random_id)
+    w = get_random_instance(qs)
     context = {
         'page_metadata': {
             'title': 'Wanderverse',
@@ -78,7 +77,7 @@ def play(request):
         'component_props': {
             'data': {
                 'exquisite_verse': str(w.exquisite()),
-                'id': random_id,
+                'id': w.id,
             }
         },
         'component_name': 'Play'
@@ -93,8 +92,8 @@ def read(request):
         w = Wanderverse.objects.get(id=wanderverse_id)
     else:
         qs = Wanderverse.objects.all()
-        wanderverse_id = get_random_id(qs)
-        w = Wanderverse.objects.get(id=wanderverse_id)
+        w = get_random_instance(qs)
+        print("id", w.id)
     verses = json.dumps(w.verse_objects())
 
     context = {
@@ -105,7 +104,7 @@ def read(request):
         'component_props': {
             'data': {
                 'verses': verses,
-                'id': wanderverse_id,
+                'id': w.id,
             }
         },
         'component_name': 'Read'
@@ -129,8 +128,7 @@ def wanderverse(request, wanderverse_id=None):
             return JsonResponse({"w": str(w).split("\\")})
     else:
         qs = Wanderverse.objects.all()
-        wanderverse_id = get_random_id(qs)
-        w = Wanderverse.objects.get(id=wanderverse_id)
+        w = get_random_instance(qs)
         return JsonResponse({"w": str(w.exquisite())})
 
 

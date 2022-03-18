@@ -1,10 +1,13 @@
 import random
 import nltk
+
 nltk.download('punkt')
 
-def get_random_id(qs):
-    max_count = qs.count()
-    return random.randint(1, max_count)
+
+def get_random_instance(qs):
+    max_count = len(qs) - 1
+    rand = random.randint(1, max_count)
+    return qs[rand]
 
 
 def get_suffix(n):
