@@ -12,8 +12,14 @@ const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
     // adding line dividers until the last line of the poem
     const content = JSON.parse(data.verses);
+    const errors = JSON.parse(data.errors);
+    const errorItems = errors.map((line, idx) => {
+        return <li className={"alert-danger"} key={`error-${idx}`}>
+            {line}
+        </li>
+    });
 
-    const getInfo = (line) => {
+    const getInfo = (line, idx) => {
         let infoText = "("
         if (line.page_number) {
             infoText += "p. " + line.page_number + ", ";
@@ -26,8 +32,8 @@ const Read = ({data}) => {
         }
         infoText += ")";
         infoText = infoText === "()" ? "" : infoText;
-        return <span
-            className={"text-citation"}>
+        return <span key={`info-${idx}`}
+                     className={"text-citation"}>
             {infoText}
         </span>
     }
@@ -37,20 +43,20 @@ const Read = ({data}) => {
     }
 
     const verses = content.map((line, idx) => {
-        let info = getInfo(line)
+        let info = getInfo(line, idx)
         return <>
-            <div className={"verse-container"}>
+            <li className={"verse-container"} key={`verse-container-${idx}`}>
                 <Symbol extraClass={"symbol-icon mt-2"} fill={"#F4782F"} spanTag={true}
                         stop={true}/>
                 {idx === content.length - 1
-                    ? <li key={idx} className={"verse"}>
+                    ? <span key={`verse-${idx}`} className={"verse"}>
                         {line.text}
-                        &nbsp;{citesShown && info}</li>
-                    : <li key={idx} className={"verse"}>
+                        &nbsp;{citesShown && info}</span>
+                    : <span key={`verse-${idx}`} className={"verse"}>
                         {line.text} {citesShown && info} <span className={"text-citation"}>/</span>
-                    </li>
+                    </span>
                 }
-            </div>
+            </li>
         </>;
     });
 
@@ -63,13 +69,7 @@ const Read = ({data}) => {
             <a href={"/"}>
                 <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
             </a>
-            {/*{window.location.href.indexOf("?id=") === -1 &&*/}
-            {/*<div>*/}
-            {/*    <a onClick={refreshPage} className={"btn btn-refresh"}>*/}
-            {/*        <RefreshIcon fill={"#9E88FA"} width={"14px"}/>*/}
-            {/*    </a>*/}
-            {/*</div>*/}
-            {/*}*/}
+            {errors && <ul>{errorItems}</ul>}
             <div className="wanderverse-container text-left">
                 {citesShown &&
                 <HideIcon className={"pointer"} fill={"#6D5BFB"} onClick={toggleCitations}/>}
@@ -88,7 +88,7 @@ const Read = ({data}) => {
 };
 
 Read.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.object
 };
 
 export default Read;

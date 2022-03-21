@@ -87,14 +87,6 @@ def play(request):
 
 def read(request):
     params = request.GET
-    if "id" in params:
-        wanderverse_id = params.get("id")
-        w = Wanderverse.objects.get(id=wanderverse_id)
-    else:
-        qs = Wanderverse.objects.all()
-        w = get_random_instance(qs)
-    verses = json.dumps(w.verse_objects())
-
     context = {
         'page_metadata': {
             'title': 'Wanderverse',
@@ -102,12 +94,31 @@ def read(request):
         },
         'component_props': {
             'data': {
-                'verses': verses,
-                'id': w.id,
+                'verses': '[]',
+                'id': '',
+                'errors': '[]'
             }
         },
         'component_name': 'Read'
     }
+    if 'id' in params:
+        wanderverse_id = params.get("id")
+        try:
+            w = Wanderverse.objects.get(id=wanderverse_id)
+        except Wanderverse.DoesNotExist:
+            context['component_props']['data']['errors'] = json.dumps(
+                ["Oops, something went wrong!",
+                 "The selected Wanderverse does not "
+                 "exist."])
+            return render(request, 'index.html', context)
+    else:
+        qs = Wanderverse.objects.all()
+        w = get_random_instance(qs)
+
+    verses = json.dumps(w.verse_objects())
+    context['component_props']['data']['id'] = w.id
+    context['component_props']['data']['verses'] = verses
+
     return render(request, 'index.html', context)
 
 
