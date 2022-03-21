@@ -14,8 +14,8 @@
     <meta name="theme-color" content="#000000"/>
     {% render_bundle 'index' 'css' %}
 </head>
-
 <body id="{{ page_metadata.id }}">
+{% csrf_token %}
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="app_root">
     <p>Hello world!</p>

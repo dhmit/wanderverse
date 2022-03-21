@@ -119,24 +119,17 @@ const Play = ({data}) => {
                                   id={"verse-input"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto mr-2"}>Title</label>
-                        <input name={bookTitle}
-                               required
-                               onChange={e => setBookTitle(e.target.value)}
-                               className={"form-control col"}/>
-                    </div>
-                    <div className={"form-group row"}>
-                        <label className={"col-auto mr-2"}>Page number</label>
-                        <input name={bookPageNumber}
-                               onChange={e => setBookPageNumber(e.target.value)}
-                               className={"form-control col"}
-                               type={"number"}/>
-                    </div>
-                    <div className={"form-group row"}>
                         <label className={"col-auto mr-2"}>Author</label>
                         <input name={bookAuthor}
                                required
                                onChange={e => setBookAuthor(e.target.value)}
+                               className={"form-control col"}/>
+                    </div>
+                    <div className={"form-group row"}>
+                        <label className={"col-auto mr-2"}>Title</label>
+                        <input name={bookTitle}
+                               required
+                               onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
                     </div>
                     <div className={"form-group row mb-6"}>
@@ -144,6 +137,13 @@ const Play = ({data}) => {
                         <input name={bookGenre}
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
+                    </div>
+                    <div className={"form-group row"}>
+                        <label className={"col-auto mr-2"}>Page number</label>
+                        <input name={bookPageNumber}
+                               onChange={e => setBookPageNumber(e.target.value)}
+                               className={"form-control col-2"}
+                               type={"number"}/>
                     </div>
                     <span>{startNew
                         ? <CheckIcon
