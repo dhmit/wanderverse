@@ -13,7 +13,7 @@ DEBUG = False
 
 ADMINS = [('Aizman', 'aizman@mit.edu')]
 
-ALLOWED_HOSTS = ["w.dhlab.mit.edu"]
+ALLOWED_HOSTS = ["w.dhlab.mit.edu", "54.193.107.52"]
 
 CORS_ORIGIN_WHITELIST = []
 LOGGING = {
