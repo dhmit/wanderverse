@@ -149,6 +149,7 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
+    print("add_verse", content)
 
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
