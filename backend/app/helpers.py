@@ -5,9 +5,9 @@ nltk.download('punkt')
 
 
 def get_random_instance(qs):
-    max_count = len(qs) - 1
+    max_count = qs.count()
     rand = random.randint(1, max_count)
-    return qs[rand]
+    return qs[rand - 1]
 
 
 def get_suffix(n):
