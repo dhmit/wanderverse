@@ -20,7 +20,8 @@ def index(request):
             'title': 'Home page',
             'id': 'home'
         },
-        'component_name': 'Home'
+        'component_name': 'Home',
+        'component_props': {}
     }
 
     return render(request, 'index.html', context)
@@ -32,7 +33,8 @@ def about(request):
             'title': 'About page',
             'id': 'about'
         },
-        'component_name': 'About'
+        'component_name': 'About',
+        'component_props': {}
     }
     return render(request, 'index.html', context)
 
