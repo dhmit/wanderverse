@@ -154,7 +154,7 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-    logger.debug('add_verse', content)
+    logger.debug(content)
 
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
