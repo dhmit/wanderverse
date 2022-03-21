@@ -77,6 +77,7 @@ const Play = ({data}) => {
             last_verse: verse,
             start_new: startNew,
         }
+        console.log("params", params);
         if (bookPageNumber) {
             params.page_number = bookPageNumber
         }
