@@ -7,6 +7,7 @@ from app.validators import verse_is_valid
 from app.rules import Rules
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -154,7 +155,8 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-    logger.debug(content)
+    logger.debug("add_verse ==== content:")
+    logger.debug(json.dumps(content))
 
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])

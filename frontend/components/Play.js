@@ -37,7 +37,7 @@ const Play = ({data}) => {
     }, []);
 
     useEffect(() => {
-        if (localStorage.getItem("verse")) {
+        if (localStorage.getItem("verse") && localStorage.getItem("wanderverseID")) {
             setVerse(JSON.parse(localStorage.getItem("verse")))
         } else {
             localStorage.setItem("verse", JSON.stringify(data.exquisite_verse));
