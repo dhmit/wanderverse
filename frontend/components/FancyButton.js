@@ -23,7 +23,7 @@ const FancyButton = ({href, extraClass, title}) => {
             min = 50;
             bool = true;
         }
-        return bool ? -1 * (Math.floor(Math.random() * (max - min) + min)) + "px" : Math.floor(Math.random() * (max - min) + min);
+        return bool ? -1 * (Math.floor(Math.random() * (max - min) + min)) + "px" : Math.floor(Math.random() * (max - min) + min) + "px";
     }
 
     const createRandomSymbols = (side) => {

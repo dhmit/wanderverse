@@ -183,7 +183,7 @@ def add_verse(request):
             verse.save()
 
     # if no last verse or start new is ticked true
-    if not last_verse or ('start_new' in content and content['start_new'] == "true") or \
+    if not last_verse or ('start_new' in content and content['start_new'] == True) or \
         last_verse.text != last_verse_text:
         new_wanderverse = Wanderverse.objects.create()
         new_verse = Verse.objects.create(text=verse_text,
