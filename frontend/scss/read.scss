@@ -16,6 +16,7 @@
             width: 100%;
             display: grid;
             grid-template-areas: "symbol verse";
+            grid-template-columns: 10% 90%;
         }
 
         .symbol-icon {
