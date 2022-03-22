@@ -17,17 +17,16 @@ const Instructions = ({rules, verse, refresh}) => {
         let val = instructionsClass === "dismissed" ? "" : "dismissed";
         setDismissInstructionsClass(val);
         // if dismissed is called, remove instructions
-        let styles = val === "dismissed" ? {top: (-1 * (ref.current.clientHeight - 60) + "px")} : {};
-        setStyle(styles);
-        let text = instructionsClass === "dismissed" ? "Add a new verse" : "Show" +
-            " instructions";
+        // let styles = val === "dismissed" ? {top: (-1 * (ref.current.clientHeight - 60) + "px")} : {};
+        // setStyle(styles);
+        let text = instructionsClass === "dismissed" ? "Add a new verse" : "";
         setInstructionsText(text);
     }
 
     return (
         <div ref={ref} style={style}
-             className={`instructions-overlay text-center pt-4 pl-4 pr-4 pb-2 ${instructionsClass}`}>
-            <h1 className={"page-title mb-4"}>CONTINUE THE POEM</h1>
+             className={`instructions-overlay text-center pl-4 pr-4 pb-2 ${instructionsClass}`}>
+            <h1 className={"page-title mt-2 mb-4"}>CONTINUE THE POEM</h1>
             <h2 className={"text-left"}>That ends with:</h2>
 
             <div id={"exquisite-verse"} className={"font-calmius text-left"}>
@@ -37,7 +36,7 @@ const Instructions = ({rules, verse, refresh}) => {
                 {verse}
             </div>
 
-            <div className={"rules text-left mt-4 pb-2"}>
+            <div className={"rules text-left mt-2 pb-2"}>
                 <div className={"instructions-title"}>
                     <div className={"page-title row mb-2 mr-1"}>
                         <div className={"col-auto"}>Instructions</div>
@@ -47,7 +46,7 @@ const Instructions = ({rules, verse, refresh}) => {
                 <ul className="rules-list">
                     {rules.map((line, idx) => {
                         return <li key={idx}>
-                            {line}<Symbol fill="#9E88FA" top={"0"} left={"20px"}
+                            {line}<Symbol fill="#000000" top={"0"} left={"20px"}
                                           spanTag={true}
                                           stop={true}/>
                         </li>;

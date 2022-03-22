@@ -103,15 +103,9 @@ const Play = ({data}) => {
                           refresh={refreshVerse}
             />
             <div className={"w-form  p-4"}>
-                <form className={"mt-5"} onSubmit={handleSubmit}>
-                    <label htmlFor={"verse"}>
-                        Last line of the poem to extend:
-                    </label>
-                    <p id={"verse"}>&ldquo;{verse}&rdquo;</p>
-
+                <form onSubmit={handleSubmit}>
                     <div className={"form-group"}>
-                        <label htmlFor="verse-input">Your found text</label>
-                        <p>Add your verse to extend the poem above.</p>
+                        <label htmlFor="verse-input" className={"text-plain"}>Your found text</label>
                         <textarea name={newVerse}
                                   required
                                   onChange={e => setNewVerse(e.target.value)}
@@ -119,27 +113,27 @@ const Play = ({data}) => {
                                   id={"verse-input"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto mr-2"}>Author</label>
+                        <label className={"col-auto"}>Author</label>
                         <input name={bookAuthor}
                                required
                                onChange={e => setBookAuthor(e.target.value)}
                                className={"form-control col"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto mr-2"}>Title</label>
+                        <label className={"col-auto"}>Title</label>
                         <input name={bookTitle}
                                required
                                onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
                     </div>
                     <div className={"form-group row mb-6"}>
-                        <label className={"col-auto mr-2"}>Genre</label>
+                        <label className={"col-auto"}>Genre</label>
                         <input name={bookGenre}
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto mr-2"}>Page number</label>
+                        <label className={"col-auto"}>Page number</label>
                         <input name={bookPageNumber}
                                onChange={e => setBookPageNumber(e.target.value)}
                                className={"form-control col-2"}
@@ -154,9 +148,9 @@ const Play = ({data}) => {
                                          className={"btn-icon mr-2 mb-1 ml-1"}
                                          stroke={"#0C00FF"}/>}
                         </span>
-                    <label className={"col-auto text-small"}>Use this verse to seed a new
+                    <label className={"col-auto text-small text-plain"}>Use this verse to seed a new
                         poem, too.</label>
-                    <div className={"row mt-4"}>
+                    <div className={"row mt-2"}>
                         <button className={"col-auto btn btn-primary btn-submit text-center"}
                                 type={"submit"}>
                             ADD VERSE

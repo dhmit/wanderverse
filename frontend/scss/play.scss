@@ -45,8 +45,7 @@
     .instructions-overlay {
         z-index: 9999;
         box-shadow: 0 4px 2px -2px gray;
-        border-bottom: 2px solid $color-w-0;
-        background-color: $color-bluer;
+        background-color: $color-w-4;
         position: absolute;
         top: 0;
         width: 100%;
@@ -56,6 +55,17 @@
 
         &.dismissed {
             position: fixed;
+            height: 220px;
+            overflow-y: hidden;
+
+            .hr {
+                display: none;
+            }
+
+            .btn-dismiss > svg {
+                margin-top: -5px;
+                fill: $color-w-0;
+            }
         }
     }
 
@@ -94,9 +104,11 @@
 
     .w-form {
         margin-bottom: 2em;
+        margin-top: 225px;
 
         label {
-            color: $color-w-0;
+            color: $color-black;
+            background-color: $color-w-form;
             font-size: 1.35em;
             padding: 0;
 
@@ -106,17 +118,17 @@
         }
 
         textarea {
-            border: 2px solid $color-w-0;
+            background-color: $color-w-form;
             min-height: 6em;
         }
 
         input {
             border: 0;
-            border-bottom: 2px solid $color-w-0;
+            background-color: $color-w-form;
         }
 
         input.form-control {
-            padding: 0;
+            padding: 0.25em !important;
             height: 100%;
 
             &:focus {
@@ -125,6 +137,10 @@
                 border-bottom: 0.1em solid $color-w-4;
             }
 
+        }
+
+        .text-plain {
+            background-color: transparent;
         }
 
         .form-group.row {
