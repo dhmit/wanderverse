@@ -6,7 +6,6 @@ import Base from "./components/global/Base";
 import ErrorNotFoundComponent from "./components/ErrorNotFoundComponent";
 import ExampleId from "./components/ExampleId";
 import Home from "./components/Home";
-import Instructions from "./components/Instructions";
 import About from "./components/About";
 import Play from "./components/Play";
 import Read from "./components/Read";
@@ -19,7 +18,6 @@ const COMPONENTS = {
     ErrorNotFoundComponent,
     ExampleId,
     Home,
-    Instructions,
     About,
     Play,
     Read,
