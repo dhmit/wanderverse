@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import * as PropTypes from "prop-types";
 import {getCookie} from "../common";
-import Instructions from "./Instructions";
 import CircleIcon from "../images/icons/circle.svg";
 import CheckIcon from "../images/icons/plus-circle.svg";
+import RefreshIcon from "../images/icons/refresh.svg";
+import Symbol from "./Symbol";
+import X from "../images/icons/x.svg";
+import DownArrow from "../images/icons/down-arrow.svg";
 
 const cookie = getCookie("csrftoken");
 
@@ -21,7 +24,25 @@ const Play = ({data}) => {
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookGenre, setBookGenre] = useState("");
     const [startNew, setStartNew] = useState(true);
+    const [instructionStyle, setInstructionStyle] = useState({});
+    const [playStyle, setPlayStyle] = useState({});
+    const [instructionsClass, setDismissInstructionsClass] = useState("");
+    const [instructionsText, setInstructionsText] = useState("Add a new verse");
 
+    const instructionsRef = useRef(null);
+
+    const dismissModal = () => {
+        let val = instructionsClass === "dismissed" ? "" : "dismissed";
+        setDismissInstructionsClass(val);
+        // if dismissed is called, remove instructions
+        let instructionStyle = val === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 30 + "px"} : {};
+        setInstructionStyle(instructionStyle);
+        let playStyle = val === "dismissed" ? {marginTop: instructionsRef.current.getBoundingClientRect().top + 30 + "px"} : {};
+        setPlayStyle(playStyle);
+
+        let text = instructionsClass === "dismissed" ? "Add a new verse" : "";
+        setInstructionsText(text);
+    }
 
     useEffect(() => {
         /* If rules already exist, use those */
@@ -51,7 +72,7 @@ const Play = ({data}) => {
         setStartNew(!startNew);
     }
 
-    const refreshVerse = () => {
+    const refresh = () => {
         clearLocalStorage();
         axios.get("/wanderverses").then(res => {
             setVerse(res.data.w);
@@ -98,14 +119,58 @@ const Play = ({data}) => {
 
     return (
         <>
-            <Instructions rules={rules}
-                          verse={verse}
-                          refresh={refreshVerse}
-            />
-            <div className={"w-form  p-4"}>
+            {/*<Instructions rules={rules}*/}
+            {/*              verse={verse}*/}
+            {/*              refresh={refreshVerse}*/}
+            {/*/>*/}
+
+            <div style={instructionStyle}
+                 className={`instructions-overlay text-center pl-4 pr-4 pb-2 ${instructionsClass}`}>
+                <h1 className={"page-title mt-2 mb-4"}>CONTINUE THE POEM</h1>
+                <h2 className={"text-left"}>That ends with:</h2>
+
+                <div id={"exquisite-verse"} className={"font-calmius text-left"}>
+                    <a className={"btn btn-default btn-refresh"} onClick={refresh}>
+                        <RefreshIcon className={"icon-refresh"} height={"16px"} fill={"#8aadff"}/>
+                    </a>
+                    {verse}
+                </div>
+
+                <div className={"rules text-left mt-2 pb-2"}>
+                    <div className={"instructions-title"}>
+                        <div className={"page-title row mb-2 mr-1"}>
+                            <div ref={instructionsRef} className={"col-auto"}>Instructions</div>
+                            <div className={"col hr mb-2"}/>
+                        </div>
+                    </div>
+                    <ul className="rules-list">
+                        {rules.map((line, idx) => {
+                            return <li key={idx}>
+                                {line}<Symbol fill="#000000" top={"0"} left={"20px"}
+                                              spanTag={true}
+                                              stop={true}/>
+                            </li>;
+                        })}
+                    </ul>
+                </div>
+                <div className={"row btn-row"}>
+                    <button className={"btn btn-tertiary btn-dismiss mt-2 mx-auto"}
+                            onClick={dismissModal}>
+                        {instructionsText}
+                        <br/>
+                        {instructionsText.indexOf("Exit") > -1
+                            ? <X width={"10px"} height={"10px"}/>
+                            : <DownArrow width={"10px"} height={"10px"}/>
+                        }
+                    </button>
+                </div>
+            </div>
+
+            <div style={playStyle} className={"w-form p-4"}>
                 <form onSubmit={handleSubmit}>
                     <div className={"form-group"}>
-                        <label htmlFor="verse-input" className={"text-plain"}>Your found text</label>
+                        <label htmlFor="verse-input" className={"text-plain"}>Your found
+                            text</label>
                         <textarea name={newVerse}
                                   required
                                   onChange={e => setNewVerse(e.target.value)}

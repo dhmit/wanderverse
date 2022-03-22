@@ -55,7 +55,6 @@
 
         &.dismissed {
             position: fixed;
-            height: 220px;
             overflow-y: hidden;
 
             .hr {
@@ -104,7 +103,6 @@
 
     .w-form {
         margin-bottom: 2em;
-        margin-top: 225px;
 
         label {
             color: $color-black;
