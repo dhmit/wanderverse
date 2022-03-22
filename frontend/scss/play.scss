@@ -114,6 +114,7 @@
         textarea {
             background-color: $color-w-form;
             min-height: 6em;
+            color: $color-w-0;
         }
 
         input {
@@ -123,7 +124,9 @@
 
         input.form-control {
             padding: 0.25em !important;
+            padding-left: 0.5em !important;
             height: 100%;
+            color: $color-w-0;
 
             &:focus {
                 box-shadow: none;

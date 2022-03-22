@@ -39,9 +39,10 @@ const Play = ({data}) => {
         setInstructionStyle(instructionStyle);
         let playStyle = val === "dismissed" ? {marginTop: instructionsRef.current.getBoundingClientRect().top + 30 + "px"} : {};
         setPlayStyle(playStyle);
-
-        let text = instructionsClass === "dismissed" ? "Add a new verse" : "";
-        setInstructionsText(text);
+        setTimeout(() => {
+            let text = instructionsClass === "dismissed" ? "Add a new verse" : "";
+            setInstructionsText(text);
+        }, 200);
     }
 
     useEffect(() => {
