@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {colors2} from "../common";
 import * as PropTypes from "prop-types";
 import ALogo from "../images/logo-small.svg";
 import HideIcon from "../images/icons/hide.svg";
@@ -36,10 +35,6 @@ const Read = ({data}) => {
                      className={"text-citation"}>
             {infoText}
         </span>
-    }
-
-    const getRandomColor = () => {
-        return colors2[Math.floor(Math.random() * colors2.length)];
     }
 
     const verses = content.map((line, idx) => {

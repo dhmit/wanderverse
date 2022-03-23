@@ -2,11 +2,10 @@ import axios from "axios";
 import React, {useEffect, useRef, useState} from "react";
 import * as PropTypes from "prop-types";
 import {getCookie} from "../common";
+import Symbol from "./Symbol";
 import CircleIcon from "../images/icons/circle.svg";
 import CheckIcon from "../images/icons/plus-circle.svg";
 import RefreshIcon from "../images/icons/refresh.svg";
-import Symbol from "./Symbol";
-import X from "../images/icons/x.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 
 const cookie = getCookie("csrftoken");
@@ -198,7 +197,7 @@ const Play = ({data}) => {
                                className={"form-control col"}/>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto"}>Page number</label>
+                        <label className={"col-auto"}>Page</label>
                         <input name={bookPageNumber}
                                onChange={e => setBookPageNumber(e.target.value)}
                                className={"form-control col-2"}

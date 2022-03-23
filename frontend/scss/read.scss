@@ -15,8 +15,8 @@
         .verse-container {
             width: 100%;
             display: grid;
-            grid-template-areas: "symbol verse";
-            grid-template-columns: 10% 90%;
+            grid-template-areas: "symbol . verse";
+            grid-template-columns: 10% 3% 87%;
         }
 
         .symbol-icon {
