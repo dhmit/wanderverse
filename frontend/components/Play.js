@@ -31,6 +31,7 @@ const Play = ({data}) => {
     const instructionsRef = useRef(null);
 
     const dismissModal = () => {
+        if (window.innerWidth >= 768) return;
         let val = instructionsClass === "dismissed" ? "" : "dismissed";
         setDismissInstructionsClass(val);
         // if dismissed is called, remove instructions

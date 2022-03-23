@@ -43,6 +43,7 @@
 
     .page-title, a.page-title {
         color: $color-w-0;
+
         &:hover, &:active, &:focus {
             text-decoration: none;
         }
@@ -178,23 +179,7 @@
             right: 0.6em;
             margin-top: -10px;
         }
-
     }
-
-    //.btn-dismiss {
-    //    text-transform: uppercase;
-    //    font-size: 0.9em;
-    //    font-weight: bold;
-    //
-    //    &:focus, &:active, &:hover {
-    //        outline: none !important;
-    //        box-shadow: none;
-    //    }
-    //
-    //    &:hover {
-    //        color: $color-w-0;
-    //    }
-    //}
 
     .w-form {
         margin-bottom: 2em;
@@ -255,6 +240,30 @@
 
         .btn {
             margin: 0 auto;
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+        main {
+
+            display: grid;
+            grid-template-areas: "instructions form";
+            grid-template-columns: 40% 60%;
+            padding-bottom: 1em;
+            .instructions-overlay {
+                grid-area: instructions;
+                position: relative;
+                z-index: 0;
+                box-shadow: 8px 0 6px -6px $color-w-2;
+                .btn-dismiss {
+                    display: none;
+                }
+            }
+
+            .w-form {
+                grid-area: form;
+                padding-top: 10px !important;
+            }
         }
     }
 

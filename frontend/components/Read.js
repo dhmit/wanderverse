@@ -64,13 +64,15 @@ const Read = ({data}) => {
             <a href={"/"}>
                 <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
             </a>
-            {errors && <ul>{errorItems}</ul>}
-            <div className="wanderverse-container text-left">
+            <div className={"top-info text-left"}>
+                {errors && <ul>{errorItems}</ul>}
                 {citesShown &&
-                <HideIcon className={"pointer"} fill={"#6D5BFB"} onClick={toggleCitations}/>}
+                <HideIcon className={"left pointer"} fill={"#6D5BFB"} onClick={toggleCitations}/>}
                 {!citesShown &&
-                <CiteIcon className={"pointer"} style={{width: "20px"}}
+                <CiteIcon className={"left pointer"} style={{width: "20px"}}
                           onClick={toggleCitations}/>}
+            </div>
+            <div className="wanderverse-container text-left">
 
                 <ul className="list">
                     {verses}
