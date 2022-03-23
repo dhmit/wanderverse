@@ -41,8 +41,12 @@
 #play {
     background-color: $color-w-form-light;
 
-    .page-title {
+    .page-title, a.page-title {
         color: $color-w-0;
+        &:hover, &:active, &:focus {
+            text-decoration: none;
+        }
+
     }
 
     .navbar.navbar-light.bg-light {
@@ -117,7 +121,7 @@
     .instructions-overlay {
         background-color: white;
         z-index: 9999;
-        box-shadow: 0 4px 2px -2px gray;
+        box-shadow: 0 8px 6px -6px $color-w-2;
         position: absolute;
         top: 0;
         width: 100%;
@@ -158,8 +162,18 @@
         font-size: 0.7em;
         position: absolute;
         right: 0.6em;
+        top: 1.2em;
+
+
+        &:hover, &:active, &:focus {
+            svg {
+                transform: rotate(360deg);
+                fill: $color-w-2;
+            }
+        }
 
         svg {
+            transition: all 500ms ease;
             position: relative;
             right: 0.6em;
             margin-top: -10px;

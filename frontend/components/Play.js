@@ -78,7 +78,10 @@ const Play = ({data}) => {
         axios.get("/wanderverses").then(res => {
             setVerse(res.data.w);
             localStorage.setItem("verse", JSON.stringify(res.data.w));
+            let instructionStyle = instructionsClass === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
+            setInstructionStyle(instructionStyle);
         })
+
     }
 
     const clearLocalStorage = () => {
@@ -123,13 +126,12 @@ const Play = ({data}) => {
             <div style={instructionStyle}
                  className={`instructions-overlay text-center pl-4 pr-4 pb-2 ${instructionsClass}`}>
                 <h1 className={"page-title mt-3 mb-3"}>CONTINUE THE POEM</h1>
-
+                <a className={"btn btn-default btn-refresh"} onClick={refresh}>
+                    <RefreshIcon className={"icon-refresh"} height={"16px"}
+                                 fill={"#0C00FF"}/>
+                </a>
                 <div id={"exquisite-verse"} className={"text-left"}>
                     <div className={"box-inner"}>
-                        <a className={"btn btn-default btn-refresh"} onClick={refresh}>
-                            <RefreshIcon className={"icon-refresh"} height={"16px"}
-                                         fill={"#8aadff"}/>
-                        </a>
                         {verse}
                     </div>
                 </div>
