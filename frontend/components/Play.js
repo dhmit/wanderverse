@@ -27,7 +27,7 @@ const Play = ({data}) => {
     const [instructionStyle, setInstructionStyle] = useState({});
     const [playStyle, setPlayStyle] = useState({});
     const [instructionsClass, setDismissInstructionsClass] = useState("");
-    const [instructionsText, setInstructionsText] = useState("Add a new verse");
+    const [instructionsText, setInstructionsText] = useState("CONTINUE");
 
     const instructionsRef = useRef(null);
 
@@ -35,12 +35,12 @@ const Play = ({data}) => {
         let val = instructionsClass === "dismissed" ? "" : "dismissed";
         setDismissInstructionsClass(val);
         // if dismissed is called, remove instructions
-        let instructionStyle = val === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 30 + "px"} : {};
+        let instructionStyle = val === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
         setInstructionStyle(instructionStyle);
-        let playStyle = val === "dismissed" ? {marginTop: instructionsRef.current.getBoundingClientRect().top + 30 + "px"} : {};
+        let playStyle = val === "dismissed" ? {marginTop: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
         setPlayStyle(playStyle);
         setTimeout(() => {
-            let text = instructionsClass === "dismissed" ? "Add a new verse" : "";
+            let text = instructionsClass === "dismissed" ? "CONTINUE" : "";
             setInstructionsText(text);
         }, 200);
     }
@@ -120,50 +120,45 @@ const Play = ({data}) => {
 
     return (
         <>
-            {/*<Instructions rules={rules}*/}
-            {/*              verse={verse}*/}
-            {/*              refresh={refreshVerse}*/}
-            {/*/>*/}
-
             <div style={instructionStyle}
                  className={`instructions-overlay text-center pl-4 pr-4 pb-2 ${instructionsClass}`}>
-                <h1 className={"page-title mt-2 mb-4"}>CONTINUE THE POEM</h1>
-                <h2 className={"text-left"}>That ends with:</h2>
+                <h1 className={"page-title mt-3 mb-3"}>CONTINUE THE POEM</h1>
 
-                <div id={"exquisite-verse"} className={"font-calmius text-left"}>
-                    <a className={"btn btn-default btn-refresh"} onClick={refresh}>
-                        <RefreshIcon className={"icon-refresh"} height={"16px"} fill={"#8aadff"}/>
-                    </a>
-                    {verse}
+                <div id={"exquisite-verse"} className={"text-left"}>
+                    <div className={"box-inner"}>
+                        <a className={"btn btn-default btn-refresh"} onClick={refresh}>
+                            <RefreshIcon className={"icon-refresh"} height={"16px"}
+                                         fill={"#8aadff"}/>
+                        </a>
+                        {verse}
+                    </div>
                 </div>
 
                 <div className={"rules text-left mt-2 pb-2"}>
-                    <div className={"instructions-title"}>
-                        <div className={"page-title row mb-2 mr-1"}>
-                            <div ref={instructionsRef} className={"col-auto"}>Instructions</div>
-                            <div className={"col hr mb-2"}/>
-                        </div>
-                    </div>
+                    <a className={"page-title instructions-title ml-1 btn-default"}
+                       ref={instructionsRef} onClick={dismissModal}>
+                        Instructions <DownArrow className="icon-down-arrow" width={"10px"}
+                                                fill={"#0C00FFFF"}/>
+                    </a>
                     <ul className="rules-list">
                         {rules.map((line, idx) => {
-                            return <li key={idx}>
-                                {line}<Symbol fill="#000000" top={"0"} left={"20px"}
-                                              spanTag={true}
-                                              stop={true}/>
+                            return <li key={idx} className={"rules-item"}>
+                                <span className={"symbol-icon"}>
+                                    <Symbol fill="#0C00FF" top={"0"} left={"20px"}
+                                            height={"13"}
+                                            spanTag={true}
+                                            stop={true}/>
+                                </span>
+                                <span className={"line"}>{line}</span>
                             </li>;
                         })}
                     </ul>
-                </div>
-                <div className={"row btn-row"}>
-                    <button className={"btn btn-tertiary btn-dismiss mt-2 mx-auto"}
-                            onClick={dismissModal}>
-                        {instructionsText}
-                        <br/>
-                        {instructionsText.indexOf("Exit") > -1
-                            ? <X width={"10px"} height={"10px"}/>
-                            : <DownArrow width={"10px"} height={"10px"}/>
-                        }
-                    </button>
+                    <div className={"text-center"}>
+                        <button className={"btn btn-tertiary btn-dismiss mx-auto"}
+                                onClick={dismissModal}>
+                            {instructionsText}
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -172,11 +167,13 @@ const Play = ({data}) => {
                     <div className={"form-group"}>
                         <label htmlFor="verse-input" className={"text-plain"}>Your found
                             text</label>
+                        <div className={"new-verse box-outer"}>
                         <textarea name={newVerse}
                                   required
                                   onChange={e => setNewVerse(e.target.value)}
                                   className={"form-control"}
                                   id={"verse-input"}/>
+                        </div>
                     </div>
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Author</label>
