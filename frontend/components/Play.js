@@ -1,6 +1,6 @@
 import axios from "axios";
 import {debounce} from "lodash";
-import React, {useEffect, useRef, useState, useCallback} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import * as PropTypes from "prop-types";
 import {getCookie} from "../common";
 import Symbol from "./Symbol";
@@ -30,9 +30,9 @@ const Play = ({data}) => {
     const [instructionsText, setInstructionsText] = useState("CONTINUE");
 
     const instructionsRef = useRef(null);
-
+    const smallScreenSize = 768;
     const getNavHeight = () => {
-        let nav = document.querySelector('.navbar');
+        let nav = document.querySelector(".navbar");
         return nav.getBoundingClientRect().height;
     }
 
@@ -43,14 +43,15 @@ const Play = ({data}) => {
 
     useEffect(() => {
         updateNavStyles();
-        window.addEventListener('resize', resize)
+        if (window.innerWidth <= smallScreenSize) return;
+        window.addEventListener("resize", resize);
     }, []);
 
     const resize = debounce(updateNavStyles, 300);
 
     const dismissModal = () => {
         // set styles depending on whether instruction "modal" is shown
-        if (window.innerWidth >= 768) return;
+        if (window.innerWidth >= smallScreenSize) return;
         let val = instructionsClass === "dismissed" ? "" : "dismissed";
         setDismissInstructionsClass(val);
         // if dismissed is called, remove instructions
