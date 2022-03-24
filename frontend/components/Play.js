@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, {useEffect, useRef, useState} from "react";
+import {debounce} from "lodash";
+import React, {useEffect, useRef, useState, useCallback} from "react";
 import * as PropTypes from "prop-types";
 import {getCookie} from "../common";
 import Symbol from "./Symbol";
@@ -30,14 +31,32 @@ const Play = ({data}) => {
 
     const instructionsRef = useRef(null);
 
+    const getNavHeight = () => {
+        let nav = document.querySelector('.navbar');
+        return nav.getBoundingClientRect().height;
+    }
+
+    const updateNavStyles = () => {
+        let navHeight = getNavHeight();
+        setInstructionStyle({height: window.innerHeight - navHeight + 5 + "px"})
+    }
+
+    useEffect(() => {
+        updateNavStyles();
+        window.addEventListener('resize', resize)
+    }, []);
+
+    const resize = debounce(updateNavStyles, 300);
+
     const dismissModal = () => {
+        // set styles depending on whether instruction "modal" is shown
         if (window.innerWidth >= 768) return;
         let val = instructionsClass === "dismissed" ? "" : "dismissed";
         setDismissInstructionsClass(val);
         // if dismissed is called, remove instructions
         let instructionStyle = val === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
         setInstructionStyle(instructionStyle);
-        let playStyle = val === "dismissed" ? {marginTop: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
+        let playStyle = val === "dismissed" ? {marginTop: instructionsRef.current.getBoundingClientRect().top + 13 + "px"} : {};
         setPlayStyle(playStyle);
         setTimeout(() => {
             let text = instructionsClass === "dismissed" ? "CONTINUE" : "";
@@ -69,7 +88,6 @@ const Play = ({data}) => {
     }, []);
 
     const triggerStartNew = () => {
-        console.log("triggerStartNew", !startNew)
         setStartNew(!startNew);
     }
 
@@ -143,6 +161,16 @@ const Play = ({data}) => {
                                                 fill={"#0C00FFFF"}/>
                     </a>
                     <ul className="rules-list">
+                        <li className={"rules-item"}>
+                                <span className={"symbol-icon"}>
+                                    <Symbol fill="#0C00FF" top={"0"} left={"20px"}
+                                            height={"13"}
+                                            spanTag={true}
+                                            stop={true}/>
+                                </span>
+                            <span className={"line"}>Extend the poem by adding another line.</span>
+                        </li>
+
                         {rules.map((line, idx) => {
                             return <li key={idx} className={"rules-item"}>
                                 <span className={"symbol-icon"}>

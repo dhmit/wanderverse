@@ -199,10 +199,11 @@
             border: 2px solid $color-w-0;
             padding: 5px;
             animation: changeColor 30s infinite alternate;
+            height: 6em;
         }
 
         textarea {
-            min-height: 6em;
+            height: 5em;
             color: $color-w-0;
             border: 2px solid $color-w-0;
 
@@ -245,7 +246,7 @@
 
     @media only screen and (min-width: 768px) {
         main {
-
+            height: 100vh;
             display: grid;
             grid-template-areas: "instructions form";
             grid-template-columns: 40% 60%;
@@ -253,6 +254,7 @@
             .instructions-overlay {
                 grid-area: instructions;
                 position: relative;
+                overflow-y: scroll;
                 z-index: 0;
                 box-shadow: 8px 0 6px -6px $color-w-2;
                 .btn-dismiss {
@@ -263,6 +265,7 @@
             .w-form {
                 grid-area: form;
                 padding-top: 10px !important;
+                overflow-y: scroll;
             }
         }
     }
