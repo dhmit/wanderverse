@@ -52,6 +52,9 @@ export function getRandomColor2() {
     return colors2[Math.floor(Math.random() * colors2.length)];
 }
 
+export function getRandomFromArray(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
 export function shuffleArray(arr) {
     return arr.sort(() => Math.random() - 0.5);

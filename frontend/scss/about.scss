@@ -2,4 +2,16 @@
     background-color: $color-black;
     color: white;
     padding: 1.5em;
+
+    .about {
+        a {
+            font-family: sans-serif;
+            font-size: 0.9em;
+            color: $color-w-4;
+
+            &:hover, &:focus, &:active {
+                color: $color-w-5 !important;
+            }
+        }
+    }
 }
