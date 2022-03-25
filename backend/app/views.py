@@ -128,6 +128,32 @@ def read(request):
     return render(request, 'index.html', context)
 
 
+def read_display(request):
+    params = request.GET
+    context = {
+        'page_metadata': {
+            'title': 'Wanderverse',
+            'id': 'read-display',
+        },
+        'component_props': {
+            'data': {
+                'verses': '[]',
+                'id': '',
+                'errors': '[]'
+            }
+        },
+        'component_name': 'ReadDisplay'
+    }
+
+    qs = Wanderverse.objects.all()
+    w = get_random_instance(qs)
+
+    verses = json.dumps(w.verse_objects())
+    context['component_props']['data']['id'] = w.id
+    context['component_props']['data']['verses'] = verses
+    return render(request, 'index.html', context)
+
+
 def wanderverse(request, wanderverse_id=None):
     if request.POST:
         # check last line added timestamp

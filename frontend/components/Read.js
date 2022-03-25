@@ -38,7 +38,7 @@ const Read = ({data}) => {
     }
 
     const verses = content.map((line, idx) => {
-        let info = getInfo(line, idx)
+        let info = getInfo(line, idx);
         return <>
             <li className={"verse-container"} key={`verse-container-${idx}`}>
                 <Symbol extraClass={"symbol-icon mt-2"} fill={"#F4782F"} spanTag={true}
