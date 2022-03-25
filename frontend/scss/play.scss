@@ -71,6 +71,10 @@
         border-bottom: 2px solid $color-black;
     }
 
+    .required-text {
+        margin-top: -10px;
+    }
+
     .rules-list {
         min-width: 100%;
         overflow-y: scroll;
@@ -187,7 +191,7 @@
             color: $color-black;
             background-color: $color-w-form;
             font-size: 1.35em;
-            padding: 0;
+            padding: 0 0.2em;
 
             &.text-small {
                 font-size: 1em;

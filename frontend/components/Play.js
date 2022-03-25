@@ -205,6 +205,7 @@ const Play = ({data}) => {
                                   className={"form-control"}
                                   id={"verse-input"}/>
                         </div>
+                        <p className={"text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                     </div>
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Author</label>
@@ -212,13 +213,16 @@ const Play = ({data}) => {
                                required
                                onChange={e => setBookAuthor(e.target.value)}
                                className={"form-control col"}/>
+                        <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                     </div>
+
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Title</label>
                         <input name={bookTitle}
                                required
                                onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
+                        <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                     </div>
                     <div className={"form-group row mb-6"}>
                         <label className={"col-auto"}>Genre</label>
