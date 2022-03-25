@@ -1,12 +1,11 @@
 import json
+import logging
 from django.shortcuts import render
 from django.http import JsonResponse
 from app.models import Wanderverse, Verse
 from app.helpers import get_random_instance
 from app.validators import verse_is_valid
 from app.rules import Rules
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -129,7 +128,6 @@ def read(request):
 
 
 def read_display(request):
-    params = request.GET
     context = {
         'page_metadata': {
             'title': 'Wanderverse',
@@ -209,7 +207,7 @@ def add_verse(request):
             verse.save()
 
     # if no last verse or start new is ticked true
-    if not last_verse or ('start_new' in content and content['start_new'] == True) or \
+    if not last_verse or ('start_new' in content and content['start_new'] is True) or \
         last_verse.text != last_verse_text:
         new_wanderverse = Wanderverse.objects.create()
         new_verse = Verse.objects.create(text=verse_text,
