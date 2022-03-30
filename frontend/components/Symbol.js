@@ -25,20 +25,19 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag, height}) => {
     const [newSymbol, setNewSymbol] = useState(<X style={{height: "10px"}}/>);
     const [rotation, setRotation] = useState(0);
     const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q,
-        <span className={"font-calmius-bold"} key={"symbol-&sect;"}>&sect;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&para;"}>&para;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#8473;"}>&#8473;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#8523;"}>&#183;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#9733;"}>&#9733;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#9753;"}>&#9753;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#9755;"}>&#9755;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#9824;"}>&#9824;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#x2020;"}>&#x2020;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#x2021;"}>&#x2021;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&amp;"}>&amp;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&rarr;"}>&rarr;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&#8621;"}>&#8621;</span>,
-        <span className={"font-calmius-bold"} key={"symbol-&hearts;"}>&hearts;</span>,
+        <span className={"font-klima"} key={"symbol-&sect;"}>&sect;</span>,
+        <span className={"font-klima"} key={"symbol-&para;"}>&para;</span>,
+        <span className={"font-klima"} key={"symbol-&#8473;"}>&#8473;</span>,
+        <span className={"font-klima"} key={"symbol-&#8523;"}>&#183;</span>,
+        <span className={"font-klima"} key={"symbol-&#9733;"}>&#9733;</span>,
+        <span className={"font-klima"} key={"symbol-&#9753;"}>&#9753;</span>,
+        <span className={"font-klima"} key={"symbol-&#9755;"}>&#9755;</span>,
+        <span className={"font-klima"} key={"symbol-&#x2020;"}>&#x2020;</span>,
+        <span className={"font-klima"} key={"symbol-&#x2021;"}>&#x2021;</span>,
+        <span className={"font-klima"} key={"symbol-&amp;"}>&amp;</span>,
+        <span className={"font-klima"} key={"symbol-&rarr;"}>&rarr;</span>,
+        <span className={"font-klima"} key={"symbol-&#8621;"}>&#8621;</span>,
+        <span className={"font-klima"} key={"symbol-&hearts;"}>&hearts;</span>,
     ]
     useEffect(() => {
         let randomSymbol = getRandomFromArray(symbols);
@@ -48,7 +47,7 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag, height}) => {
         }
         let color = fill ? fill : getRandomFromArray(colors);
         if (randomSymbol.type === "span") {
-            randomHeight = height ? height : Math.floor(Math.random() * 40 + 20);
+            randomHeight = height ? height : Math.floor(Math.random() * 20 + 20);
             setNewSymbol(<div
                 style={{fontSize: randomHeight + "px", color: color}}>{randomSymbol}</div>);
         } else {

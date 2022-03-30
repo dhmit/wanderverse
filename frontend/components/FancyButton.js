@@ -23,11 +23,12 @@ const FancyButton = ({href, extraClass, title}) => {
             min = 50;
             bool = true;
         }
-        return bool ? -1 * (Math.floor(Math.random() * (max - min) + min)) + "px" : Math.floor(Math.random() * (max - min) + min) + "px";
+        return bool ? -1 * (Math.floor(Math.random() * (max - min) + min)) + "px"
+            : Math.floor(Math.random() * (max - min) + min) + "px";
     }
 
     const createRandomSymbols = (side) => {
-        let rand = Math.floor(Math.random() * (10 - 4) + 4);
+        let rand = Math.floor(Math.random() * 20 + 4);
         let arr = [];
         for (let i = 0; i < rand; i++) {
             arr.push(<Symbol key={i} left={getPosition(side)} top={getPosition("top")}/>)

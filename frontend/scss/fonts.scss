@@ -15,22 +15,6 @@
 }
 
 @font-face {
-    font-family: "calmiusbold";
-    src: url("../fonts/nrey_-_calmius-bold-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-bold-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "calmiusbold_italic";
-    src: url("../fonts/nrey_-_calmius-bolditalic-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-bolditalic-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: "calmiusextra_bold";
     src: url("../fonts/nrey_-_calmius-extrabold-webfont.woff2") format("woff2"),
     url("../fonts/nrey_-_calmius-extrabold-webfont.woff") format("woff");
@@ -38,50 +22,11 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: "calmiusextra_bold_italic";
-    src: url("../fonts/nrey_-_calmius-extrabolditalic-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-extrabolditalic-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "calmiusextra_light";
-    src: url("../fonts/nrey_-_calmius-extralight-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-extralight-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "calmiusextra_light_italic";
-    src: url("../fonts/nrey_-_calmius-extralightitalic-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-extralightitalic-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
 
 @font-face {
     font-family: "calmiusitalic";
     src: url("../fonts/nrey_-_calmius-italic-webfont.woff2") format("woff2"),
     url("../fonts/nrey_-_calmius-italic-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "calmiuslight";
-    src: url("../fonts/nrey_-_calmius-light-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-light-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "calmiuslight_italic";
-    src: url("../fonts/nrey_-_calmius-lightitalic-webfont.woff2") format("woff2"),
-    url("../fonts/nrey_-_calmius-lightitalic-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -103,12 +48,21 @@
 }
 
 
+@font-face {
+    font-family: "klima";
+    src: url("../fonts/klima-heavy-webfont.woff2") format("woff2"),
+    url("../fonts/klima-heavy-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 $font-family-base: "Baskerville", serif;
 $font-family-calmius: calmiusregular, "Baskerville", serif;
 $font-family-calmius-extrabold: calmiusextra_bold, "Baskerville", serif;
 $font-family-calmius-mediumitalic: calmiusmedium_italic, "Baskerville", serif;
 $font-family-calmius-medium: calmiusmedium, "Baskerville", serif;
-
+$font-family-klima: klima, sans-serif;
 
 .font-calmius {
     font-family: $font-family-calmius;
@@ -124,4 +78,8 @@ $font-family-calmius-medium: calmiusmedium, "Baskerville", serif;
 
 .font-calmius-medium {
     font-family: $font-family-calmius-medium;
+}
+
+.font-klima {
+    font-family: $font-family-klima;
 }

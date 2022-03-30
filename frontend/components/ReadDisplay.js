@@ -1,11 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef} from "react";
 import * as PropTypes from "prop-types";
 import Logo from "../images/logo.svg";
-import Symbol from "./Symbol";
 
 
 const ReadDisplay = ({data}) => {
-    const [citesShown, showCites] = useState(true);
     // adding line dividers until the last line of the poem
     const content = JSON.parse(data.verses);
     const messagesEndRef = useRef(null);
