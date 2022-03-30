@@ -12,13 +12,7 @@ import DownArrow from "../images/icons/down-arrow.svg";
 const cookie = getCookie("csrftoken");
 const rulesURL = "/rules/";
 const addVerseURL = "/add-verse/";
-const formErrors = {
-    title: "",
-    author: "",
-    verse: "",
-    page: "",
-    genre: ""
-};
+
 const Play = ({data}) => {
     const [rules, setRules] = useState([]);
     const [verse, setVerse] = useState([]);
@@ -34,7 +28,9 @@ const Play = ({data}) => {
     const [playStyle, setPlayStyle] = useState({});
     const [instructionsClass, setDismissInstructionsClass] = useState("");
     const [instructionsText, setInstructionsText] = useState("CONTINUE");
-    const [formErrors, setFormErrors] = useState({});
+    const [formErrors, setFormErrors] = useState({
+        title: "", author: "", verse: "", page: "", genre: ""
+    });
 
     const instructionsRef = useRef(null);
     const smallScreenSize = 768;
