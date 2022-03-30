@@ -179,8 +179,7 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-    logger.debug("add_verse ==== content:")
-    logger.debug(json.dumps(content))
+    # logger.debug(json.dumps(content))
 
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
@@ -193,8 +192,10 @@ def add_verse(request):
     verse_text = content['verse'].strip()
 
     # Check if text is clean:
-    if not verse_is_valid(content):
-        return JsonResponse({"valid": False, "message": "Not allowed"}, status=422)
+    valid = verse_is_valid(content)
+    if valid is not True:
+        return JsonResponse({"valid": False, "message": valid["message"], "key": valid["key"]},
+                            status=422)
 
     # if last_verse doesn't exist OR it exists and matches the actual last verse text
     if last_verse and last_verse.text == last_verse_text:

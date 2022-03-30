@@ -183,7 +183,17 @@
             margin-top: -10px;
         }
     }
-
+    .helper-text {
+        display: grid;
+        grid-template-areas: "error required";
+        padding: 0;
+        .error {
+            grid-area: error;
+        }
+        .required-text {
+            grid-area: required;
+        }
+    }
     .w-form {
         margin-bottom: 2em;
 

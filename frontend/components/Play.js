@@ -10,9 +10,15 @@ import RefreshIcon from "../images/icons/refresh.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 
 const cookie = getCookie("csrftoken");
-
-const rulesURL = "/rules/"
-const addVerseURL = "/add-verse/"
+const rulesURL = "/rules/";
+const addVerseURL = "/add-verse/";
+const formErrors = {
+    title: "",
+    author: "",
+    verse: "",
+    page: "",
+    genre: ""
+};
 const Play = ({data}) => {
     const [rules, setRules] = useState([]);
     const [verse, setVerse] = useState([]);
@@ -28,6 +34,7 @@ const Play = ({data}) => {
     const [playStyle, setPlayStyle] = useState({});
     const [instructionsClass, setDismissInstructionsClass] = useState("");
     const [instructionsText, setInstructionsText] = useState("CONTINUE");
+    const [formErrors, setFormErrors] = useState({});
 
     const instructionsRef = useRef(null);
     const smallScreenSize = 768;
@@ -99,8 +106,7 @@ const Play = ({data}) => {
             localStorage.setItem("verse", JSON.stringify(res.data.w));
             let instructionStyle = instructionsClass === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
             setInstructionStyle(instructionStyle);
-        })
-
+        });
     }
 
     const clearLocalStorage = () => {
@@ -108,6 +114,7 @@ const Play = ({data}) => {
         localStorage.removeItem("wanderverseID");
         localStorage.removeItem("rules");
     }
+
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -121,7 +128,6 @@ const Play = ({data}) => {
             last_verse: verse,
             start_new: startNew,
         }
-        console.log("params", params);
         if (bookPageNumber) {
             params.page_number = bookPageNumber
         }
@@ -136,8 +142,11 @@ const Play = ({data}) => {
             clearLocalStorage();
             window.location.assign("/read/?id=" + id);
         }).catch((error) => {
-            console.log("catching", error);
-        })
+            let response = error.response.data;
+            let error_obj = {};
+            error_obj[response.key] = response.message;
+            setFormErrors(error_obj);
+        });
     }
 
     return (
@@ -198,44 +207,58 @@ const Play = ({data}) => {
                     <div className={"form-group"}>
                         <label htmlFor="verse-input" className={"text-plain"}>Your found
                             text</label>
-                        <div className={"new-verse box-outer"}>
-                        <textarea name={newVerse}
+                        <div className={"new-verse box-outer mb-2"}>
+                        <textarea name="newVerse"
                                   required
                                   onChange={e => setNewVerse(e.target.value)}
                                   className={"form-control"}
                                   id={"verse-input"}/>
                         </div>
-                        <p className={"text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                        <div className={"helper-text"}>
+                            <small className="error text-danger">{formErrors["verse"]}</small>
+                            <p className={"text-right required-text p-0 small text-blue mb-0"}>&#10045; required</p>
+                        </div>
+
                     </div>
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Author</label>
-                        <input name={bookAuthor}
+                        <input name="author"
                                required
                                onChange={e => setBookAuthor(e.target.value)}
                                className={"form-control col"}/>
-                        <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                        <div className={"helper-text"}>
+                            <small className="error text-danger">{formErrors["author"]}</small>
+                            <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                        </div>
                     </div>
 
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Title</label>
-                        <input name={bookTitle}
+                        <input name="title"
                                required
                                onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
-                        <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                        <div className={"helper-text"}>
+                            <small className="error text-danger">{formErrors.book_title}</small>
+                            <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                        </div>
                     </div>
                     <div className={"form-group row mb-6"}>
                         <label className={"col-auto"}>Genre</label>
-                        <input name={bookGenre}
+                        <input name="genre"
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
+                        <small className="text-danger">{formErrors.genre}</small>
                     </div>
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Page</label>
-                        <input name={bookPageNumber}
+                        <input name="page"
                                onChange={e => setBookPageNumber(e.target.value)}
                                className={"form-control col-2"}
                                type={"number"}/>
+                        <div className={"helper-text"}>
+                            <small className="error text-danger">{formErrors.page}</small>
+                        </div>
                     </div>
                     <span>{startNew
                         ? <CheckIcon
