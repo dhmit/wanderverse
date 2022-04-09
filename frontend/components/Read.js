@@ -72,7 +72,7 @@ const Read = ({data}) => {
                               onClick={toggleCitations}/>}
                 </div>
             </div>
-            <div className={"read-container"}>
+            {verses.length > 0 && <div className={"read-container"}>
                 <div className={"inner-container"}>
                     <div className="wanderverse-container text-left">
 
@@ -83,7 +83,7 @@ const Read = ({data}) => {
                     <SectionSymbols otherClass={"fixed-bottom symbols-bottom mb-4"}/>
 
                 </div>
-            </div>
+            </div>}
         </div>
     );
 };
