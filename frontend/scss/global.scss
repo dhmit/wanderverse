@@ -22,8 +22,6 @@ a:hover {
 }
 
 #app_root {
-//    max-width: 400px;
-//    margin: 0 auto;
     height: 100vh;
 }
 
@@ -78,6 +76,7 @@ a:hover {
 
 #home {
     background-color: $color-w-6;
+
     .col-4.p-0 {
         height: 200px !important;
     }
@@ -102,4 +101,26 @@ a:hover {
 
 .text-blue {
     color: $color-w-0;
+}
+
+
+@keyframes changePlayColor {
+    0% {
+        background-color: white;
+    }
+    20% {
+        background-color: #e3cfff;
+    }
+    40% {
+        background-color: #ffd5c7;
+    }
+    60% {
+        background-color: #d6d3ff;
+    }
+    80% {
+        background-color: #fdffe9;
+    }
+    100% {
+        background-color: #fccbdc;
+    }
 }

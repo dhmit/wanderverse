@@ -1,24 +1,4 @@
 #play {
-    @keyframes changePlayColor {
-        0% {
-            background-color: white;
-        }
-        20% {
-            background-color: #e3cfff;
-        }
-        40% {
-            background-color: #ffd5c7;
-        }
-        60% {
-            background-color: #d6d3ff;
-        }
-        80% {
-            background-color: #fdffe9;
-        }
-        100% {
-            background-color: #fccbdc;
-        }
-    }
     background-color: $color-w-form-light;
 
     #exquisite-verse {

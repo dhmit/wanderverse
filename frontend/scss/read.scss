@@ -1,4 +1,30 @@
 #read {
+    display: grid;
+    background-color: $color-w-6;
+
+    .top-info-container, .read-container {
+        margin: 0 auto;
+        width: 95%;
+        max-height: 60vh;
+        @media only screen and (min-width: 768px) {
+            width: 400px;
+        }
+    }
+
+    .read-container {
+        border: 2px solid $color-w-0;
+        padding: 0.3em;
+        animation: changePlayColor 30s infinite alternate;
+
+        .inner-container {
+            border: 2px solid $color-w-0;
+            padding: 0.2em;
+            background-color: white;
+            max-height: 100%;
+            overflow-y: scroll;
+        }
+    }
+
     .page-title {
         color: $color-w-3;
     }
@@ -8,24 +34,14 @@
     }
 
     .wanderverse-container {
-        min-height: 50%;
-        max-height: 500px;
+        max-height: 100%;
         overflow-y: scroll;
 
         .verse-container {
             width: 100%;
             display: grid;
-            grid-template-areas: "symbol . verse";
-            grid-template-columns: 10% 3% 87%;
-        }
-
-        .symbol-icon {
-            width: 3em;
-            margin-left: 0.5em;
-            grid-area: symbol;
-            max-width: 20px;
-            left: -5px;
-            position: relative;
+            grid-template-areas: ". verse .";
+            grid-template-columns: 7% 88% 5%;
         }
 
         .verse {

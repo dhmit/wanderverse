@@ -3,7 +3,6 @@ import * as PropTypes from "prop-types";
 import ALogo from "../images/logo-small.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
-import Symbol from "./Symbol";
 import SectionSymbols from "./SectionSymbols";
 
 
@@ -41,14 +40,12 @@ const Read = ({data}) => {
         let info = getInfo(line, idx);
         return <>
             <li className={"verse-container"} key={`verse-container-${idx}`}>
-                <Symbol extraClass={"symbol-icon mt-2"} fill={"#F4782F"} spanTag={true}
-                        stop={true}/>
                 {idx === content.length - 1
                     ? <span key={`verse-${idx}`} className={"verse"}>
                         {line.text}
                         &nbsp;{citesShown && info}</span>
                     : <span key={`verse-${idx}`} className={"verse"}>
-                        {line.text} {citesShown && info} <span className={"text-citation"}>/</span>
+                        {line.text} {citesShown && info}
                     </span>
                 }
             </li>
@@ -62,24 +59,31 @@ const Read = ({data}) => {
     return (
         <div id="read" className={"text-center pt-4 pl-4 pr-4 pb-2"}>
             <a href={"/"}>
-                <ALogo width={"80%"} className={"w mb-3"} fill={"#9E88FA"}/>
+                <ALogo style={{maxWidth: "300px"}} className={"w mb-3"} fill={"#9E88FA"}/>
             </a>
-            <div className={"top-info text-left"}>
-                {errors && <ul>{errorItems}</ul>}
-                {citesShown &&
-                <HideIcon className={"left pointer"} fill={"#6D5BFB"} onClick={toggleCitations}/>}
-                {!citesShown &&
-                <CiteIcon className={"left pointer"} style={{width: "20px"}}
-                          onClick={toggleCitations}/>}
+            <div className="top-info-container mb-2">
+                <div className={"top-info text-left"}>
+                    {errors && <ul>{errorItems}</ul>}
+                    {citesShown &&
+                    <HideIcon className={"left pointer"} fill={"#6D5BFB"}
+                              onClick={toggleCitations}/>}
+                    {!citesShown &&
+                    <CiteIcon className={"left pointer"} style={{width: "20px"}}
+                              onClick={toggleCitations}/>}
+                </div>
             </div>
-            <div className="wanderverse-container text-left">
+            <div className={"read-container"}>
+                <div className={"inner-container"}>
+                    <div className="wanderverse-container text-left">
 
-                <ul className="list">
-                    {verses}
-                </ul>
+                        <ul className="list">
+                            {verses}
+                        </ul>
+                    </div>
+                    <SectionSymbols otherClass={"fixed-bottom symbols-bottom mb-4"}/>
+
+                </div>
             </div>
-            <br/>
-            <SectionSymbols otherClass={"fixed-bottom symbols-bottom mb-4"}/>
         </div>
     );
 };

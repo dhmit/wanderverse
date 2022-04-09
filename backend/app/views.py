@@ -117,7 +117,7 @@ def read(request):
                  "exist."])
             return render(request, 'index.html', context)
     else:
-        qs = Wanderverse.objects.all()
+        qs = Wanderverse.all_valid()
         w = get_random_instance(qs)
 
     verses = json.dumps(w.verse_objects())
@@ -143,13 +143,20 @@ def read_display(request):
         'component_name': 'ReadDisplay'
     }
 
-    qs = Wanderverse.objects.all()
+    qs = Wanderverse.all_valid()
     w = get_random_instance(qs)
 
     verses = json.dumps(w.verse_objects())
     context['component_props']['data']['id'] = w.id
     context['component_props']['data']['verses'] = verses
     return render(request, 'index.html', context)
+
+
+def random(request):
+    qs = Wanderverse.all_valid()
+    w = get_random_instance(qs)
+    verses = json.dumps(w.verse_objects())
+    return JsonResponse({"verses": verses})
 
 
 def wanderverse(request, wanderverse_id=None):

@@ -21,8 +21,8 @@ import Q from "../images/icons/symbol-divider.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 import {getRandomFromArray, colors} from "../common";
 
-const Symbol = ({top, left, extraClass, fill, stop, spanTag, height}) => {
-    const [newSymbol, setNewSymbol] = useState(<X style={{height: "10px"}}/>);
+const Symbol = ({top, left, extraClass, fill, stop, spanTag, height, delayDisplay = 0}) => {
+    const [newSymbol, setNewSymbol] = useState(<></>);
     const [rotation, setRotation] = useState(0);
     const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q,
         <span className={"font-klima"} key={"symbol-&sect;"}>&sect;</span>,
@@ -46,18 +46,20 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag, height}) => {
             setRotation(Math.floor(Math.random() * 360));
         }
         let color = fill ? fill : getRandomFromArray(colors);
-        if (randomSymbol.type === "span") {
-            randomHeight = height ? height : Math.floor(Math.random() * 20 + 20);
-            setNewSymbol(<div
-                style={{fontSize: randomHeight + "px", color: color}}>{randomSymbol}</div>);
-        } else {
-            randomHeight = height ? height : Math.floor(Math.random() * 20 + 10);
-            setNewSymbol(randomSymbol({
-                position: "relative",
-                fill: color,
-                height: randomHeight + "px",
-            }));
-        }
+        setTimeout(() => {
+            if (randomSymbol.type === "span") {
+                randomHeight = height ? height : Math.floor(Math.random() * 20 + 20);
+                setNewSymbol(<div
+                    style={{fontSize: randomHeight + "px", color: color}}>{randomSymbol}</div>);
+            } else {
+                randomHeight = height ? height : Math.floor(Math.random() * 20 + 10);
+                setNewSymbol(randomSymbol({
+                    position: "relative",
+                    fill: color,
+                    height: randomHeight + "px",
+                }));
+            }
+        }, delayDisplay)
 
     }, []);
 
@@ -85,7 +87,8 @@ Symbol.propTypes = {
     extraClass: PropTypes.string,
     fill: PropTypes.string,
     stop: PropTypes.bool,
-    spanTag: PropTypes.bool
+    spanTag: PropTypes.bool,
+    delayDisplay: PropTypes.number
 };
 
 export default Symbol;

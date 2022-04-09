@@ -15,6 +15,10 @@ class Wanderverse(models.Model):
         return list(self.verse_set.order_by('id').values('id', 'text', 'author', 'page_number',
                                                          'book_title'))
 
+    @classmethod
+    def all_valid(cls):
+        return cls.objects.filter(verse__verified=True)
+
 
 class Verse(models.Model):
     id = models.BigAutoField(primary_key=True)
