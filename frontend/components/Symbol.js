@@ -37,7 +37,9 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag, height, delayDispla
         <span className={"font-klima"} key={"symbol-&amp;"}>&amp;</span>,
         <span className={"font-klima"} key={"symbol-&rarr;"}>&rarr;</span>,
         <span className={"font-klima"} key={"symbol-&#8621;"}>&#8621;</span>,
-        <span className={"font-klima"} key={"symbol-&hearts;"}>&hearts;</span>,
+        // <span className={"font-klima"} key={"symbol-&hearts;"}>&hearts;</span> // removed
+        // because of a bizarre mobile chrome bug
+
     ]
     useEffect(() => {
         let randomSymbol = getRandomFromArray(symbols);
@@ -50,7 +52,9 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag, height, delayDispla
             if (randomSymbol.type === "span") {
                 randomHeight = height ? height : Math.floor(Math.random() * 20 + 20);
                 setNewSymbol(<div
-                    style={{fontSize: randomHeight + "px", color: color}}>{randomSymbol}</div>);
+                    style={{fontSize: randomHeight + "px", color: color}}>
+                    {randomSymbol}
+                </div>);
             } else {
                 randomHeight = height ? height : Math.floor(Math.random() * 20 + 10);
                 setNewSymbol(randomSymbol({

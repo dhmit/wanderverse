@@ -106,11 +106,12 @@ def read(request):
         },
         'component_name': 'Read'
     }
+    print(params)
     if 'id' in params:
         wanderverse_id = params.get("id")
         try:
             w = Wanderverse.objects.get(id=wanderverse_id)
-        except Wanderverse.DoesNotExist:
+        except (Wanderverse.DoesNotExist, Exception):
             context['component_props']['data']['errors'] = json.dumps(
                 ["Oops, something went wrong!",
                  "The selected Wanderverse does not "

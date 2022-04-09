@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div className={"text-center"}>
             <a href={"/"}>
-                <Logo height={"10em"} className={"mb-4 mt-4"} fill={"#6D5BFB"}/>
+                <Logo height={"10em"} className={"mb-4 mt-4"} fill={"#3D2DFD"}/>
             </a>
             <h3 className={"subtitle mb-5"}>A collaborative poetry treasure hunt game.</h3>
             <FancyButton title={"Instructions"}
