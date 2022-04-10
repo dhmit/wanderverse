@@ -72,7 +72,7 @@ def example(request, example_id=None):
 
 
 def play(request):
-    qs = Wanderverse.objects.all()
+    qs = Wanderverse.all_valid()
     w = get_random_instance(qs)
     context = {
         'page_metadata': {
