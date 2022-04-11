@@ -17,6 +17,7 @@ class Wanderverse(models.Model):
 
     @classmethod
     def all_valid(cls):
+        """Get all instances with at least one verified verse"""
         return cls.objects.filter(verse__verified=True)
 
     def last_verified(self):

@@ -127,7 +127,6 @@ const Play = ({data}) => {
         if (bookPageNumber) {
             params.page_number = bookPageNumber
         }
-
         axios.post(addVerseURL,
             params, {
                 headers: {

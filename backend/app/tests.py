@@ -141,5 +141,4 @@ class VerifyTests(TestCase):
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
         assert response.status_code == 200
-
         assert Wanderverse.objects.count() == wanderverse_count + 1

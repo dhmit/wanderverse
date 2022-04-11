@@ -176,9 +176,10 @@ def wanderverse(request, wanderverse_id=None):
         else:
             return JsonResponse({"w": str(w).split("\\")})
     else:
-        qs = Wanderverse.objects.all()
+        qs = Wanderverse.all_valid()
         w = get_random_instance(qs)
-        return JsonResponse({"w": str(w.exquisite())})
+        last_verified = w.last_verified()
+        return JsonResponse({"w": str(last_verified.text)})
 
 
 def rules(request):
@@ -188,7 +189,7 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-
+    
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
     except Wanderverse.DoesNotExist:
