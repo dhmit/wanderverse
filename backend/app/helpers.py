@@ -28,7 +28,6 @@ def get_suffix(n):
 
 def is_clean(sentence):
     words = nltk.word_tokenize(sentence)
-    print("checking", words)
     words = [word.lower() for word in words]
     for word in words:
         if word in bad_words:

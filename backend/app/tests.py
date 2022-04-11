@@ -7,7 +7,6 @@ from factory import fuzzy
 from django.test import TestCase
 from django.urls import reverse
 
-from app.views import play
 from app.models import Wanderverse, Verse
 
 
@@ -20,7 +19,7 @@ def create_sentence(min_word_length=3, max_word_length=6):
     return sentence.strip()
 
 
-class MainTests(TestCase):
+class BaseTests(TestCase):
     """
     Test cases for the brightness, dominant color recognition, and tempo finding private functions
     """
@@ -29,15 +28,15 @@ class MainTests(TestCase):
         for _ in range(3):
             w = Wanderverse.objects.create()
             for _ in range(5):
-                Verse.objects.create(text=create_sentence(max_word_length=10), wanderverse=w)
+                Verse.objects.create(text=create_sentence(max_word_length=10), wanderverse=w,
+                                     verified=True)
         assert Wanderverse.objects.count() == 3
 
     def test_simple(self):
         self.assertEqual(2 + 2, 4)
 
     def test_play(self):
-        request = self.client.get(reverse("play_wanderverse"))
-        response = play(request)
+        response = self.client.get(reverse("play_wanderverse"))
         assert response.status_code == 200
         assert "exquisite_verse" in response.content.decode()
 
@@ -60,22 +59,87 @@ class MainTests(TestCase):
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
         assert response.status_code == 200
-        # assert that we have extended the wanderverse
+        # assert that we have added a new verse, extended the Wanderverse
+        # but that we haven't added a new Wanderverse object
+
         w = Wanderverse.objects.get(id=wanderverse_id)
         assert w.verse_set.count() == w_length + 1
+        # Wanderverse count remains the same
         assert Wanderverse.objects.count() == total_wanderverse_count
 
         w.refresh_from_db()
 
+        # Start new Wanderverse
         data["start_new"] = "true"
         data["verse"] = create_sentence()
         data["last_verse"] = w.verse_set.last().text
 
-        response = self.client.post(reverse("add_verse"), json.dumps(data),
+        response = self.client.post(reverse("add_verse"),
+                                    json.dumps(data),
                                     content_type="application/json")
 
         assert response.status_code == 200
-        # assert that we have extended the wanderverse
+
+        # assert that we have added a new Wanderverse
         w = Wanderverse.objects.get(id=wanderverse_id)
         assert w.verse_set.count() == w_length + 2
         assert Wanderverse.objects.count() == total_wanderverse_count + 1
+
+
+class VerifyTests(TestCase):
+    def setUp(self):
+        w = Wanderverse.objects.create()
+        for _ in range(3):
+            Verse.objects.create(text=create_sentence(max_word_length=10),
+                                 wanderverse=w,
+                                 verified=True)
+        # add unverified verse
+        Verse.objects.create(text=create_sentence(max_word_length=10), wanderverse=w)
+
+    def test_verified_play(self):
+        wanderverse = Wanderverse.objects.get(id=1)
+        last_unverified = wanderverse.verse_set.last()
+        last_verified = wanderverse.verse_set.filter(verified=True).last()
+
+        response = self.client.get(reverse("play_wanderverse"))
+        decoded = response.content.decode()
+
+        assert last_unverified.text not in decoded
+        assert last_verified.text in decoded
+
+        # verify verse
+        last_unverified.verified = True
+        last_unverified.save()
+        wanderverse.refresh_from_db()
+        now_verified = wanderverse.verse_set.last()
+
+        # sanity check for renaming
+        assert now_verified == last_unverified
+
+        response = self.client.get(reverse("play_wanderverse"))
+        decoded = response.content.decode()
+
+        assert now_verified.text in decoded
+
+    def test_add_verse_verified(self):
+        wanderverse_count = Wanderverse.objects.count()
+        wanderverse = Wanderverse.objects.get(id=1)
+        last_verified = wanderverse.verse_set.filter(verified=True).last()
+
+        new_verse_text = create_sentence()
+
+        data = {
+            "id": wanderverse.id,
+            "verse": new_verse_text,
+            "book_title": create_sentence(max_word_length=3),
+            "author": create_sentence(min_word_length=1, max_word_length=2),
+            "last_verse": last_verified.text,
+            "genre": "",
+            "start_new": "false"
+        }
+
+        response = self.client.post(reverse("add_verse"), json.dumps(data),
+                                    content_type="application/json")
+        assert response.status_code == 200
+
+        assert Wanderverse.objects.count() == wanderverse_count + 1

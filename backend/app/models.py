@@ -19,6 +19,9 @@ class Wanderverse(models.Model):
     def all_valid(cls):
         return cls.objects.filter(verse__verified=True)
 
+    def last_verified(self):
+        return self.verse_set.order_by('id').filter(verified=True).last()
+
 
 class Verse(models.Model):
     id = models.BigAutoField(primary_key=True)

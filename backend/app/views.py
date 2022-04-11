@@ -74,6 +74,7 @@ def example(request, example_id=None):
 def play(request):
     qs = Wanderverse.all_valid()
     w = get_random_instance(qs)
+    verified_verse = w.last_verified()
     context = {
         'page_metadata': {
             'title': 'Wanderverse',
@@ -81,7 +82,7 @@ def play(request):
         },
         'component_props': {
             'data': {
-                'exquisite_verse': str(w.exquisite()),
+                'exquisite_verse': str(verified_verse),
                 'id': w.id,
             }
         },
@@ -187,7 +188,6 @@ def rules(request):
 
 def add_verse(request):
     content = json.loads(request.body)
-    # logger.debug(json.dumps(content))
 
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
@@ -196,8 +196,12 @@ def add_verse(request):
         Verse.objects.create(text=content['last_verse'], wanderverse=wanderverse_to_extend)
 
     last_verse = wanderverse_to_extend.verse_set.last()
-    last_verse_text = content['last_verse']
+    submitted_last_verse_text = content['last_verse']
     verse_text = content['verse'].strip()
+
+    # Start a new Wanderverse using the verse submitted?
+    start_new = "start_new" in content and (content["start_new"] == "true" or content[
+        "start_new"] is True)
 
     # Check if text is clean:
     valid = verse_is_valid(content)
@@ -206,7 +210,7 @@ def add_verse(request):
                             status=422)
 
     # if last_verse doesn't exist OR it exists and matches the actual last verse text
-    if last_verse and last_verse.text == last_verse_text:
+    if last_verse and last_verse.text == submitted_last_verse_text:
         verse = Verse.objects.create(text=verse_text,
                                      author=content['author'],
                                      book_title=content['book_title'],
@@ -215,14 +219,24 @@ def add_verse(request):
             verse.page_number = int(content['page_number'])
             verse.save()
 
-    # if no last verse or start new is ticked true
-    if not last_verse or ('start_new' in content and content['start_new'] is True) or \
-        last_verse.text != last_verse_text:
+    # if last verified verse is NOT the actual last verse
+    # OR if no last verse or start new is True
+    if not last_verse or start_new or last_verse.text != submitted_last_verse_text:
         new_wanderverse = Wanderverse.objects.create()
+
+        # only in the case that last verified does not equal last verse:
+        if last_verse.text != submitted_last_verse_text:
+            # duplicate last verse, we lose author, genre, title here.
+            # TODO: fix
+            Verse.objects.create(text=submitted_last_verse_text,
+                                 wanderverse=new_wanderverse)
+
+        # add submitted verse
         new_verse = Verse.objects.create(text=verse_text,
                                          author=content['author'],
                                          book_title=content['book_title'],
                                          wanderverse=new_wanderverse)
+
         if 'page_number' in content and content['page_number'].isdigit():
             new_verse.page_number = int(content['page_number'])
             new_verse.save()
