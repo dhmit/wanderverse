@@ -107,7 +107,7 @@ def read(request):
         },
         'component_name': 'Read'
     }
-    print(params)
+
     if 'id' in params:
         wanderverse_id = params.get("id")
         try:
@@ -122,7 +122,10 @@ def read(request):
         qs = Wanderverse.all_valid()
         w = get_random_instance(qs)
 
-    verses = json.dumps(w.verse_objects())
+    verses = json.dumps(w.verse_objects_valid())
+    # TODO: what if there are no verified verses, like in a new poem?
+    # TODO: send newly submitted with a param=newly_submitted (or something like it)
+    # so that we can tack on the recently added verse
     context['component_props']['data']['id'] = w.id
     context['component_props']['data']['verses'] = verses
 

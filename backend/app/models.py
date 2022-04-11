@@ -15,6 +15,13 @@ class Wanderverse(models.Model):
         return list(self.verse_set.order_by('id').values('id', 'text', 'author', 'page_number',
                                                          'book_title'))
 
+    def verse_objects_valid(self):
+        # TODO: fix breaking up poems!
+        return list(self.verse_set.filter(verified=True).order_by('id').values('id', 'text',
+                                                                               'author',
+                                                                               'page_number',
+                                                                               'book_title'))
+
     @classmethod
     def all_valid(cls):
         """Get all instances with at least one verified verse"""
