@@ -3,7 +3,7 @@ from app.helpers import is_clean
 
 def verse_is_valid(verse_obj):
     message = {}
-    if not page_is_valid(verse_obj["page"]):
+    if len(verse_obj["page"]) and not page_is_valid(verse_obj["page"]):
         message["key"] = "page"
         message["message"] = "Page number is invalid. Please submit without it."
         return message
