@@ -12,7 +12,7 @@ import DownArrow from "../images/icons/down-arrow.svg";
 const cookie = getCookie("csrftoken");
 const rulesURL = "/rules/";
 const addVerseURL = "/add-verse/";
-
+const MAXINPUT = 500;
 const Play = ({data}) => {
     const [rules, setRules] = useState([]);
     const [verse, setVerse] = useState([]);
@@ -114,9 +114,23 @@ const Play = ({data}) => {
         localStorage.removeItem("rules");
     }
 
-
+    const validateInputs = (key, text) => {
+        let errorObj = {}
+        setFormErrors(errorObj);
+        if (text.length > MAXINPUT) {
+            errorObj[key] =
+                "Error! Your inputted text is too long. Maximum length: " + MAXINPUT + " characters."
+            setFormErrors(errorObj);
+            return false
+        }
+        return true
+    }
     const handleSubmit = (evt) => {
         evt.preventDefault();
+
+        let valid = validateInputs("verse", newVerse) && validateInputs("author", bookAuthor) && validateInputs("genre", bookGenre) && validateInputs("title", bookTitle);
+
+        if (!valid) return
         let id = localStorage.getItem("wanderverseID")
         let params = {
             id: id,
@@ -237,7 +251,7 @@ const Play = ({data}) => {
                                onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
                         <div className={"helper-text"}>
-                            <small className="error text-danger">{formErrors.book_title}</small>
+                            <small className="error text-danger">{formErrors["title"]}</small>
                             <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                         </div>
                     </div>
@@ -246,7 +260,7 @@ const Play = ({data}) => {
                         <input name="genre"
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
-                        <small className="text-danger">{formErrors.genre}</small>
+                        <small className="text-danger">{formErrors["genre"]}</small>
                     </div>
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Page</label>
@@ -257,7 +271,7 @@ const Play = ({data}) => {
                                max="10000"
                                type={"number"}/>
                         <div className={"helper-text"}>
-                            <small className="error text-danger">{formErrors.page}</small>
+                            <small className="error text-danger">{formErrors["page"]}</small>
                         </div>
                     </div>
                     <span>{startNew

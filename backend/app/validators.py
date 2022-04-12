@@ -3,8 +3,9 @@ from app.helpers import is_clean
 
 def verse_is_valid(verse_obj):
     message = {}
-    if len(verse_obj["page"]) and not page_is_valid(verse_obj["page"]):
-        message["key"] = "page"
+    print(verse_obj)
+    if "page_number" in verse_obj and not page_is_valid(verse_obj["page_number"]):
+        message["key"] = "page_number"
         message["message"] = "Page number is invalid. Please submit without it."
         return message
 
