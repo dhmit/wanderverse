@@ -96,10 +96,13 @@ const Play = ({data}) => {
     }
 
     const refresh = () => {
+        let rules = localStorage.getItem("rules");
         clearLocalStorage();
         axios.get("/wanderverses").then(res => {
             setVerse(res.data.w);
             localStorage.setItem("verse", JSON.stringify(res.data.w));
+            localStorage.setItem("wanderverseID", JSON.stringify(res.data.id));
+            localStorage.setItem("rules", rules);
             let instructionStyle = instructionsClass === "dismissed" ? {height: instructionsRef.current.getBoundingClientRect().top + 23 + "px"} : {};
             setInstructionStyle(instructionStyle);
         });
@@ -250,6 +253,8 @@ const Play = ({data}) => {
                         <input name="page"
                                onChange={e => setBookPageNumber(e.target.value)}
                                className={"form-control col-2"}
+                               min="0"
+                               max="10000"
                                type={"number"}/>
                         <div className={"helper-text"}>
                             <small className="error text-danger">{formErrors.page}</small>

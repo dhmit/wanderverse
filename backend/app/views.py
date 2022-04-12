@@ -182,7 +182,7 @@ def wanderverse(request, wanderverse_id=None):
         qs = Wanderverse.all_valid()
         w = get_random_instance(qs)
         last_verified = w.last_verified()
-        return JsonResponse({"w": str(last_verified.text)})
+        return JsonResponse({"w": str(last_verified.text), "id": w.id})
 
 
 def rules(request):
