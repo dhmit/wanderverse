@@ -31,7 +31,7 @@ class About extends React.Component {
                 <SectionSymbols/>
                 <div className="supporters">
                     <p>Funded by:</p>
-                    <a href="https://arts.mit.edu/camit/" target="_blank">
+                    <a href="https://arts.mit.edu/camit/" target="_blank" rel="noreferrer">
                         <CAMIT height="3em" fill="#CEB6F8"/>
                     </a>
                 </div>
