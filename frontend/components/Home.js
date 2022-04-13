@@ -10,10 +10,10 @@ const Home = () => {
                 <Logo height={"10em"} className={"mb-4 mt-4"} fill={"#3D2DFD"}/>
             </a>
             <h3 className={"subtitle mb-5"}>A collaborative poetry treasure hunt game.</h3>
-            <FancyButton title={"Instructions"}
+            <FancyButton title={"Play"}
                          href={"play/"}
                          extraClass={"btn-primary"}/>
-            <FancyButton title={"Wanderverses"}
+            <FancyButton title={"Read"}
                          href={"read/"}
                          extraClass={"btn-secondary"}/>
             <br/><br/>
