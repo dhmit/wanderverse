@@ -1,9 +1,10 @@
 from app.helpers import is_clean
 
+MAXINPUT = 500
+
 
 def verse_is_valid(verse_obj):
     message = {}
-    print(verse_obj)
     if "page_number" in verse_obj and not page_is_valid(verse_obj["page_number"]):
         message["key"] = "page_number"
         message["message"] = "Page number is invalid. Please submit without it."
@@ -15,6 +16,12 @@ def verse_is_valid(verse_obj):
             message["key"] = key
             message["message"] = "Some words are not allowed. Please resubmit."
             return message
+        else:
+            if len(verse_obj[key]) > 500:
+                message["key"] = key
+                message["message"] = "Error! This text is too long. Maximum length: " + \
+                                     str(MAXINPUT) + " characters."
+                return message
 
     # arbitrary length values. rethink?
     words = verse_obj['verse'].split(' ')

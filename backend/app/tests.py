@@ -142,3 +142,59 @@ class VerifyTests(TestCase):
                                     content_type="application/json")
         assert response.status_code == 200
         assert Wanderverse.objects.count() == wanderverse_count + 1
+
+    def test_length(self):
+        wanderverse_count = Wanderverse.objects.count()
+        wanderverse = Wanderverse.objects.get(id=1)
+        long_text = """
+            Optio consequatur eligendi laudantium voluptatibus repellat aperiam.
+            Dolores velit earum quo voluptatem quis sit. Eligendi eveniet est sint omnis et cum.
+            Architecto est dolorem hic. Voluptas ut sunt natus dolor eaque ex.
+            Quia illum et consequatur suscipit esse illo eveniet impedit.
+            Porro nostrum officia quidem iusto est debitis voluptatem. Nemo velit qui ipsam autem.
+            Doloribus et similique veritatis perferendis dolorem sequi et.
+            In error qui necessitatibus fugit. Eos saepe et atque velit illum et laudantium.
+            Assumenda voluptatem ab inventore nulla voluptatem minima voluptate sit.
+            Tempora similique est voluptates quas enim sed qui minima. Culpa delectus molestias eos.
+            Quia esse reprehenderit porro dolores et. Vero magnam quibusdam aut nulla quis.
+            Optio minima laudantium facilis a et quod ut omnis.
+            Blanditiis laboriosam voluptatem et sit dolores. Omnis sint eius qui.
+            Molestiae illum rem praesentium.
+        """
+        assert len(long_text) > 500
+        last_verse = wanderverse.verse_set.filter(verified=True).last().text
+        data = {
+            "id": wanderverse.id,
+            "verse": long_text.strip(),
+            "book_title": create_sentence(max_word_length=3),
+            "author": create_sentence(min_word_length=1, max_word_length=2),
+            "last_verse": last_verse,
+            "genre": "",
+            "start_new": "true"
+        }
+
+        response = self.client.post(reverse("add_verse"), json.dumps(data),
+                                    content_type="application/json")
+        assert response.status_code == 422
+
+        r = response.json()
+        assert r["valid"] is False
+
+        # count has not changed
+        assert Wanderverse.objects.count() == wanderverse_count
+
+        # Test book title length
+        data["verse"] = create_sentence()
+        data["book_title"] = long_text
+
+        response = self.client.post(reverse("add_verse"), json.dumps(data),
+                                    content_type="application/json")
+        assert response.status_code == 422
+
+        # Test genre length
+        data["book_title"] = create_sentence()
+        data["genre"] = long_text
+
+        response = self.client.post(reverse("add_verse"), json.dumps(data),
+                                    content_type="application/json")
+        assert response.status_code == 422

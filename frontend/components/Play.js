@@ -119,7 +119,7 @@ const Play = ({data}) => {
         setFormErrors(errorObj);
         if (text.length > MAXINPUT) {
             errorObj[key] =
-                "Error! Your inputted text is too long. Maximum length: " + MAXINPUT + " characters."
+                "Error! This text is too long. Maximum length: " + MAXINPUT + " characters."
             setFormErrors(errorObj);
             return false
         }
