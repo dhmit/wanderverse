@@ -11,7 +11,7 @@ const Home = () => {
             </a>
             <h3 className={"subtitle mb-5"}>A collaborative poetry treasure hunt game.</h3>
             <FancyButton title={"Play"}
-                         href={"play/"}
+                         href={"instructions/"}
                          extraClass={"btn-primary"}/>
             <FancyButton title={"Read"}
                          href={"read/"}

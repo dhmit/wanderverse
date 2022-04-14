@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.index),
     path('about/', views.about),
     path('play/', views.play, name="play_wanderverse"),
+    path('instructions/', views.instructions, name="instructions"),
     path('read/', views.read, name="read_wanderverse"),
     path('read-display/', views.read_display, name="read_wanderverse"),
     path('add-verse/', views.add_verse, name="add_verse"),

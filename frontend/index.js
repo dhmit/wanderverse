@@ -8,6 +8,7 @@ import ExampleId from "./components/ExampleId";
 import Home from "./components/Home";
 import About from "./components/About";
 import Play from "./components/Play";
+import Instructions from "./components/Instructions";
 import Read from "./components/Read";
 import ReadDisplay from "./components/ReadDisplay";
 const COMPONENT_PROPS_RAW = document.getElementById("component_props").text;
@@ -20,6 +21,7 @@ const COMPONENTS = {
     ExampleId,
     Home,
     About,
+    Instructions,
     Play,
     Read,
     ReadDisplay

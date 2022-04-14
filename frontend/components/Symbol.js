@@ -11,7 +11,7 @@ import G from "../images/icons/symbol-6.svg";
 import H from "../images/icons/symbol-7.svg";
 import I from "../images/icons/symbol-8.svg";
 import J from "../images/icons/symbol-9.svg";
-import K from "../images/icons/symbol-10.svg";
+import K from "../images/icons/symbol-10.svg"; // hand
 import L from "../images/icons/symbol-11.svg";
 import M from "../images/icons/symbol-12.svg";
 import N from "../images/icons/symbol-13.svg";

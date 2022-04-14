@@ -49,20 +49,27 @@
 
 
 @font-face {
-    font-family: "klima";
+    font-family: "klimabold";
     src: url("../fonts/klima-heavy-webfont.woff2") format("woff2"),
     url("../fonts/klima-heavy-webfont.woff") format("woff");
-    font-weight: normal;
+    font-weight: 900;
     font-style: normal;
 }
 
-
+@font-face {
+    font-family: "klimamedium";
+    src: url("../fonts/klima-medium-webfont.woff2") format("woff2"),
+    url("../fonts/klima-medium-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
 $font-family-base: "Baskerville", serif;
 $font-family-calmius: calmiusregular, "Baskerville", serif;
 $font-family-calmius-extrabold: calmiusextra_bold, "Baskerville", serif;
 $font-family-calmius-mediumitalic: calmiusmedium_italic, "Baskerville", serif;
 $font-family-calmius-medium: calmiusmedium, "Baskerville", serif;
-$font-family-klima: klima, sans-serif;
+$font-family-klima: klimabold, sans-serif;
+$font-family-klima-medium: klimamedium, sans-serif;
 
 .font-calmius {
     font-family: $font-family-calmius;

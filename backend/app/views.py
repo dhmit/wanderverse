@@ -126,6 +126,7 @@ def read(request):
     valid_verses = w.verse_objects_valid()
 
     submitted = params.get("submitted")
+
     if submitted:
         # complicated logic to append newly added verse that has not been verified
         # verse should only appear for the reader, but not be added to the poem
@@ -138,19 +139,19 @@ def read(request):
                  "exist."])
             return render(request, 'index.html', context)
 
-        if verse_to_add.wanderverse.id == w.id:
-            submitted_verse = model_to_dict(verse_to_add, fields=['id', 'text', 'author',
-                                                                  'page_number', 'book_title'])
-            if valid_verses[-1]['id'] < int(submitted):
-                valid_verses.append(submitted_verse)
-            else:
-                idx = -2
-                while valid_verses[idx]:
-                    if valid_verses[idx]['id'] < int(submitted):
-                        valid_verses = valid_verses[0:valid_verses[idx]['id']] + submitted_verse + \
-                                       valid_verses[idx + 1:]
-                        break
-                    idx = idx - 1
+        # TODO: if verse_to_add.wanderverse.id == w.id:
+        submitted_verse = model_to_dict(verse_to_add, fields=['id', 'text', 'author',
+                                                              'page_number', 'book_title'])
+        if valid_verses[-1]['id'] < int(submitted):
+            valid_verses.append(submitted_verse)
+        else:
+            idx = -2
+            while valid_verses[idx]:
+                if valid_verses[idx]['id'] < int(submitted):
+                    valid_verses = valid_verses[0:valid_verses[idx]['id']] + submitted_verse + \
+                                   valid_verses[idx + 1:]
+                    break
+                idx = idx - 1
 
     # TODO: what if there are no verified verses, like in a new poem?
     # TODO: send newly submitted with a param=newly_submitted (or something like it)
@@ -217,6 +218,23 @@ def wanderverse(request, wanderverse_id=None):
 def rules(request):
     rules_list = Rules().all
     return JsonResponse({'rules': rules_list})
+
+
+def instructions(request):
+    rules_list = Rules().all
+    context = {
+        'page_metadata': {
+            'title': 'Wanderverse',
+            'id': 'instructions',
+        },
+        'component_props': {
+            'data': {
+                'rules': rules_list,
+            }
+        },
+        'component_name': 'Instructions'
+    }
+    return render(request, 'index.html', context)
 
 
 def add_verse(request):

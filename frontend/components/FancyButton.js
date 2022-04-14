@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Symbol from "./Symbol";
 
-const FancyButton = ({href, extraClass, title}) => {
+const FancyButton = ({href, extraClass = "", title}) => {
     const [leftSymbols, setLeftSymbols] = useState([]);
     const [rightSymbols, setRightSymbols] = useState([]);
     let bool = Math.random() < 0.5;

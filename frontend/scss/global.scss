@@ -2,6 +2,7 @@ body {
     font-family: $font-family-base !important;
     color: $color-black;
     height: 100vh;
+    font-size: 10px;
 }
 
 main {
@@ -78,7 +79,7 @@ a:hover {
     background-color: $color-w-6;
 
     .col-4.p-0 {
-        height: 200px !important;
+        height: 150px !important;
     }
 }
 
@@ -122,5 +123,27 @@ a:hover {
     }
     100% {
         background-color: #fccbdc;
+    }
+}
+
+
+@keyframes changePlayColorSVG {
+    0% {
+        fill: $color-w-0;
+    }
+    20% {
+        fill: $color-w-2;
+    }
+    40% {
+        fill: $color-w-9;
+    }
+    60% {
+        fill: #d6d3ff;
+    }
+    80% {
+        fill: $color-w-3;
+    }
+    100% {
+        fill: #fccbdc;
     }
 }

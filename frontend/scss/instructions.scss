@@ -1,0 +1,111 @@
+@keyframes changeColor {
+    0% {
+        background-color: #ee7e23;
+    }
+    20% {
+        background-color: $color-w-3;
+    }
+    40% {
+        background-color: $color-w-8;
+    }
+    60% {
+        background-color: $color-w-5;
+    }
+    80% {
+        background-color: $color-w-10;
+    }
+    100% {
+        background-color: $color-w-2;
+    }
+}
+
+#instructions {
+    #main-container {
+
+        padding: 1em;
+        background-blend-mode: difference;
+        font-size: 1.4em !important;
+
+        .rule-position {
+            font-family: $font-family-klima-medium;
+            font-size: 1em;
+
+            span {
+                color: $color-w-0;
+
+            }
+        }
+
+        .rules-item-container {
+            display: flex;
+            padding: 0.4em;
+        }
+
+        .rules-item {
+            padding: 0.5em !important;
+            font-size: 1.6em;
+            margin-bottom: 0;
+
+            .symbol-icon {
+                width: 32px;
+            }
+
+            .symbol-icon > svg {
+                animation: changePlayColorSVG 60s infinite alternate;
+                margin-right: 0.5em;
+                height: 30px;
+                margin-top: -10px;
+            }
+        }
+
+        .btn-fancy {
+            font-size: 12px;
+        }
+
+        .background-area {
+            top: 0;
+            position: absolute;
+            width: 100%;
+            grid-template-areas: "left . right";
+            grid-template-columns: 25% 50% 25%;
+            grid-template-rows: auto;
+            height: calc(100vh - 200px);
+            display: grid;
+            left: 0;
+
+            .clear-area {
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                button {
+                    margin: 0;
+
+                    svg {
+                        height: 15px;
+                        opacity: 0.2;
+                    }
+                }
+            }
+
+            .clear-area.left {
+                grid-area: left;
+
+                svg {
+                    transform: rotate(90deg);
+                    float: left;
+                }
+            }
+
+            .clear-area.right {
+                grid-area: right;
+
+                svg {
+                    transform: rotate(-90deg);
+                    float: right;
+                    margin-top: 8px;
+                }
+            }
+        }
+    }
+}

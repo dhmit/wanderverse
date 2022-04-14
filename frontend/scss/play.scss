@@ -1,22 +1,29 @@
 #play {
-    background-color: $color-w-form-light;
+    #main-container {
+        font-size: 1.4em !important;
+    }
 
     #exquisite-verse {
         color: $color-w-0;
         letter-spacing: 0.02em;
         max-height: 6em;
-        width: 100%;
-        padding: 5px;
-        border: 2px solid $color-w-0;
-        animation: changePlayColor 30s infinite alternate;
+        display: flex;
+        overflow-y: auto;
 
         .box-inner {
             background-color: white;
             overflow-y: scroll;
             position: relative;
-            border: 2px solid $color-w-0;
-            padding: 10px;
+            border-right: 2px solid $color-w-0;
+            border-left: 2px solid $color-w-0;
+            padding: 0 10px;
             max-height: 5em;
+            width: 100%;
+
+            p {
+                font-size: 1.4em;
+                font-weight: 500;
+            }
         }
     }
 
@@ -69,16 +76,15 @@
         list-style: line inside;
 
         .symbol-icon {
-            grid-area: symbol
+            grid-area: symbol;
+
+            svg {
+                animation: changePlayColorSVG 30s infinite alternate;
+            }
         }
 
         .line {
             grid-area: line;
-        }
-
-        svg {
-            left: -10px;
-            position: relative;
         }
     }
 
@@ -114,8 +120,12 @@
         overflow-y: scroll;
 
         &.dismissed {
-            position: fixed;
             overflow-y: hidden;
+
+            .page-title {
+                position: fixed;
+                top: 0;
+            }
 
             .hr {
                 display: none;
@@ -163,17 +173,21 @@
             margin-top: -10px;
         }
     }
+
     .helper-text {
         display: grid;
         grid-template-areas: "error required";
         padding: 0;
+
         .error {
             grid-area: error;
         }
+
         .required-text {
             grid-area: required;
         }
     }
+
     .w-form {
         margin-bottom: 2em;
 
@@ -181,7 +195,6 @@
             color: $color-black;
             background-color: $color-w-form;
             font-size: 1.35em;
-            padding: 0 0.2em;
 
             &.text-small {
                 font-size: 1em;
@@ -195,10 +208,15 @@
             height: 6em;
         }
 
+        .form-control {
+            font-size: 1em;
+        }
+
         textarea {
             height: 5.1em;
             color: $color-w-0;
             border: 2px solid $color-w-0;
+            height: 100%;
 
             &:focus, &:active {
                 box-shadow: none;
@@ -249,7 +267,7 @@
                 grid-area: instructions;
                 position: relative;
                 overflow-y: scroll;
-                z-index: 0;
+                z-index: 999;
                 box-shadow: 8px 0 6px -6px $color-w-2;
 
                 .btn-dismiss {
