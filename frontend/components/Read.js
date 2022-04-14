@@ -71,10 +71,10 @@ const Read = ({data}) => {
                               onClick={toggleCitations}/>}
                 </div>
             </div>
-            {verses.length > 0 && <div className={"read-container"}>
+            {verses.length > 0 &&
+            <div className="read-container">
                 <div className={"inner-container"}>
                     <div className="wanderverse-container text-left">
-
                         <ul className="list">
                             {verses}
                         </ul>
@@ -82,6 +82,7 @@ const Read = ({data}) => {
 
                 </div>
             </div>}
+            <br/><br/><br/>
         </div>
     );
 };
