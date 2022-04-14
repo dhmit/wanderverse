@@ -16,15 +16,13 @@
                 color: $color-w-5 !important;
             }
         }
-        .section-symbols {
-            margin-top: 2em;
-        }
         .section-symbols > svg {
             fill: $color-w-9 !important;
             height: 10px;
         }
         .supporters {
             margin-top: 2em;
+            margin-bottom: 5em;
         }
     }
 }
