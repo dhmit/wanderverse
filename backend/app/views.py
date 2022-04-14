@@ -150,8 +150,7 @@ def read(request):
                         valid_verses = valid_verses[0:valid_verses[idx]['id']] + submitted_verse + \
                                        valid_verses[idx + 1:]
                         break
-                    else:
-                        idx = idx - 1
+                    idx = idx - 1
 
     # TODO: what if there are no verified verses, like in a new poem?
     # TODO: send newly submitted with a param=newly_submitted (or something like it)
