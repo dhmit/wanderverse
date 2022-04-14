@@ -80,7 +80,6 @@ const Read = ({data}) => {
                             {verses}
                         </ul>
                     </div>
-                    <SectionSymbols otherClass={"fixed-bottom symbols-bottom mb-4"}/>
 
                 </div>
             </div>}

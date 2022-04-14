@@ -150,9 +150,9 @@ const Play = ({data}) => {
                     "X-Requested-With": "XMLHttpRequest",
                     "X-CSRFToken": cookie
                 }
-            }).then(() => {
+            }).then((response) => {
             clearLocalStorage();
-            window.location.assign("/read/?id=" + id);
+            window.location.assign("/read/?id=" + id + "&submitted=" + response.data.success);
         }).catch((error) => {
             let response = error.response.data;
             let error_obj = {};
