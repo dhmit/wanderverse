@@ -3,7 +3,6 @@ import * as PropTypes from "prop-types";
 import ALogo from "../images/logo-small.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
-import SectionSymbols from "./SectionSymbols";
 
 
 const Read = ({data}) => {

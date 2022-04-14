@@ -277,4 +277,6 @@ def add_verse(request):
         new_verse.wanderverse = new_wanderverse
         new_verse.save()
 
-    return JsonResponse({"success": new_verse.id}, status=200)
+        return JsonResponse({"success": new_verse.id}, status=200)
+
+    return JsonResponse(content, status=200)
