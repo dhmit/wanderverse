@@ -18,8 +18,6 @@ urlpatterns = [
     path('read-display/', views.read_display, name="read_wanderverse"),
     path('add-verse/', views.add_verse, name="add_verse"),
     path('rules/', views.rules, name="rules"),
-    path('example/', views.example),
-    path('example/<example_id>', views.example),
     path('wanderverses', views.wanderverse),
     path('random/', views.random, name="random"),
     path('wanderverses/<wanderverse_id>', views.wanderverse),

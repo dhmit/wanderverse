@@ -40,38 +40,6 @@ def about(request):
     return render(request, 'index.html', context)
 
 
-def instructions(request):
-    new_rules = Rules().all
-    context = {
-        'page_metadata': {
-            'title': 'Instructions page',
-            'id': 'instructions',
-        },
-        'component_props': {
-            'rules': new_rules
-        },
-        'component_name': 'Instructions'
-    }
-    return render(request, 'index.html', context)
-
-
-def example(request, example_id=None):
-    """
-    Example page
-    """
-
-    context = {
-        'page_metadata': {
-            'title': 'Example ID page'
-        },
-        'component_props': {
-            'id': example_id
-        },
-        'component_name': 'ExampleId'
-    }
-    return render(request, 'index.html', context)
-
-
 def play(request):
     qs = Wanderverse.all_valid()
     w = get_random_instance(qs)
@@ -224,7 +192,7 @@ def instructions(request):
     rules_list = Rules().all
     context = {
         'page_metadata': {
-            'title': 'Wanderverse',
+            'title': 'Wanderverse instructions',
             'id': 'instructions',
         },
         'component_props': {
