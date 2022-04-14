@@ -1,6 +1,7 @@
 import json
 import logging
 from django.shortcuts import render
+from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from app.models import Wanderverse, Verse
 from app.helpers import get_random_instance
@@ -122,12 +123,41 @@ def read(request):
         qs = Wanderverse.all_valid()
         w = get_random_instance(qs)
 
-    verses = json.dumps(w.verse_objects_valid())
+    valid_verses = w.verse_objects_valid()
+
+    submitted = params.get("submitted")
+    if submitted:
+        # complicated logic to append newly added verse that has not been verified
+        # verse should only appear for the reader, but not be added to the poem
+        try:
+            verse_to_add = Verse.objects.get(id=submitted)
+        except Verse.DoesNotExist:
+            context['component_props']['data']['errors'] = json.dumps(
+                ["Oops, something went wrong!",
+                 "The selected verse does not "
+                 "exist."])
+            return render(request, 'index.html', context)
+
+        if verse_to_add.wanderverse.id == w.id:
+            submitted_verse = model_to_dict(verse_to_add, fields=['id', 'text', 'author',
+                                                                  'page_number', 'book_title'])
+            if valid_verses[-1]['id'] < int(submitted):
+                valid_verses.append(submitted_verse)
+            else:
+                idx = -2
+                while valid_verses[idx]:
+                    if valid_verses[idx]['id'] < int(submitted):
+                        valid_verses = valid_verses[0:valid_verses[idx]['id']] + submitted_verse + \
+                                       valid_verses[idx + 1:]
+                        break
+                    else:
+                        idx = idx - 1
+
     # TODO: what if there are no verified verses, like in a new poem?
     # TODO: send newly submitted with a param=newly_submitted (or something like it)
     # so that we can tack on the recently added verse
     context['component_props']['data']['id'] = w.id
-    context['component_props']['data']['verses'] = verses
+    context['component_props']['data']['verses'] = json.dumps(valid_verses)
 
     return render(request, 'index.html', context)
 
@@ -247,4 +277,4 @@ def add_verse(request):
         new_verse.wanderverse = new_wanderverse
         new_verse.save()
 
-    return JsonResponse(content, status=200)
+    return JsonResponse({"success": new_verse.id}, status=200)
