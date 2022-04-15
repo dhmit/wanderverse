@@ -1,25 +1,33 @@
 #about {
     #app_root {
         height: auto;
+        font-family: $font-family-klima-regular;
+        font-size: 0.9em;
+        letter-spacing: 0.03em;
+        color: #FDE9F1;
     }
+
     background-color: $color-black;
     color: white;
     padding: 1.5em;
 
     .about {
         a {
-            font-family: sans-serif;
-            font-size: 0.9em;
             color: $color-w-4;
 
             &:hover, &:focus, &:active {
                 color: $color-w-5 !important;
             }
         }
-        .section-symbols > svg {
-            fill: $color-w-9 !important;
-            height: 10px;
+
+        .section-symbols {
+
+            svg {
+                fill: $color-w-9 !important;
+                height: 10px;
+            }
         }
+
         .supporters {
             margin-top: 2em;
             margin-bottom: 5em;
