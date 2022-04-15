@@ -169,7 +169,7 @@ const Play = ({data}) => {
                         <label className={"col-auto"}>Page</label>
                         <input name="page"
                                onChange={e => setBookPageNumber(e.target.value)}
-                               className={"form-control col-2"}
+                               className={"form-control col-4"}
                                min="0"
                                max="10000"
                                type={"number"}/>

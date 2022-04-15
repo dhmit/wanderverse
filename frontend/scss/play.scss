@@ -6,9 +6,10 @@
     #exquisite-verse {
         color: $color-w-0;
         letter-spacing: 0.02em;
+        line-height: 1.1em;
         max-height: 6em;
         display: flex;
-        overflow-y: auto;
+        overflow-y: scroll;
 
         .box-inner {
             background-color: white;
@@ -195,6 +196,7 @@
             background-color: #EDE8F7;
             font-size: 1.35em;
             border-right: 2px solid white;
+            padding-bottom: 2px;
 
             &.text-small {
                 font-size: 1em;
@@ -230,9 +232,6 @@
         }
 
         input.form-control {
-            padding: 0.25em !important;
-            padding-left: 0.5em !important;
-            height: 100%;
             color: $color-w-0;
 
             &:focus, &:active {
