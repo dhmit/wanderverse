@@ -74,8 +74,8 @@ book_part_options = ["Flip to a random page. Do it again.",
 book_part["0"] += book_part_options
 book_part["1"] += book_part_options
 end = {
-    "0": ["Find a sentence or a fragment of a sentence that you like to continue the poem."],
-    "1": ["Find a sentence or a fragment of a sentence that you like to continue the poem."]
+    "0": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse."],
+    "1": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse."]
 }
 choices = {
     "floor": floor,

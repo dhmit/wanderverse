@@ -81,9 +81,8 @@ const Instructions = ({data}) => {
                 </p>
             </div>
             <div className={"text-center"}>
-
                 {shownRuleIdx + 1 === rules.length &&
-                <FancyButton title="Go to poem!"
+                <FancyButton title="Ready!"
                          href={"/play/"}
                          extraClass={"btn-primary"}/>}
             </div>

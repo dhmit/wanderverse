@@ -193,8 +193,9 @@
 
         label {
             color: $color-black;
-            background-color: $color-w-form;
+            background-color: #EDE8F7;
             font-size: 1.35em;
+            border-right: 2px solid white;
 
             &.text-small {
                 font-size: 1em;
@@ -244,14 +245,16 @@
 
         .text-plain {
             background-color: transparent;
+            line-height: 1.2em;
         }
 
         .form-group.row {
-            margin: 0.75em 0.25em;
+            margin: 0.75em 0;
         }
 
         .btn {
             margin: 0 auto;
+            font-size: 14px;
         }
     }
 

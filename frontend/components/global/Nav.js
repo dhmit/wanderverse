@@ -8,7 +8,7 @@ const Nav = () => {
             <ul className="nav mr-auto">
                 <li className="nav-item mr-2">
                     <a href={"/"} className={"w-logo"}>
-                        <W width={"20px"} fill={"#000000"}/>
+                        <W width={"20px"} fill={"#0C00FF"}/>
                     </a>
                 </li>
                 <li className="nav-item">

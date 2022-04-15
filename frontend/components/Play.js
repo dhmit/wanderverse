@@ -112,12 +112,10 @@ const Play = ({data}) => {
                                  fill={"#0C00FF"}/>
                 </a>
                 <label htmlFor="exquisite-verse" className={"text-plain"}>
-                    Extend this verse:
+                    Extend the Wanderverse that ends with:
                 </label>
                 <div id={"exquisite-verse"} className={"text-left"}>
-                    {verse}
-                    {/*<div className={"box-inner"}>*/}
-                    {/*</div>*/}
+                    &#8220;{verse}&#8221;
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className={"form-group"}>
@@ -197,7 +195,7 @@ const Play = ({data}) => {
                     <div className={"row mt-2"}>
                         <button className={"col-auto btn btn-primary btn-submit text-center"}
                                 type={"submit"}>
-                            ADD VERSE
+                            SUBMIT
                         </button>
                     </div>
                 </form>
