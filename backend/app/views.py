@@ -158,8 +158,8 @@ def read_display(request):
 def random(request):
     qs = Wanderverse.all_valid()
     w = get_random_instance(qs)
-    verses = json.dumps(w.verse_objects())
-    return JsonResponse({"verses": verses})
+    valid_verses = w.verse_objects_valid()
+    return JsonResponse({"verses": json.dumps(valid_verses)})
 
 
 def wanderverse(request, wanderverse_id=None):

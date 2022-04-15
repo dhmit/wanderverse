@@ -6,9 +6,26 @@
         margin: 0 auto;
         width: 95%;
         max-height: calc(100vh - 300px);
+
         @media only screen and (min-width: 768px) {
             width: 400px;
         }
+    }
+
+    .top-info-container > a {
+        font-size: 0.5em;
+        position: relative;
+        font-family: $font-family-klima-medium;
+        color: $color-w-0;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-top: -2.2em;
+        margin-right: -10px;
+        padding-bottom: 1em;
+        .icon-refresh {
+            width: 30px;
+        }
+
     }
 
     .read-container {
@@ -17,6 +34,7 @@
         animation: changePlayColor 30s infinite alternate;
         max-height: 50vh;
         display: flex;
+
         .inner-container {
             border: 2px solid $color-w-0;
             padding: 0.2em;

@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import * as PropTypes from "prop-types";
 import ALogo from "../images/logo-small.svg";
 import HideIcon from "../images/icons/hide.svg";
 import CiteIcon from "../images/icons/cite.svg";
+import RefreshIcon from "../images/icons/refresh.svg";
+import axios from "axios";
 
 
 const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
+    const [wanderverse, setWanderverse] = useState([]);
     // adding line dividers until the last line of the poem
     const content = JSON.parse(data.verses);
     const errors = JSON.parse(data.errors);
@@ -15,6 +18,29 @@ const Read = ({data}) => {
             {line}
         </li>
     });
+
+    useEffect(() => {
+        let verses = prepareWanderverse(content);
+        setWanderverse(verses);
+    }, []);
+
+    const prepareWanderverse = (verses) => {
+        return verses.map((line, idx) => {
+            let info = getInfo(line, idx);
+            return <>
+                <li className={"verse-container"} key={`verse-container-${idx}`}>
+                    {idx === content.length - 1
+                        ? <span key={`verse-${idx}`} className={"verse"}>
+                        {line.text}
+                            &nbsp;{citesShown && info}</span>
+                        : <span key={`verse-${idx}`} className={"verse"}>
+                        {line.text} {citesShown && info}
+                    </span>
+                    }
+                </li>
+            </>;
+        });
+    }
 
     const getInfo = (line, idx) => {
         let infoText = "("
@@ -35,21 +61,14 @@ const Read = ({data}) => {
         </span>
     }
 
-    const verses = content.map((line, idx) => {
-        let info = getInfo(line, idx);
-        return <>
-            <li className={"verse-container"} key={`verse-container-${idx}`}>
-                {idx === content.length - 1
-                    ? <span key={`verse-${idx}`} className={"verse"}>
-                        {line.text}
-                        &nbsp;{citesShown && info}</span>
-                    : <span key={`verse-${idx}`} className={"verse"}>
-                        {line.text} {citesShown && info}
-                    </span>
-                }
-            </li>
-        </>;
-    });
+    const refresh = () => {
+        axios.get("/random").then(res => {
+            let content = JSON.parse(res.data.verses);
+            let verses = prepareWanderverse(content);
+            setWanderverse(verses);
+        });
+    }
+
 
     const toggleCitations = () => {
         showCites(!citesShown);
@@ -70,13 +89,17 @@ const Read = ({data}) => {
                     <CiteIcon className={"left pointer"} style={{width: "20px"}}
                               onClick={toggleCitations}/>}
                 </div>
+                <a className={"float-right top-info refresh"} onClick={refresh}>
+                    <RefreshIcon className={"icon-refresh"} height={"16px"}
+                                 fill={"#0C00FF"}/>
+                </a>
             </div>
-            {verses.length > 0 &&
-            <div className="read-container">
+            {wanderverse.length > 0 &&
+            <div className="read-container mt-3">
                 <div className={"inner-container"}>
                     <div className="wanderverse-container text-left">
                         <ul className="list">
-                            {verses}
+                            {wanderverse}
                         </ul>
                     </div>
 
