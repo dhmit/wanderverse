@@ -150,14 +150,13 @@
         }
     }
 
-    .btn-refresh {
-        text-transform: uppercase;
-        font-family: $font-family-calmius-medium;
-        font-size: 0.7em;
-        position: absolute;
-        right: 0.6em;
-        top: 1.2em;
-
+    .refresh {
+        font-size: 0.4em;
+        position: relative;
+        font-family: $font-family-klima-medium;
+        color: $color-w-0;
+        text-decoration: underline;
+        cursor: pointer;
 
         &:hover, &:active, &:focus {
             svg {
@@ -169,8 +168,8 @@
         svg {
             transition: all 500ms ease;
             position: relative;
-            right: 0.6em;
-            margin-top: -10px;
+            margin-top: -5px;
+            margin-right: 10px;
         }
     }
 

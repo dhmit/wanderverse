@@ -107,16 +107,16 @@ const Play = ({data}) => {
         <>
 
             <div className={"w-form p-4"}>
-                <a className={"btn btn-default btn-refresh"} onClick={refresh}>
-                    <RefreshIcon className={"icon-refresh"} height={"16px"}
-                                 fill={"#0C00FF"}/>
-                </a>
                 <label htmlFor="exquisite-verse" className={"text-plain"}>
                     Extend the Wanderverse that ends with:
                 </label>
                 <div id={"exquisite-verse"} className={"text-left"}>
                     &#8220;{verse}&#8221;
                 </div>
+                <a className={"refresh"} onClick={refresh}>
+                    <RefreshIcon className={"icon-refresh"} height={"16px"}
+                                 fill={"#0C00FF"}/>Request another
+                </a>
                 <form onSubmit={handleSubmit}>
                     <div className={"form-group"}>
                         <label htmlFor="verse-input" className="text-plain mt-3">
