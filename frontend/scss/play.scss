@@ -255,33 +255,4 @@
             font-size: 14px;
         }
     }
-
-    @media only screen and (min-width: 768px) {
-        main {
-            height: 100vh;
-            display: grid;
-            grid-template-areas: "instructions form";
-            grid-template-columns: 40% 60%;
-            padding-bottom: 1em;
-
-            .instructions-overlay {
-                grid-area: instructions;
-                position: relative;
-                overflow-y: scroll;
-                z-index: 999;
-                box-shadow: 8px 0 6px -6px $color-w-2;
-
-                .btn-dismiss {
-                    display: none;
-                }
-            }
-
-            .w-form {
-                grid-area: form;
-                padding-top: 10px !important;
-                overflow-y: scroll;
-            }
-        }
-    }
-
 }

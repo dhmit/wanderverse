@@ -1,8 +1,29 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+
 body {
     font-family: $font-family-base !important;
     color: $color-black;
     height: 100vh;
     font-size: 10px;
+    @include media-breakpoint-up(md) {
+        #main-container {
+            width: 500px;
+            min-height: 100vh;
+            border-left: 2px solid $color-w-3;
+            border-right: 2px solid $color-w-3;
+            box-shadow: 0 0 10px $color-w-5;
+            margin: 0 auto;
+        }
+    }
+    &#about  {
+        #main-container {
+            box-shadow: none;
+            border: 0;
+        }
+    }
 }
 
 main {
@@ -98,6 +119,7 @@ a:hover {
     font-family: $font-family-calmius-medium;
     font-size: 0.85em;
     color: $color-w-0;
+    line-height: 1.6em;
 }
 
 .text-blue {

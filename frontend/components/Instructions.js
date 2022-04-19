@@ -35,16 +35,6 @@ const Instructions = ({data}) => {
         }
     }, []);
 
-
-    //                        <li className={"rules-item"}>
-    //                                 <span className={"symbol-icon"}>
-    //                                     <Symbol fill="#0C00FF" top={"0"} left={"20px"}
-    //                                             height={"13"}
-    //                                             spanTag={true}
-    //                                             stop={true}/>
-    //                                 </span>
-    //                             <span className={"line"}>Extend the poem by adding another line.</span>
-    //                         </li>
     useEffect(() => {
         setShownRule(rules[0]);
         let randomSymbol = getRandomFromArray(symbols);
@@ -83,8 +73,8 @@ const Instructions = ({data}) => {
             <div className={"text-center"}>
                 {shownRuleIdx + 1 === rules.length &&
                 <FancyButton title="Ready!"
-                         href={"/play/"}
-                         extraClass={"btn-primary"}/>}
+                             href={"/play/"}
+                             extraClass={"btn-primary"}/>}
             </div>
         </div>
         <div className="background-area">

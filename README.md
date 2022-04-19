@@ -1,2 +1,2 @@
 # Wanderverse
-An “exquisite corpse” poetry treasure hunt game.
+The Wanderverse Project is a collaborative poetry project in MIT's Hayden Library.

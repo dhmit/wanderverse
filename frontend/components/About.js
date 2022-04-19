@@ -10,7 +10,7 @@ class About extends React.Component {
                 <Logo className="mb-4" height="10em" fill="white"/>
             </a>
             <div className="text-left">
-                <p>The Wanderverse Project is a collaborative poetry treasure hunt game. Each
+                <p>The Wanderverse Project is a collaborative poetry project in MIT's Hayden Library. Each
                     co-created poem is called a “wanderverse.” The purpose of this project is to
                     draw the MIT public in to explore spaces in Hayden Library they wouldn't
                     otherwise get a chance to visit, and to promote stack browsing.
