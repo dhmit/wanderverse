@@ -105,7 +105,6 @@ const Play = ({data}) => {
 
     return (
         <>
-
             <div className={"w-form p-4"}>
                 <label htmlFor="exquisite-verse" className={"text-plain"}>
                     Extend the Wanderverse that ends with:
@@ -136,17 +135,17 @@ const Play = ({data}) => {
 
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto"}>Author</label>
-                        <input name="author"
-                               required
-                               onChange={e => setBookAuthor(e.target.value)}
-                               className={"form-control col"}/>
+                        <label className={"col-auto"}>Page</label>
+                        <input name="page"
+                               onChange={e => setBookPageNumber(e.target.value)}
+                               className={"form-control col-4"}
+                               min="0"
+                               max="10000"
+                               type={"number"}/>
                         <div className={"helper-text"}>
-                            <small className="error text-danger">{formErrors["author"]}</small>
-                            <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                            <small className="error text-danger">{formErrors["page"]}</small>
                         </div>
                     </div>
-
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Title</label>
                         <input name="title"
@@ -158,24 +157,24 @@ const Play = ({data}) => {
                             <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                         </div>
                     </div>
+                    <div className={"form-group row"}>
+                        <label className={"col-auto"}>Author</label>
+                        <input name="author"
+                               required
+                               onChange={e => setBookAuthor(e.target.value)}
+                               className={"form-control col"}/>
+                        <div className={"helper-text"}>
+                            <small className="error text-danger">{formErrors["author"]}</small>
+                            <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
+                        </div>
+                    </div>
+
                     <div className={"form-group row mb-6"}>
                         <label className={"col-auto"}>Genre</label>
                         <input name="genre"
                                onChange={e => setBookGenre(e.target.value)}
                                className={"form-control col"}/>
                         <small className="text-danger">{formErrors["genre"]}</small>
-                    </div>
-                    <div className={"form-group row"}>
-                        <label className={"col-auto"}>Page</label>
-                        <input name="page"
-                               onChange={e => setBookPageNumber(e.target.value)}
-                               className={"form-control col-4"}
-                               min="0"
-                               max="10000"
-                               type={"number"}/>
-                        <div className={"helper-text"}>
-                            <small className="error text-danger">{formErrors["page"]}</small>
-                        </div>
                     </div>
                     <div className="row">
                     <span>
