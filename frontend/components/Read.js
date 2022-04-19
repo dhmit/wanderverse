@@ -11,7 +11,6 @@ const Read = ({data}) => {
     const [citesShown, showCites] = useState(false);
     const [wanderverse, setWanderverse] = useState([]);
     // adding line dividers until the last line of the poem
-    const content = JSON.parse(data.verses);
     const errors = JSON.parse(data.errors);
     const errorItems = errors.map((line, idx) => {
         return <li className={"alert-danger"} key={`error-${idx}`}>
@@ -20,27 +19,8 @@ const Read = ({data}) => {
     });
 
     useEffect(() => {
-        let verses = prepareWanderverse(content);
-        setWanderverse(verses);
+        setWanderverse(JSON.parse(data.verses));
     }, []);
-
-    const prepareWanderverse = (verses) => {
-        return verses.map((line, idx) => {
-            let info = getInfo(line, idx);
-            return <>
-                <li className={"verse-container"} key={`verse-container-${idx}`}>
-                    {idx === content.length - 1
-                        ? <span key={`verse-${idx}`} className={"verse"}>
-                        {line.text}
-                            &nbsp;{citesShown && info}</span>
-                        : <span key={`verse-${idx}`} className={"verse"}>
-                        {line.text} {citesShown && info}
-                    </span>
-                    }
-                </li>
-            </>;
-        });
-    }
 
     const getInfo = (line, idx) => {
         let infoText = "("
@@ -56,7 +36,7 @@ const Read = ({data}) => {
         infoText += ")";
         infoText = infoText === "()" ? "" : infoText;
         return <span key={`info-${idx}`}
-                     className={"text-citation"}>
+                     className={`text-citation ${citesShown ? "shown" : ""}`}>
             {infoText}
         </span>
     }
@@ -64,8 +44,7 @@ const Read = ({data}) => {
     const refresh = () => {
         axios.get("/random").then(res => {
             let content = JSON.parse(res.data.verses);
-            let verses = prepareWanderverse(content);
-            setWanderverse(verses);
+            setWanderverse(content);
         });
     }
 
@@ -99,7 +78,19 @@ const Read = ({data}) => {
                 <div className={"inner-container"}>
                     <div className="wanderverse-container text-left">
                         <ul className="list">
-                            {wanderverse}
+                            {
+                                wanderverse.map((line, idx) => {
+                                    let info = getInfo(line, idx);
+                                    return <>
+                                        <li className={"verse-container"}
+                                            key={`verse-container-${idx}`}>
+                                            <span key={`verse-${idx}`} className="verse">
+                                                {line.text}&nbsp;{info}
+                                            </span>
+                                        </li>
+                                    </>;
+                                })
+                            }
                         </ul>
                     </div>
 
