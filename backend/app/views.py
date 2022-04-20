@@ -3,10 +3,9 @@ import logging
 from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
-from app.models import Wanderverse, Verse
+from app.models import Wanderverse, Verse, Rules
 from app.helpers import get_random_instance
 from app.validators import verse_is_valid
-from app.rules import Rules
 
 logger = logging.getLogger(__name__)
 
@@ -183,13 +182,9 @@ def wanderverse(request, wanderverse_id=None):
         return JsonResponse({"w": str(last_verified.text), "id": w.id})
 
 
-def rules(request):
-    rules_list = Rules().all
-    return JsonResponse({'rules': rules_list})
-
 
 def instructions(request):
-    rules_list = Rules().all
+    rules = get_random_instance(Rules.objects.all())
     context = {
         'page_metadata': {
             'title': 'Wanderverse instructions',
@@ -197,7 +192,7 @@ def instructions(request):
         },
         'component_props': {
             'data': {
-                'rules': rules_list,
+                'rules': rules.list,
             }
         },
         'component_name': 'Instructions'
