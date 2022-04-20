@@ -1,12 +1,12 @@
 """
 This file controls the administrative interface for the web app.
 """
-
+from django import forms
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from app.models import Verse, Wanderverse
+from app.models import Verse, Wanderverse, Rules
 
 
 def verify(modeladmin, request, queryset):
@@ -26,6 +26,11 @@ class VerseAdmin(admin.ModelAdmin):
         return obj.wanderverse_id
 
     actions = [verify, unverify]
+
+
+@admin.register(Rules)
+class RulesAdmin(admin.ModelAdmin):
+    list_display = ['list']
 
 
 @admin.register(Wanderverse)
