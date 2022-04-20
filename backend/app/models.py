@@ -33,7 +33,7 @@ floor = {
           "Admire the view from the expansive windows of the Hayden Library."],
     # downstairs floor
     "1": ["Go to the stacks floor of Hayden Library.",
-          "Descend to the bowels of Hayden Library.",
+          "Descend to the basement of Hayden Library.",
           "Where are the stacks? We must find them. (pssst they're in the basement)"]
 }
 
