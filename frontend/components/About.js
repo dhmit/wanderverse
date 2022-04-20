@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../images/logo.svg";
-import CAMIT from "../images/supporters/camit.svg"
+import CAMIT from "../images/supporters/camit-colored.svg"
 import SectionSymbols from "./SectionSymbols";
 
 class About extends React.Component {
