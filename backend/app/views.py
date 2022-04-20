@@ -207,6 +207,7 @@ def instructions(request):
 
 def add_verse(request):
     content = json.loads(request.body)
+
     try:
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
     except Wanderverse.DoesNotExist:
@@ -217,51 +218,54 @@ def add_verse(request):
     submitted_last_verse_text = content['last_verse']
     verse_text = content['verse'].strip()
 
-    # Start a new Wanderverse using the verse submitted?
-    start_new = "start_new" in content and (content["start_new"] == "true" or content[
-        "start_new"] is True)
-
     # Check if text is clean:
     valid = verse_is_valid(content)
     if valid is not True:
         return JsonResponse({"valid": False, "message": valid["message"], "key": valid["key"]},
                             status=422)
 
-    # if last_verse doesn't exist OR it exists and matches the actual last verse text
-    if last_verse and last_verse.text == submitted_last_verse_text:
-        verse = Verse.objects.create(text=verse_text,
-                                     author=content['author'],
-                                     book_title=content['book_title'],
-                                     wanderverse=wanderverse_to_extend)
-        if 'page_number' in content and content['page_number'].isdigit():
-            verse.page_number = int(content['page_number'])
-            verse.save()
+    # Start a new Wanderverse using the verse submitted?
+    start_new = "start_new" in content and (content["start_new"] == "true" or content[
+        "start_new"] is True)
 
-    # if last verified verse is NOT the actual last verse
-    # OR if no last verse or start new is True
-    if not last_verse or start_new or last_verse.text != submitted_last_verse_text:
-        new_wanderverse = Wanderverse.objects.create()
+    # get page number
+    if 'page_number' in content and content['page_number'].isdigit():
+        page_number = int(content['page_number'])
+    else:
+        page_number = None
 
-        # only in the case that last verified does not equal last verse:
-        if last_verse.text != submitted_last_verse_text:
-            # duplicate last verse, we lose author, genre, title here.
-            # TODO: fix
-            Verse.objects.create(text=submitted_last_verse_text,
-                                 wanderverse=new_wanderverse)
-
-        # add submitted verse
+    # if last_verse exists
+    if last_verse:
         new_verse = Verse.objects.create(text=verse_text,
                                          author=content['author'],
                                          book_title=content['book_title'],
+                                         genre=content['genre'])
+        if last_verse.text == submitted_last_verse_text:
+            new_verse.wanderverse = wanderverse_to_extend
+            new_verse.save()
+        else:
+            # duplicate last verse, do your best to find it.
+            try:
+                new_wanderverse = Wanderverse.objects.create()
+                old_verse = Verse.objects.filter(text=submitted_last_verse_text).first()
+                new_verse = Verse.objects.create(text=submitted_last_verse_text,
+                                                 page_number=old_verse.page_number,
+                                                 author=old_verse.author,
+                                                 book_title=old_verse.book_title,
+                                                 genre=old_verse.genre,
+                                                 wanderverse=new_wanderverse)
+            except Verse.DoesNotExist:
+                pass
+
+    if not last_verse or start_new:
+        new_wanderverse = Wanderverse.objects.create()
+
+        # add submitted verse
+        new_verse = Verse.objects.create(text=verse_text,
+                                         page_number=page_number,
+                                         author=content['author'],
+                                         book_title=content['book_title'],
+                                         genre=content['genre'],
                                          wanderverse=new_wanderverse)
 
-        if 'page_number' in content and content['page_number'].isdigit():
-            new_verse.page_number = int(content['page_number'])
-            new_verse.save()
-
-        new_verse.wanderverse = new_wanderverse
-        new_verse.save()
-
-        return JsonResponse({"success": new_verse.id}, status=200)
-
-    return JsonResponse(content, status=200)
+    return JsonResponse({"success": new_verse.id}, status=200)

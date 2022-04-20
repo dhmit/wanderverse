@@ -69,9 +69,11 @@ class BaseTests(TestCase):
 
         w.refresh_from_db()
 
+        new_verse = create_sentence()
+
         # Start new Wanderverse
         data["start_new"] = "true"
-        data["verse"] = create_sentence()
+        data["verse"] = new_verse
         data["last_verse"] = w.verse_set.last().text
 
         response = self.client.post(reverse("add_verse"),
@@ -84,6 +86,24 @@ class BaseTests(TestCase):
         w = Wanderverse.objects.get(id=wanderverse_id)
         assert w.verse_set.count() == w_length + 2
         assert Wanderverse.objects.count() == total_wanderverse_count + 1
+
+        # assert that we have two wanderverses with the same verse
+        verses = Verse.objects.filter(text=new_verse)
+        assert verses.count() == 2
+
+        # assert that only one verse exists in the newly created one
+        new_wanderverse = verses.last().wanderverse \
+            if verses.first().wanderverse.id == w.id \
+            else verses.first().wanderverse
+
+        assert new_wanderverse.verse_set.count() == 1
+
+        # test add verse without page number
+        data.pop("page_number", None)
+        assert "page_number" not in data
+        response = self.client.post(reverse("add_verse"), json.dumps(data),
+                                    content_type="application/json")
+        assert response.status_code == 200
 
 
 class VerifyTests(TestCase):

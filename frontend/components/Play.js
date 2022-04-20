@@ -143,7 +143,7 @@ const Play = ({data}) => {
                                max="10000"
                                type={"number"}/>
                         <div className={"helper-text"}>
-                            <small className="error text-danger">{formErrors["page"]}</small>
+                            <small className="error text-danger">{formErrors["page_number"]}</small>
                         </div>
                     </div>
                     <div className={"form-group row"}>

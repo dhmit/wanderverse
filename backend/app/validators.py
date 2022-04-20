@@ -33,4 +33,4 @@ def verse_is_valid(verse_obj):
 
 
 def page_is_valid(page):
-    return page.isnumeric() and 0 < int(page) < 10000
+    return page.isnumeric() and 0 <= int(page) < 10000
