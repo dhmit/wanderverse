@@ -182,6 +182,11 @@ def wanderverse(request, wanderverse_id=None):
         return JsonResponse({"w": str(last_verified.text), "id": w.id})
 
 
+def rules(request):
+    rules_instance = get_random_instance(Rules.objects.all())
+    return JsonResponse({"rules": rules_instance.list})
+
+
 def instructions(request):
     rules = get_random_instance(Rules.objects.all())
     context = {
