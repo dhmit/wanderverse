@@ -43,6 +43,9 @@ const FancyButton = ({href, extraClass = "", title}) => {
 
     useEffect(() => {
         refreshSymbols();
+        setInterval(() => {
+            refreshSymbols();
+        }, 2500);
     }, [])
 
     return (
