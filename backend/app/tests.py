@@ -242,8 +242,10 @@ class VerifyTests(TestCase):
 
         # subtract an hour from date
         totals = Total.objects.first()
-        totals.date = Total.objects.first().date - timedelta(seconds=-3601)
+        totals.date = totals.date - timedelta(seconds=3600)
         totals.save()
+
+        original_date = totals.date
 
         count_response = self.client.get(reverse("count"))
         assert count_response.status_code == 200
@@ -251,3 +253,6 @@ class VerifyTests(TestCase):
         # assert that we have updated the count
         assert Total.objects.first().wanderverse == original_totals.wanderverse + 1
         assert Total.objects.count() == 1
+
+        # assert that the date has been updated
+        assert Total.objects.first().date >= original_date + timedelta(seconds=3600)
