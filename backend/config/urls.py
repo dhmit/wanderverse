@@ -21,4 +21,5 @@ urlpatterns = [
     path('wanderverses', views.wanderverse),
     path('random/', views.random, name="random"),
     path('wanderverses/<wanderverse_id>', views.wanderverse),
+    path('count/', views.update_count, name="count"),
 ]

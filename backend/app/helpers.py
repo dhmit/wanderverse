@@ -1,14 +1,7 @@
-import random
 import nltk
 from app.bad_words import bad_words
 
 nltk.download('punkt')
-
-
-def get_random_instance(qs):
-    max_count = qs.count()
-    rand = random.randint(1, max_count)
-    return qs[rand - 1]
 
 
 def get_suffix(n):

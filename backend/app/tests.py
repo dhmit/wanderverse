@@ -6,8 +6,10 @@ import random
 from factory import fuzzy
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
+from datetime import timedelta
 
-from app.models import Wanderverse, Verse
+from app.models import Wanderverse, Verse, Total
 
 
 def create_sentence(min_word_length=3, max_word_length=6):
@@ -218,3 +220,34 @@ class VerifyTests(TestCase):
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
         assert response.status_code == 422
+
+    def test_count(self):
+        original_wanderverse_count = Wanderverse.all_valid().count()
+        Total.update(count_now=True)
+        original_totals = Total.objects.first()
+        count_response = self.client.get(reverse("count"))
+        assert count_response.status_code == 200
+        assert original_totals.wanderverse == Total.objects.first().wanderverse
+        assert Total.objects.count() == 1
+
+        # creation of new wanderverse should not update count
+        w = Wanderverse.objects.create()
+        Verse.objects.create(verified=True, wanderverse=w)
+        assert Wanderverse.all_valid().count() == original_wanderverse_count + 1
+
+        count_response = self.client.get(reverse("count"))
+        assert count_response.status_code == 200
+        assert Total.objects.first().wanderverse == original_totals.wanderverse
+        assert Total.objects.count() == 1
+
+        # subtract an hour from date
+        totals = Total.objects.first()
+        totals.date = Total.objects.first().date - timedelta(seconds=-3601)
+        totals.save()
+
+        count_response = self.client.get(reverse("count"))
+        assert count_response.status_code == 200
+
+        # assert that we have updated the count
+        assert Total.objects.first().wanderverse == original_totals.wanderverse + 1
+        assert Total.objects.count() == 1

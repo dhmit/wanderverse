@@ -3,8 +3,7 @@ import logging
 from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
-from app.models import Wanderverse, Verse, Rules
-from app.helpers import get_random_instance
+from app.models import Wanderverse, Verse, Rules, Total, get_random_instance
 from app.validators import verse_is_valid
 
 logger = logging.getLogger(__name__)
@@ -41,7 +40,7 @@ def about(request):
 
 def play(request):
     qs = Wanderverse.all_valid()
-    w = get_random_instance(qs)
+    w = get_random_instance("wanderverses", qs)
     verified_verse = w.last_verified()
     context = {
         'page_metadata': {
@@ -88,7 +87,7 @@ def read(request):
             return render(request, 'index.html', context)
     else:
         qs = Wanderverse.all_valid()
-        w = get_random_instance(qs)
+        w = get_random_instance("wanderverses", qs)
 
     valid_verses = w.verse_objects_valid()
 
@@ -146,7 +145,7 @@ def read_display(request):
     }
 
     qs = Wanderverse.all_valid()
-    w = get_random_instance(qs)
+    w = get_random_instance("wanderverses", qs)
 
     verses = json.dumps(w.verse_objects())
     context['component_props']['data']['id'] = w.id
@@ -156,7 +155,7 @@ def read_display(request):
 
 def random(request):
     qs = Wanderverse.all_valid()
-    w = get_random_instance(qs)
+    w = get_random_instance("wanderverses", qs)
     valid_verses = w.verse_objects_valid()
     return JsonResponse({"verses": json.dumps(valid_verses)})
 
@@ -183,12 +182,12 @@ def wanderverse(request, wanderverse_id=None):
 
 
 def rules(request):
-    rules_instance = get_random_instance(Rules.objects.all())
+    rules_instance = get_random_instance("rules", Rules.objects.all())
     return JsonResponse({"rules": rules_instance.list})
 
 
 def instructions(request):
-    rules = get_random_instance(Rules.objects.all())
+    rules = get_random_instance("rules", Rules.objects.all())
     context = {
         'page_metadata': {
             'title': 'Wanderverse instructions',
@@ -268,3 +267,8 @@ def add_verse(request):
                                          wanderverse=new_wanderverse)
 
     return JsonResponse({"success": new_verse.id}, status=200)
+
+
+def update_count(request):
+    Total.update()
+    return JsonResponse(Total.count())

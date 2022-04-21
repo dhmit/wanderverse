@@ -1,4 +1,5 @@
 import random
+from django.utils import timezone
 from app.helpers import get_suffix
 
 from django.db import models
@@ -276,3 +277,41 @@ class Rules(models.Model):
         if func_name == "robot":
             return self.robot_rules(step)
         return func_name
+
+
+class Total(models.Model):
+    wanderverse = models.IntegerField(default=0)
+    rules = models.IntegerField(default=0)
+    date = models.DateTimeField()
+
+    @classmethod
+    def update(cls, count_now=False):
+        # only run this once a day
+        HOUR = 3600  # 1 hour
+        time_now = timezone.now()
+        if not cls.objects.first():
+            cls.objects.create(date=timezone.now())
+
+        # either count now or once every hour
+        if count_now or (time_now - cls.objects.first().date).seconds >= HOUR:
+            obj = cls.objects.first()
+            obj.date = timezone.now()
+            obj.wanderverse = Wanderverse.all_valid().count()
+            obj.rules = Rules.objects.count()
+            obj.save()
+
+    @classmethod
+    def count(cls):
+        count_obj = cls.objects.first()
+        return {
+            "wanderverses": count_obj.wanderverse,
+            "rules": count_obj.rules,
+            "date": count_obj.date
+        }
+
+
+def get_random_instance(obj, qs):
+    Total.update()
+    totals = Total.count()
+    rand = random.randint(1, totals[obj])
+    return qs[rand - 1]
