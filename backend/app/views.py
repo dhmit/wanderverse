@@ -210,7 +210,6 @@ def add_verse(request):
         wanderverse_to_extend = Wanderverse.objects.get(id=content['id'])
     except Wanderverse.DoesNotExist:
         wanderverse_to_extend = Wanderverse.objects.create()
-        Verse.objects.create(text=content['last_verse'], wanderverse=wanderverse_to_extend)
 
     last_verse = wanderverse_to_extend.verse_set.last()
     submitted_last_verse_text = content['last_verse']
@@ -219,7 +218,9 @@ def add_verse(request):
     # Check if text is clean:
     valid = verse_is_valid(content)
     if valid is not True:
-        return JsonResponse({"valid": False, "message": valid["message"], "key": valid["key"]},
+        return JsonResponse({"valid": False,
+                             "message": valid["message"],
+                             "key": valid["key"]},
                             status=422)
 
     # Start a new Wanderverse using the verse submitted?
@@ -232,28 +233,34 @@ def add_verse(request):
     else:
         page_number = None
 
+    new_verse = Verse.objects.create(text=verse_text,
+                                     page_number=page_number,
+                                     author=content['author'],
+                                     book_title=content['book_title'],
+                                     genre=content['genre'])
+
     # if last_verse exists
-    if last_verse:
-        new_verse = Verse.objects.create(text=verse_text,
-                                         author=content['author'],
-                                         book_title=content['book_title'],
-                                         genre=content['genre'])
-        if last_verse.text == submitted_last_verse_text:
-            new_verse.wanderverse = wanderverse_to_extend
+    if last_verse and last_verse.text == submitted_last_verse_text:
+        new_verse.wanderverse = wanderverse_to_extend
+        new_verse.save()
+    else:
+        # do your best to find old verse.
+        new_wanderverse = Wanderverse.objects.create()
+        # just get the first verse that matches the last_verse text
+        old_verse = Verse.objects.filter(text=submitted_last_verse_text).first()
+        try:
+            # duplicate old verse
+            Verse.objects.create(text=submitted_last_verse_text,
+                                             page_number=old_verse.page_number,
+                                             author=old_verse.author,
+                                             book_title=old_verse.book_title,
+                                             genre=old_verse.genre,
+                                             wanderverse=new_wanderverse)
+            new_verse.wanderverse = new_wanderverse
             new_verse.save()
-        else:
-            # duplicate last verse, do your best to find it.
-            try:
-                new_wanderverse = Wanderverse.objects.create()
-                old_verse = Verse.objects.filter(text=submitted_last_verse_text).first()
-                new_verse = Verse.objects.create(text=submitted_last_verse_text,
-                                                 page_number=old_verse.page_number,
-                                                 author=old_verse.author,
-                                                 book_title=old_verse.book_title,
-                                                 genre=old_verse.genre,
-                                                 wanderverse=new_wanderverse)
-            except Verse.DoesNotExist:
-                pass
+        except AttributeError:
+            # TODO: should never happen! Does it?
+            pass
 
     if not last_verse or start_new:
         new_wanderverse = Wanderverse.objects.create()
