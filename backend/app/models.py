@@ -1,8 +1,9 @@
 import random
-from django.utils import timezone
-from app.helpers import get_suffix
 
+from django.utils import timezone
 from django.db import models
+
+from app.helpers import get_suffix
 
 # robot options
 options = {
@@ -225,7 +226,7 @@ class Rules(models.Model):
             self.list.append(choice)
             self.list.append(where_we_end)
 
-        super(Rules, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def choose(self, place):
         length_of_possible_choices = len(choices[place][str(self.floor)])
@@ -235,16 +236,6 @@ class Rules(models.Model):
     def roll_dice(self, sides=6, min_sides=0):
         # zero based
         return random.randint(min_sides, sides - 1)
-
-    def expand(self, choice, step):
-        """Run function if function chosen"""
-        if "function" not in choice:
-            return choice
-        func_name = choice.split("function:")[1]
-        # return func_name
-        if func_name == "robot":
-            return self.robot_rules(step)
-        return func_name
 
     def robot_rules(self, step):
         if step == "book_part":

@@ -176,7 +176,7 @@ def wanderverse(request, wanderverse_id=None):
             return JsonResponse({"w": str(w).split("\\")})
     else:
         qs = Wanderverse.all_valid()
-        w = get_random_instance(qs)
+        w = get_random_instance("wanderverse", qs)
         last_verified = w.last_verified()
         return JsonResponse({"w": str(last_verified.text), "id": w.id})
 
@@ -187,7 +187,7 @@ def rules(request):
 
 
 def instructions(request):
-    rules = get_random_instance("rules", Rules.objects.all())
+    rules_random = get_random_instance("rules", Rules.objects.all())
     context = {
         'page_metadata': {
             'title': 'Wanderverse instructions',
@@ -195,7 +195,7 @@ def instructions(request):
         },
         'component_props': {
             'data': {
-                'rules': rules.list,
+                'rules': rules_random.list,
             }
         },
         'component_name': 'Instructions'

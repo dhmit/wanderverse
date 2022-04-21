@@ -1,7 +1,6 @@
 """
 This file controls the administrative interface for the web app.
 """
-from django import forms
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe

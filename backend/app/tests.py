@@ -3,11 +3,10 @@
 # ignoring pylint's `missing-function-docstring` errors
 import json
 import random
+from datetime import timedelta
 from factory import fuzzy
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
-from datetime import timedelta
 
 from app.models import Wanderverse, Verse, Total
 
