@@ -51,10 +51,10 @@
             background-color: white;
         }
         20% {
-            background-color: #e3cfff;
+            background-color: #eee3ff;
         }
         40% {
-            background-color: #ffd5c7;
+            background-color: #ffe3dd;
         }
         60% {
             background-color: #d6d3ff;
@@ -63,7 +63,7 @@
             background-color: #fdffe9;
         }
         100% {
-            background-color: #fccbdc;
+            background-color: #fcdce4;
         }
     }
 
@@ -72,7 +72,7 @@
             fill: #09075d;
         }
         60% {
-            fill: $color-w-0;
+            fill: #150dd3;
         }
         70% {
             fill: #423dde;
@@ -143,7 +143,7 @@
         height: 100vh;
         display: grid;
         grid-template-areas: "left . right";
-        grid-template-columns: 40% 10% 50%;
+        grid-template-columns: 45% 5% 50%;
         animation: changeColorPastel 30s infinite alternate;
         -moz-animation: changeColorPastel 30s infinite alternate;
         -webkit-animation: changeColorPastel 30s infinite alternate;
@@ -183,7 +183,7 @@
             }
 
             .marquee {
-                padding: 1em;
+                padding: 1em 1em 1em 0;
                 height: 100vh;
                 overflow-y: scroll;
 
@@ -201,8 +201,7 @@
 
             .text-citation {
                 color: $color-w-0;
-                font-family: $font-family-klima-regular;
-                font-size: 30px !important;
+                font-style: italic;
             }
 
             #end {

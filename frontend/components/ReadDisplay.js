@@ -143,7 +143,7 @@ const ReadDisplay = ({data}) => {
         <div id="display" className={"pt-4 pl-4 pr-4 pb-2"}>
             <div className={"left-side"}>
                 <div className={"logo-container"}>
-                    <Logo className={"w ml-3 mb-5"} fill="#0C00FF"/>
+                    <Logo className={"w mt-5 mb-5"} fill="#0C00FF"/>
                     <br/><br/><br/><br/>
                     <QR fill="#0C00FF" height="100px"/>
                 </div>
