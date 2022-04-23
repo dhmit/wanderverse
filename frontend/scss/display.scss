@@ -3,6 +3,50 @@
         overflow-y: hidden;
     }
 
+    #symbols-container {
+        position: absolute;
+        top: -200px;
+        left: -200px;
+        z-index: 999;
+    }
+
+    #symbols-container.hide > .coverup-symbol, .marquee.hide {
+        visibility: visible;
+        -webkit-animation: fadeOut 6s ease-out;
+        -moz-animation: fadeOut 6s ease-out;
+        -o-animation: fadeOut 6s ease-out;
+        animation: fadeOut 6s ease-out;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            display: block;
+            opacity: 1;
+        }
+
+        1% {
+            display: block;
+            opacity: 1;
+        }
+
+        100% {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+    }
+
+    .coverup-symbol {
+        position: absolute !important;
+
+        svg {
+            opacity: 0.5;
+        }
+    }
+
     @keyframes changeColorPastel {
         0% {
             background-color: white;
@@ -46,56 +90,66 @@
     }
 
     .marquee {
-        //height: 50px;
-        //overflow: hidden;
         position: relative;
-        background: #fefefe;
         color: #333;
-        border: 1px solid #4a4a4a;
+
+        &.stop {
+            display: none;
+            -moz-animation: none !important;
+            -webkit-animation: none !important;
+            animation: none !important;
+        }
     }
 
     .marquee > .list {
-        //position: absolute;
-        //width: 100%;
+        //-moz-transform: translateY(1000px);
+        //-webkit-transform: translateY(1000px);
+        //transform: translateY(1000px);
         margin: 0;
         line-height: 50px;
-        //-moz-transform: translateY(100%);
-        //-webkit-transform: translateY(100%);
-        //transform: translateY(100%);
-        -moz-animation: scroll-down 10s linear infinite;
-        -webkit-animation: scroll-down 10s linear infinite;
-        animation: scroll-down 80s linear infinite;
+        //-moz-animation: scroll-down 80s linear infinite;
+        //-webkit-animation: scroll-down 80s linear infinite;
+        //animation: scroll-down 80s linear infinite;
+        &.hide {
+            visibility: hidden;
+        }
+        //&.move-up {
+        //    -moz-transform: translateY(1000px);
+        //    -webkit-transform: translateY(1000px);
+        //    -moz-transform: translateY(1000px);
+        //}
     }
 
     @-moz-keyframes scroll-down {
         0% {
-            -moz-transform: translateY(100%);
+            -moz-transform: translateY(1000px);
         }
         100% {
-            -moz-transform: translateY(-100%);
+            -moz-transform: translateY(0%);
         }
     }
 
     @-webkit-keyframes scroll-down {
         0% {
-            -webkit-transform: translateY(100%);
+            -webkit-transform: translateY(1000px);
         }
         100% {
-            -webkit-transform: translateY(-100%);
+            -webkit-transform: translateY(0%);
         }
     }
 
     @keyframes scroll-down {
         0% {
-            -moz-transform: translateY(100%);
-            -webkit-transform: translateY(100%);
-            transform: translateY(100%);
+            -moz-transform: translateY(1000px);
+            -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
         }
         100% {
-            -moz-transform: translateY(-100%);
-            -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
+            -moz-transform: translateY(0%);
+            -webkit-transform: translateY(0%);
+            transform: translateY(0%);
         }
+
     }
 
     nav.navbar {
@@ -107,15 +161,20 @@
         display: grid;
         grid-template-areas: "left . right";
         grid-template-columns: 40% 10% 50%;
-        animation: changeColorPastel 30s infinite alternate;
+        //animation: changeColorPastel 30s infinite alternate;
+        //-moz-animation: changeColorPastel 30s infinite alternate;
+        //-webkit-animation: changeColorPastel 30s infinite alternate;
 
         .left-side {
             grid-area: left;
 
             .logo-container {
-                margin-top: 20%;
                 text-align: center;
                 font-family: sans-serif;
+                width: 450px;
+                margin: 0 auto;
+                position: relative;
+                top: 100px;
 
                 a {
                     color: $color-w-0;
@@ -125,31 +184,38 @@
 
         .right-side {
             grid-area: right;
-            font-size: 24px;
+            font-size: 3em;
 
             .wanderverse-container {
-                border: 3px solid $color-w-0;
-                animation: changeColor 30s infinite alternate;
-                height: 90%;
+                height: 600px;
                 padding: 0.4em;
+                position: relative;
             }
 
-            .new-verse {
-                border: 3px solid $color-w-0;
-                background-color: white;
+            .marquee {
+                border: 2px solid $color-w-10;
                 padding: 1em;
                 height: 100%;
                 overflow-y: scroll;
             }
 
             .verse-container {
-                margin-top: 1em;
                 margin-bottom: 1em;
             }
 
             .text-citation {
                 color: $color-w-0;
             }
+
+            #end {
+                margin-top: 3em;
+                margin-bottom: 10em;
+                background-color: green;
+
+            }
+        }
+        .wanderverse {
+            position: relative;
         }
     }
 }
