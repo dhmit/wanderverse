@@ -5,8 +5,6 @@
 
     #symbols-container {
         position: absolute;
-        top: -200px;
-        left: -200px;
         z-index: 999;
     }
 
@@ -41,6 +39,7 @@
 
     .coverup-symbol {
         position: absolute !important;
+        z-index: 9999;
 
         svg {
             opacity: 0.5;
@@ -102,22 +101,12 @@
     }
 
     .marquee > .list {
-        //-moz-transform: translateY(1000px);
-        //-webkit-transform: translateY(1000px);
-        //transform: translateY(1000px);
         margin: 0;
         line-height: 50px;
-        //-moz-animation: scroll-down 80s linear infinite;
-        //-webkit-animation: scroll-down 80s linear infinite;
-        //animation: scroll-down 80s linear infinite;
+
         &.hide {
             visibility: hidden;
         }
-        //&.move-up {
-        //    -moz-transform: translateY(1000px);
-        //    -webkit-transform: translateY(1000px);
-        //    -moz-transform: translateY(1000px);
-        //}
     }
 
     @-moz-keyframes scroll-down {
@@ -161,9 +150,9 @@
         display: grid;
         grid-template-areas: "left . right";
         grid-template-columns: 40% 10% 50%;
-        //animation: changeColorPastel 30s infinite alternate;
-        //-moz-animation: changeColorPastel 30s infinite alternate;
-        //-webkit-animation: changeColorPastel 30s infinite alternate;
+        animation: changeColorPastel 30s infinite alternate;
+        -moz-animation: changeColorPastel 30s infinite alternate;
+        -webkit-animation: changeColorPastel 30s infinite alternate;
 
         .left-side {
             grid-area: left;
@@ -187,16 +176,22 @@
             font-size: 3em;
 
             .wanderverse-container {
-                height: 600px;
+                min-height: 100%;
                 padding: 0.4em;
                 position: relative;
             }
 
             .marquee {
-                border: 2px solid $color-w-10;
                 padding: 1em;
-                height: 100%;
+                height: 100vh;
                 overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
 
             .verse-container {
@@ -205,17 +200,18 @@
 
             .text-citation {
                 color: $color-w-0;
+                font-family: $font-family-klima-regular;
+                font-size: 30px !important;
             }
 
             #end {
                 margin-top: 3em;
-                margin-bottom: 10em;
-                background-color: green;
-
             }
         }
+
         .wanderverse {
-            position: relative;
+            position: absolute;
+            top: 0;
         }
     }
 }
