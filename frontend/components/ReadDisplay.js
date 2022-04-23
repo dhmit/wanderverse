@@ -72,22 +72,21 @@ const ReadDisplay = ({data}) => {
 
     const scroll = () => {
         if (!hasLeftTheStage()) {
-            listRef.current.style["top"] =
-                listRef.current.style["top"]
-                    ? (Number(listRef.current.style["top"].split("px")[0]) - 1) + "px"
+            listRef.current.style.top =
+                listRef.current.style.top
+                    ? (Number(listRef.current.style.top.split("px")[0]) - 1) + "px"
                     : verseOutOfSight();
 
         } else {
-            console.log("scrollIntervalID", scrollIntervalID);
             window.clearInterval(scrollIntervalID);
-            listRef.current.style["display"] = "none";
-            listRef.current.style["top"] = verseOutOfSight();
-            coverUp().then((r) => {
+            listRef.current.style.display = "none";
+            listRef.current.style.top = verseOutOfSight();
+            coverUp().then(() => {
                 getWanderverses().then((res) => {
                     setSymbols([]);
                     setTimeout(() => {
                         setWanderverses(res);
-                        listRef.current.style["display"] = "block";
+                        listRef.current.style.display = "block";
                     }, 200);
                 });
             });
@@ -104,7 +103,7 @@ const ReadDisplay = ({data}) => {
             delay = 2000 + count;
             let height = 20;
             if (count > 200 && count < 500) {
-                height = randomInt(count / 2);
+                height = randomInt(count / 1.5);
             } else if (count > 500) {
                 height = randomInt(count / 2.5);
             }
@@ -112,20 +111,14 @@ const ReadDisplay = ({data}) => {
                                    key={`count-${count}`} top={randomInt(windowHeight) + "px"}
                                    left={randomInt(windowWidth) + "px"}
                                    height={"" + height}
-                                   delayDisplay={delay}/>);
+                                   delayDisplay={delay}
+                                   delayHide={delay * 2}
+            />);
         }
 
         setSymbols(symbolEls);
-        // console.log("delay is now:", delay);
-        // setTimeout(() => {
-        // console.log("setDissolveClass hide");
-        // setDissolveClass("hide");
-        // console.log("setStopMarqueeClass", "stop");
-        // setStopMarqueeClass("stop");
-        // getWanderverses();
-        // });
         return new Promise((resolve) => {
-            setTimeout(resolve, delay + 2000);
+            setTimeout(resolve, delay * 2);
         })
     }
 
@@ -136,7 +129,6 @@ const ReadDisplay = ({data}) => {
     }
 
     useEffect(() => {
-        console.log("first useEffect")
         setWanderverses(JSON.parse(data.verses));
     }, []);
 
@@ -146,13 +138,6 @@ const ReadDisplay = ({data}) => {
             scroll();
         }, 35);
     }, [wanderverses]);
-
-    // useEffect(() => {
-    //     scrollIntervalID = setInterval(() => {
-    //         scroll();
-    //     }, 35);
-    //
-    // }, [wanderverseElements]);
 
     return (
         <div id="display" className={"pt-4 pl-4 pr-4 pb-2"}>
@@ -189,18 +174,3 @@ ReadDisplay.propTypes = {
 };
 
 export default ReadDisplay;
-
-//
-// .then((verses) => {
-//             console.log("gotten verses", verses);
-//             setWanderverses(verses);
-//             setListClass("hide");
-//             setTimeout(() => {
-//                 setListClass("list");
-//                 setDissolveClass("");
-//                 setStopMarqueeClass("");
-//                 setSymbols([]);
-//                 // setTimeout(() => {
-//                 // }, 300)
-//             }, 1000);
-//         });

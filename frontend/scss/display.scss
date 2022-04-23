@@ -68,23 +68,17 @@
     }
 
     @keyframes changeColor {
-        0% {
-            background-color: #ee7e23;
-        }
         20% {
-            background-color: $color-w-3;
-        }
-        40% {
-            background-color: $color-w-8;
+            fill: #09075d;
         }
         60% {
-            background-color: $color-w-5;
+            fill: $color-w-0;
+        }
+        70% {
+            fill: #423dde;
         }
         80% {
-            background-color: $color-w-10;
-        }
-        100% {
-            background-color: $color-w-2;
+            fill: #3427A1;
         }
     }
 
@@ -167,6 +161,13 @@
 
                 a {
                     color: $color-w-0;
+                }
+
+                .w {
+                    animation: changeColor 50s infinite alternate;
+                    -moz-animation: changeColor 50s infinite alternate;
+                    -webkit-animation: changeColor 50s infinite alternate;
+
                 }
             }
         }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import * as PropTypes from "prop-types";
 import X from "../images/icons/x.svg";
 import A from "../images/icons/symbol-0.svg";
@@ -21,9 +21,20 @@ import Q from "../images/icons/symbol-divider.svg";
 import DownArrow from "../images/icons/down-arrow.svg";
 import {getRandomFromArray, colors} from "../common";
 
-const Symbol = ({top, left, extraClass, fill, stop, spanTag, height, delayDisplay = 0}) => {
+const Symbol = ({
+                    top,
+                    left,
+                    extraClass,
+                    fill,
+                    stop,
+                    spanTag,
+                    height,
+                    delayDisplay = 0,
+                    delayHide = 0
+                }) => {
     const [newSymbol, setNewSymbol] = useState(<></>);
     const [rotation, setRotation] = useState(0);
+    const symbolRef = useRef(null);
     const symbols = [X, DownArrow, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q,
         <span className={"font-klima"} key={"symbol-&sect;"}>&sect;</span>,
         <span className={"font-klima"} key={"symbol-&para;"}>&para;</span>,
@@ -63,18 +74,24 @@ const Symbol = ({top, left, extraClass, fill, stop, spanTag, height, delayDispla
                     height: randomHeight + "px",
                 }));
             }
-        }, delayDisplay)
-
+        }, delayDisplay);
+        if (delayHide > 0) {
+            setTimeout(() => {
+                if (symbolRef)
+                    symbolRef.current.style.display = "none";
+            }, delayHide)
+        }
     }, []);
 
     return (<>
-            {spanTag ? <span className={extraClass} style={{
+            {spanTag
+                ? <span ref={symbolRef} className={extraClass} style={{
                     position: "relative",
                     top: top,
                     left: left,
                     transform: `rotate(${rotation}deg)`
                 }}>{newSymbol}</span>
-                : <div className={extraClass} style={{
+                : <div ref={symbolRef} className={extraClass} style={{
                     position: "relative",
                     top: top,
                     left: left,
@@ -92,7 +109,8 @@ Symbol.propTypes = {
     fill: PropTypes.string,
     stop: PropTypes.bool,
     spanTag: PropTypes.bool,
-    delayDisplay: PropTypes.number
+    delayDisplay: PropTypes.number,
+    delayHide: PropTypes.number
 };
 
 export default Symbol;
