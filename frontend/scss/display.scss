@@ -5,6 +5,8 @@
 
     #symbols-container {
         position: absolute;
+        left: -100px;
+        top: -100px;
         z-index: 999;
     }
 
@@ -85,7 +87,7 @@
     .marquee {
         position: relative;
         color: #333;
-
+        width: 90%;
         &.stop {
             display: none;
             -moz-animation: none !important;
@@ -174,7 +176,7 @@
 
         .right-side {
             grid-area: right;
-            font-size: 3em;
+            font-size: 2em;
 
             .wanderverse-container {
                 min-height: 100%;
@@ -212,6 +214,26 @@
         .wanderverse {
             position: absolute;
             top: 0;
+        }
+
+        #progress-container {
+            width: 10px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            transform: rotate(180deg);
+            background-color: $color-w-4;
+            position: absolute;
+            right: 0;
+            top: 30%;
+            #progress-fill {
+                position: relative;
+                bottom: 0;
+                height: 0;
+                width: 100%;
+                max-height: 100%;
+                background-color: $color-w-3;
+            }
         }
     }
 }

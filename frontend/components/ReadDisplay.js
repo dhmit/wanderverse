@@ -10,13 +10,13 @@ const ReadDisplay = ({data}) => {
     // adding line dividers until the last line of the poem
     const endOfWanderverseRef = useRef(null);
     const containerRef = useRef(null);
+    const progressRef = useRef(null);
+    const progressContainerRef = useRef(null);
     const listRef = useRef(null);
     const symbolsContainerRef = useRef(null);
     const [wanderverses, setWanderverses] = useState([]);
     const [wanderverseElements, setWanderverseElements] = useState([]);
     const [symbols, setSymbols] = useState([]);
-    const [dissolveClass, setDissolveClass] = useState("");
-    const [stopMarqueeClass, setStopMarqueeClass] = useState("");
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
@@ -72,13 +72,19 @@ const ReadDisplay = ({data}) => {
 
     const scroll = () => {
         if (!hasLeftTheStage()) {
+            if (progressContainerRef.current.style.display === "none") {
+                progressContainerRef.current.style.display = "block";
+            }
             listRef.current.style.top =
                 listRef.current.style.top
                     ? (Number(listRef.current.style.top.split("px")[0]) - 1) + "px"
                     : verseOutOfSight();
-
+            progressRef.current.style.height =
+                Math.round(100 * (containerRef.current.getBoundingClientRect().bottom
+                    / endOfWanderverseRef.current.getBoundingClientRect().bottom)) + "px";
         } else {
             window.clearInterval(scrollIntervalID);
+            progressContainerRef.current.style.display = "none";
             listRef.current.style.display = "none";
             listRef.current.style.top = verseOutOfSight();
             coverUp().then(() => {
@@ -112,13 +118,13 @@ const ReadDisplay = ({data}) => {
                                    left={randomInt(windowWidth) + "px"}
                                    height={"" + height}
                                    delayDisplay={delay}
-                                   delayHide={delay * 2}
+                                   delayHide={delay * 2 - count}
             />);
         }
 
         setSymbols(symbolEls);
         return new Promise((resolve) => {
-            setTimeout(resolve, delay * 2);
+            setTimeout(resolve, delay * 2 - randomNumSymbols);
         })
     }
 
@@ -150,11 +156,13 @@ const ReadDisplay = ({data}) => {
             </div>
             <div className="right-side">
                 <div ref={containerRef} className="wanderverse-container text-left">
-                    <div id="symbols-container" className={dissolveClass}
-                         ref={symbolsContainerRef}>
+                    <div id="symbols-container" ref={symbolsContainerRef}>
                         {symbols}
                     </div>
-                    <div className={`marquee ${dissolveClass} ${stopMarqueeClass}`}>
+                    <div id={"progress-container"} ref={progressContainerRef}>
+                        <div id="progress-fill" ref={progressRef}/>
+                    </div>
+                    <div className={"marquee"}>
                         <ul ref={listRef} className={"wanderverse"}>
                             <li className="verse-container">
                                 <span className="verse"/>
