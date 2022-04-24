@@ -21,7 +21,7 @@ const ReadDisplay = ({data}) => {
     const windowHeight = window.innerHeight;
 
     let scrollIntervalID;
-
+    let originalEndPosition;
     const randomInt = (max, min = 0) => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
@@ -71,20 +71,18 @@ const ReadDisplay = ({data}) => {
     }
 
     const scroll = () => {
-        if (!hasLeftTheStage()) {
-            if (progressContainerRef.current.style.display === "none") {
-                progressContainerRef.current.style.display = "block";
+        if (!endInSight()) {
+            let verseBottom = endOfWanderverseRef.current.getBoundingClientRect().bottom;
+            if (!originalEndPosition || originalEndPosition < verseBottom) {
+                originalEndPosition = verseBottom;
             }
             listRef.current.style.top =
                 listRef.current.style.top
                     ? (Number(listRef.current.style.top.split("px")[0]) - 1) + "px"
                     : verseOutOfSight();
-            progressRef.current.style.height =
-                Math.round(100 * (containerRef.current.getBoundingClientRect().bottom
-                    / endOfWanderverseRef.current.getBoundingClientRect().bottom)) + "px";
+            progressRef.current.style.height = Math.round((1 - (verseBottom / originalEndPosition)) * 100) + "px";
         } else {
             window.clearInterval(scrollIntervalID);
-            progressContainerRef.current.style.display = "none";
             listRef.current.style.display = "none";
             listRef.current.style.top = verseOutOfSight();
             coverUp().then(() => {
@@ -128,7 +126,7 @@ const ReadDisplay = ({data}) => {
         })
     }
 
-    const hasLeftTheStage = () => {
+    const endInSight = () => {
         let bounding = endOfWanderverseRef.current.getBoundingClientRect();
         let containerBounding = containerRef.current.getBoundingClientRect();
         return containerBounding.top >= bounding.bottom;
@@ -140,6 +138,7 @@ const ReadDisplay = ({data}) => {
 
     useEffect(() => {
         wanderverses.length && constructWanderverseElements();
+        originalEndPosition = undefined;
         scrollIntervalID = setInterval(() => {
             scroll();
         }, 35);
