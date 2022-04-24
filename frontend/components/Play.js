@@ -182,14 +182,14 @@ const Play = ({data}) => {
                         <label className={"col-auto text-small text-plain"}>
                             {startNew
                                 ? <CheckIcon
-                                    stroke={"#0C00FF"}
+                                    fill={"#0C00FF"}
                                     className={"btn-icon mr-2 mb-1 ml-1"}
                                     onClick={triggerStartNew}
                                 /> : <CircleIcon onClick={triggerStartNew}
-                                                 className={"btn-icon mr-2 mb-1 ml-1"}
+                                                 className={"btn-icon btn-empty-circle" +
+                                                 " mb-1 ml-1"}
                                                  stroke={"#0C00FF"}/>}
-                            Use this verse to seed a
-                            new poem, too.</label>
+                            Use this verse to seed a new poem, too.</label>
                     </div>
                     <div className={"row mt-2"}>
                         <button className={"col-auto btn btn-primary btn-submit text-center"}
