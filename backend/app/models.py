@@ -31,7 +31,6 @@ floor = {
     "0": ["Find yourself on the main floor of Hayden Library.", "Amble around the library on the "
                                                                 "first floor", "Navigate to the "
                                                                                "Courtyard Cafe.",
-          "Find the circulation desk.",
           "Admire the view from the expansive windows of the Hayden Library."],
     # downstairs floor
     "1": ["Go to the stacks floor of Hayden Library.",
