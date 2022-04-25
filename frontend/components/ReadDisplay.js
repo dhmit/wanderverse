@@ -141,7 +141,7 @@ const ReadDisplay = ({data}) => {
         originalEndPosition = undefined;
         scrollIntervalID = setInterval(() => {
             scroll();
-        }, 35);
+        }, 45);
     }, [wanderverses]);
 
     return (
