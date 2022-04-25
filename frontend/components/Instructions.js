@@ -20,26 +20,17 @@ import {getRandomFromArray} from "../common";
 import DownArrow from "../images/icons/down-arrow.svg";
 
 const Instructions = ({data}) => {
-    const [rules, setRules] = useState(data.rules);
     const [shownRule, setShownRule] = useState("");
     const [shownRuleIdx, setShownRuleIdx] = useState(0);
     const [symbol, setSymbol] = useState(<></>);
     const symbols = [A, B, C, D, E, G, I, K, L, M, N, O, P];
-    useEffect(() => {
-        /* If rules already exist, use those */
-        if (localStorage.getItem("rules")) {
-            setRules(JSON.parse(localStorage.getItem("rules")));
-        } else {
-            setRules(data.rules);
-            localStorage.setItem("rules", JSON.stringify(data.rules));
-        }
-    }, []);
+    const rules = data.rules;
 
     useEffect(() => {
         setShownRule(rules[0]);
         let randomSymbol = getRandomFromArray(symbols);
         setSymbol(randomSymbol);
-    }, rules);
+    }, []);
 
     const forward = () => {
         setShownRuleIdx(shownRuleIdx + 1);

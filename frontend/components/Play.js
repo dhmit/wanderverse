@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import * as PropTypes from "prop-types";
 import {getCookie} from "../common";
 import CircleIcon from "../images/icons/circle.svg";
@@ -11,7 +11,8 @@ const addVerseURL = "/add-verse/";
 const MAXINPUT = 500;
 
 const Play = ({data}) => {
-    const [verse, setVerse] = useState([]);
+    const [verse, setVerse] = useState(data.exquisite_verse);
+    const [wanderverseID, setWanderverseID] = useState(data.id);
 
     // form values
     const [newVerse, setNewVerse] = useState("");
@@ -20,45 +21,26 @@ const Play = ({data}) => {
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookGenre, setBookGenre] = useState("");
     const [startNew, setStartNew] = useState(true);
-    const [formErrors, setFormErrors] = useState({
+
+    let errorsTemplate = {
         title: "", author: "", verse: "", page: "", genre: ""
-    });
-
-
-    useEffect(() => {
-        if (localStorage.getItem("verse") && localStorage.getItem("wanderverseID")) {
-            setVerse(JSON.parse(localStorage.getItem("verse")))
-        } else {
-            localStorage.setItem("verse", JSON.stringify(data.exquisite_verse));
-            setVerse(data.exquisite_verse);
-            localStorage.setItem("wanderverseID", data.id.toString())
-        }
-    }, []);
+    }
+    const [formErrors, setFormErrors] = useState(errorsTemplate);
 
     const triggerStartNew = () => {
         setStartNew(!startNew);
     }
 
     const refresh = () => {
-        let rules = localStorage.getItem("rules");
-        clearLocalStorage();
         axios.get("/wanderverses").then(res => {
             setVerse(res.data.w);
-            localStorage.setItem("verse", JSON.stringify(res.data.w));
-            localStorage.setItem("wanderverseID", JSON.stringify(res.data.id));
-            localStorage.setItem("rules", rules);
+            setWanderverseID(res.data.id);
         });
     }
 
-    const clearLocalStorage = () => {
-        localStorage.removeItem("verse");
-        localStorage.removeItem("wanderverseID");
-        localStorage.removeItem("rules");
-    }
-
     const validateInputs = (key, text) => {
-        let errorObj = {}
-        setFormErrors(errorObj);
+        let errorObj = JSON.parse(JSON.stringify(errorsTemplate));
+        setFormErrors(errorsTemplate);
         if (text.length > MAXINPUT) {
             errorObj[key] =
                 "Error! This text is too long. Maximum length: " + MAXINPUT + " characters."
@@ -73,9 +55,8 @@ const Play = ({data}) => {
         let valid = validateInputs("verse", newVerse) && validateInputs("author", bookAuthor) && validateInputs("genre", bookGenre) && validateInputs("title", bookTitle);
 
         if (!valid) return
-        let id = localStorage.getItem("wanderverseID")
         let params = {
-            id: id,
+            id: wanderverseID,
             verse: newVerse,
             book_title: bookTitle,
             author: bookAuthor,
@@ -93,8 +74,7 @@ const Play = ({data}) => {
                     "X-CSRFToken": cookie
                 }
             }).then((response) => {
-            clearLocalStorage();
-            window.location.assign("/read/?id=" + id + "&submitted=" + response.data.success);
+            window.location.assign("/read/?id=" + wanderverseID + "&submitted=" + response.data.success);
         }).catch((error) => {
             let response = error.response.data;
             let error_obj = {};
