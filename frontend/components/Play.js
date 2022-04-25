@@ -90,7 +90,7 @@ const Play = ({data}) => {
                     Extend the Wanderverse that ends with:
                 </label>
                 <div id={"exquisite-verse"} className={"text-left"}>
-                    &#8220;{verse}&#8221;
+                    {verse}
                 </div>
                 <a className={"refresh"} onClick={refresh}>
                     <RefreshIcon className={"icon-refresh"} height={"16px"}
@@ -157,9 +157,7 @@ const Play = ({data}) => {
                         <small className="text-danger">{formErrors["genre"]}</small>
                     </div>
                     <div className="row">
-                    <span>
-                        </span>
-                        <label className={"col-auto text-small text-plain"}>
+                        <div className="col-2">
                             {startNew
                                 ? <CheckIcon
                                     fill={"#0C00FF"}
@@ -169,7 +167,11 @@ const Play = ({data}) => {
                                                  className={"btn-icon btn-empty-circle" +
                                                  " mb-1 ml-1"}
                                                  stroke={"#0C00FF"}/>}
-                            Use this verse to seed a new poem, too.</label>
+                        </div>
+                        <div className="col-10 p-0">
+                            <label className={"ext-small text-plain"}>
+                                Use this verse to seed a new poem, too.</label>
+                        </div>
                     </div>
                     <div className={"row mt-2"}>
                         <button className={"col-auto btn btn-primary btn-submit text-center"}
