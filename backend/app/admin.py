@@ -32,9 +32,19 @@ class RulesAdmin(admin.ModelAdmin):
     list_display = ['list']
 
 
+class VerseInline(admin.TabularInline):
+    model = Verse
+
+
 @admin.register(Wanderverse)
 class WanderverseAdmin(admin.ModelAdmin):
     list_display = ['id', 'total_verses', 'verified', 'last_added']
+    inlines = [VerseInline, ]
+
+    def verse_set(self, db_field, request, **kwargs):
+        # if db_field.name == "verse":
+        #     kwargs["queryset"] = Verse.objects.filter(wanderverse=self)
+        return super().verse_set(db_field, request, **kwargs)
 
     def total_verses(self, obj):
         return len(obj.verse_set.all())
@@ -43,7 +53,7 @@ class WanderverseAdmin(admin.ModelAdmin):
         all_verified = obj.verse_set.order_by('id').filter(verified=True)
         lv = all_verified.last()
         if lv:
-            return mark_safe('<a href="{}">{}</a> <span>total: {}</span>'.format(
+            return mark_safe('last: <a href="{}">{}</a> <span>total: {}</span>'.format(
                 reverse("admin:app_verse_change", args=(lv.pk,)),
                 lv.pk,
                 len(all_verified)
