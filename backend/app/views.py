@@ -16,7 +16,7 @@ def index(request):
 
     context = {
         'page_metadata': {
-            'title': 'Home page',
+            'title': 'The Wanderverse Project',
             'id': 'home'
         },
         'component_name': 'Home',
@@ -29,7 +29,7 @@ def index(request):
 def about(request):
     context = {
         'page_metadata': {
-            'title': 'About page',
+            'title': 'About Wanderverse',
             'id': 'about'
         },
         'component_name': 'About',
@@ -44,7 +44,7 @@ def play(request):
     verified_verse = w.last_verified()
     context = {
         'page_metadata': {
-            'title': 'Wanderverse',
+            'title': 'Play Wanderverse',
             'id': 'play',
         },
         'component_props': {
@@ -62,7 +62,7 @@ def read(request):
     params = request.GET
     context = {
         'page_metadata': {
-            'title': 'Wanderverse',
+            'title': 'Read Wanderverse',
             'id': 'read',
         },
         'component_props': {
@@ -198,7 +198,7 @@ def instructions(request):
     rules_random = get_random_instance("rules", Rules.objects.all())
     context = {
         'page_metadata': {
-            'title': 'Wanderverse instructions',
+            'title': 'How to play Wanderverse',
             'id': 'instructions',
         },
         'component_props': {
