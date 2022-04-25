@@ -106,6 +106,19 @@ class BaseTests(TestCase):
                                     content_type="application/json")
         assert response.status_code == 200
 
+    def test_get_new_random(self):
+        response = self.client.get(reverse("wanderverse_random"))
+        res = response.json()
+        assert len(res["w"]) > 0
+        assert res["id"] > -1
+
+    def test_get_new_and_exclude(self):
+        w = Wanderverse.objects.first()
+        last_verified = w.last_verified()
+        response = self.client.get(reverse("wanderverse_exclude", args=(last_verified.text,)))
+        res = response.json()
+        assert res["w"] is not last_verified.text
+
 
 class VerifyTests(TestCase):
     def setUp(self):

@@ -160,7 +160,7 @@ def random(request):
     return JsonResponse({"verses": json.dumps(valid_verses)})
 
 
-def wanderverse(request, wanderverse_id=None):
+def wanderverse(request, wanderverse_id=None, exclude=""):
     if request.POST:
         # check last line added timestamp
         # if all good, add line
@@ -175,10 +175,18 @@ def wanderverse(request, wanderverse_id=None):
         else:
             return JsonResponse({"w": str(w).split("\\")})
     else:
-        qs = Wanderverse.all_valid()
-        w = get_random_instance("wanderverse", qs)
+        w = get_random_wanderverse()
+        last_verified = w.last_verified()
+        while last_verified.text == exclude:
+            w = get_random_wanderverse()
+            last_verified = w.last_verified()
         last_verified = w.last_verified()
         return JsonResponse({"w": str(last_verified.text), "id": w.id})
+
+
+def get_random_wanderverse():
+    qs = Wanderverse.all_valid()
+    return get_random_instance("wanderverses", qs)
 
 
 def rules(request):
@@ -251,11 +259,11 @@ def add_verse(request):
         try:
             # duplicate old verse
             Verse.objects.create(text=submitted_last_verse_text,
-                                             page_number=old_verse.page_number,
-                                             author=old_verse.author,
-                                             book_title=old_verse.book_title,
-                                             genre=old_verse.genre,
-                                             wanderverse=new_wanderverse)
+                                 page_number=old_verse.page_number,
+                                 author=old_verse.author,
+                                 book_title=old_verse.book_title,
+                                 genre=old_verse.genre,
+                                 wanderverse=new_wanderverse)
             new_verse.wanderverse = new_wanderverse
             new_verse.save()
         except AttributeError:
