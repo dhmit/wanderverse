@@ -245,7 +245,7 @@ class Rules(models.Model):
         num_of_options = options[str(self.floor)][step]
         choice = self.roll_dice(num_of_options)
         if step == "stack":
-            return f"Go to stack number {choice + 1}."
+            return f"Go to Row {choice + 1}."
 
         suffixed = get_suffix(choice)
         if step == "book":

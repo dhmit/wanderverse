@@ -215,10 +215,10 @@
         }
 
         textarea {
-            height: 5.1em;
             color: $color-w-0;
             border: 2px solid $color-w-0;
             height: 100%;
+            line-height: 1.1em;
 
             &:focus, &:active {
                 box-shadow: none;
