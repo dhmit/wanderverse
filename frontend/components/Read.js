@@ -74,7 +74,7 @@ const Read = ({data}) => {
                 </a>
             </div>
             {wanderverse.length > 0 &&
-            <div className="read-container mt-3">
+            <div className="read-container mt-3 mb-3">
                 <div className={"inner-container"}>
                     <div className="wanderverse-container text-left">
                         <ul className="list">
@@ -96,7 +96,12 @@ const Read = ({data}) => {
 
                 </div>
             </div>}
-            <br/><br/><br/>
+            {window.location.href.indexOf("submitted=") > -1 &&
+            <a href={"/instructions"}
+               className={"col-auto ml-auto mr-auto mt-2 btn btn-primary text-center play-again"}>
+                PLAY AGAIN
+            </a>
+            }
         </div>
     );
 };

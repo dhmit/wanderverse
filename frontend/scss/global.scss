@@ -2,6 +2,9 @@
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
 
+::selection {
+    background: $color-w-11;
+}
 
 body {
     font-family: $font-family-base !important;
@@ -18,12 +21,14 @@ body {
             margin: 0 auto;
         }
     }
-    &#about  {
+
+    &#about {
         #main-container {
             box-shadow: none;
             border: 0;
         }
     }
+
     &#read-display {
         #main-container {
             width: 100%;
