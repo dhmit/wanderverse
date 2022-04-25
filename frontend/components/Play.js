@@ -138,7 +138,7 @@ const Play = ({data}) => {
                         </div>
                     </div>
                     <div className={"form-group row"}>
-                        <label className={"col-auto"}>Author</label>
+                        <label className={"col-auto"}>Author/creator</label>
                         <input name="author"
                                required
                                onChange={e => setBookAuthor(e.target.value)}

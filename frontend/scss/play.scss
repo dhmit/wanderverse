@@ -194,10 +194,11 @@
         label {
             color: $color-black;
             background-color: #EDE8F7;
-            font-size: 1.35em;
+            font-size: 1em;
             border-right: 2px solid white;
-            padding-bottom: 2px;
-
+            border-right: 2px solid white;
+            padding: 0.35em 0.5em 0.27em;
+            height: 100%;
             &.text-small {
                 font-size: 1em;
             }
@@ -244,6 +245,7 @@
         .text-plain {
             background-color: transparent;
             line-height: 1.2em;
+            padding-left: 0;
         }
 
         .form-group.row {
