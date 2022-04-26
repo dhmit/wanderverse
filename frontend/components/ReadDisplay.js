@@ -148,8 +148,8 @@ const ReadDisplay = ({data}) => {
         <div id="display" className={"pt-4 pl-4 pr-4 pb-2"}>
             <div className={"left-side"}>
                 <div className={"logo-container"}>
-                    <Logo className={"w mt-5 mb-5"} fill="#0C00FF"/>
-                    <br/><br/><br/><br/>
+                    <Logo className="w mt-5 mb-4" fill="#0C00FF"/>
+                    <p className="website-link mb-4"><a href="https://wanderverse.dhlab.mit.edu">wanderverse.dhlab.mit.edu</a></p>
                     <QR fill="#0C00FF" height="100px"/>
                 </div>
             </div>
