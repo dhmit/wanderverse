@@ -219,7 +219,7 @@ def add_verse(request):
     except Wanderverse.DoesNotExist:
         wanderverse_to_extend = Wanderverse.objects.create()
 
-    last_verse = wanderverse_to_extend.verse_set.last()
+    last_verse = wanderverse_to_extend.exquisite()
     submitted_last_verse_text = content['last_verse']
     verse_text = content['verse'].strip()
 

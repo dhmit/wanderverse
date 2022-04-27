@@ -117,7 +117,7 @@ class Wanderverse(models.Model):
         return "\\".join(self.verse_set.all().order_by('date').values_list('text', flat=True))
 
     def exquisite(self):
-        # return last verse only
+        """Returns last verified verse"""
         return self.verse_set.filter(verified=True).order_by('date').last()
 
     def verse_objects(self):

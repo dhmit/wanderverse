@@ -70,12 +70,18 @@ class BaseTests(TestCase):
 
         w.refresh_from_db()
 
-        new_verse = create_sentence()
+        # update for new length
+        w_length = w_length + 1
 
+        new_verse = "This is a valid sentence"
+        # Make sure the last verse is verified
+        last = w.verse_set.last()
+        last.verified = True
+        last.save()
         # Start new Wanderverse
         data["start_new"] = "true"
         data["verse"] = new_verse
-        data["last_verse"] = w.verse_set.last().text
+        data["last_verse"] = last.text
 
         response = self.client.post(reverse("add_verse"),
                                     json.dumps(data),
@@ -85,7 +91,7 @@ class BaseTests(TestCase):
 
         # assert that we have added a new Wanderverse
         w = Wanderverse.objects.get(id=wanderverse_id)
-        assert w.verse_set.count() == w_length + 2
+        assert w.verse_set.count() == w_length + 1
         assert Wanderverse.objects.count() == total_wanderverse_count + 1
 
         # assert that we have two wanderverses with the same verse
@@ -157,16 +163,18 @@ class VerifyTests(TestCase):
 
     def test_add_verse_verified(self):
         wanderverse_count = Wanderverse.objects.count()
+        verse_count = Verse.objects.count()
         wanderverse = Wanderverse.objects.get(id=1)
-        last_verified = wanderverse.verse_set.filter(verified=True).last()
+        verified_verse_count = len(wanderverse.verse_objects_valid())
 
-        new_verse_text = create_sentence()
-
+        # getting last verified verse
+        last_verified = wanderverse.exquisite()
+        valid_text = "A valid verse 123"
         data = {
             "id": wanderverse.id,
-            "verse": new_verse_text,
-            "book_title": create_sentence(max_word_length=3),
-            "author": create_sentence(min_word_length=1, max_word_length=2),
+            "verse": valid_text,
+            "book_title": "A valid book title",
+            "author": "A valid author",
             "last_verse": last_verified.text,
             "genre": "",
             "start_new": "false"
@@ -174,26 +182,47 @@ class VerifyTests(TestCase):
 
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
+
         assert response.status_code == 200
-        assert Wanderverse.objects.count() == wanderverse_count + 1
+        wanderverse.refresh_from_db()
+
+        assert Wanderverse.objects.count() == wanderverse_count
+        assert Verse.objects.count() == verse_count + 1
+        # the verified count has not changed
+        assert len(wanderverse.verse_objects_valid()) == verified_verse_count
+
+        newly_added_verse = Verse.objects.get(text=valid_text)
+        assert newly_added_verse.verified is False
+
+        newly_added_verse.verified = True
+        newly_added_verse.save()
+        assert len(wanderverse.verse_objects_valid()) == verified_verse_count + 1
 
     def test_length(self):
         wanderverse_count = Wanderverse.objects.count()
         wanderverse = Wanderverse.objects.get(id=1)
         long_text = """
-            Optio consequatur eligendi laudantium voluptatibus repellat aperiam.
-            Dolores velit earum quo voluptatem quis sit. Eligendi eveniet est sint omnis et cum.
-            Architecto est dolorem hic. Voluptas ut sunt natus dolor eaque ex.
-            Quia illum et consequatur suscipit esse illo eveniet impedit.
-            Porro nostrum officia quidem iusto est debitis voluptatem. Nemo velit qui ipsam autem.
-            Doloribus et similique veritatis perferendis dolorem sequi et.
-            In error qui necessitatibus fugit. Eos saepe et atque velit illum et laudantium.
-            Assumenda voluptatem ab inventore nulla voluptatem minima voluptate sit.
-            Tempora similique est voluptates quas enim sed qui minima. Culpa delectus molestias eos.
-            Quia esse reprehenderit porro dolores et. Vero magnam quibusdam aut nulla quis.
-            Optio minima laudantium facilis a et quod ut omnis.
-            Blanditiis laboriosam voluptatem et sit dolores. Omnis sint eius qui.
-            Molestiae illum rem praesentium.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
+            A valid but very long verse.
         """
         assert len(long_text) > 500
         last_verse = wanderverse.verse_set.filter(verified=True).last().text
@@ -224,6 +253,9 @@ class VerifyTests(TestCase):
         response = self.client.post(reverse("add_verse"), json.dumps(data),
                                     content_type="application/json")
         assert response.status_code == 422
+
+        message = response.json()['message']
+        assert message == 'Error! This text is too long. Maximum length: 500 characters.'
 
         # Test genre length
         data["book_title"] = create_sentence()
