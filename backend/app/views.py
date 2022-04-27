@@ -263,6 +263,7 @@ def add_verse(request):
                                  author=old_verse.author,
                                  book_title=old_verse.book_title,
                                  genre=old_verse.genre,
+                                 date=old_verse.date,
                                  wanderverse=new_wanderverse)
             new_verse.wanderverse = new_wanderverse
             new_verse.save()
