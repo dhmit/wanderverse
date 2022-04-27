@@ -51,7 +51,7 @@ const ReadDisplay = ({data}) => {
             return <>
                 <li className={"verse-container"} key={`verse-container-${line.id}`}>
                         <span key={`verse-${line.id}`} className={"verse"}>
-                                {line.text} {info}
+                                {line.text}
                         </span>
                 </li>
             </>;
