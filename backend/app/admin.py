@@ -18,11 +18,22 @@ def unverify(modeladmin, request, queryset):
 
 @admin.register(Verse)
 class VerseAdmin(admin.ModelAdmin):
-    list_display = ['id', 'text', 'verified', 'w_id', 'author', 'book_title',
+    list_display = ['id', 'text', 'preview', 'verified', 'w_id', 'author', 'book_title',
                     'genre', 'date']
 
     def w_id(self, obj):
         return obj.wanderverse_id
+
+    def preview(self, obj):
+        if not obj.verified:
+            return mark_safe('<a href="{}">preview</a>'.format(
+                "https://wanderverse.dhlab.mit.edu/read/?id=" + str(obj.wanderverse.id) +
+                "&submitted=" + str(obj.pk)
+            ))
+        else:
+            return mark_safe('<a href="{}">published</a>'.format(
+                "https://wanderverse.dhlab.mit.edu/read/?id=" + str(obj.wanderverse.id)
+            ))
 
     actions = [verify, unverify]
 
