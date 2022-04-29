@@ -5,16 +5,39 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
+    <!-- Primary Meta Tags -->
     <title>{{ page_metadata.title }}</title>
     <link
         rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        href="/static/wanderverse.png"
     />
     <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#000000"/>
+    <meta name="title" content="The Wanderverse Project">
+    <meta name="description"
+          content="The Wanderverse Project is a collaborative poetry project in MIT's Hayden Library.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wanderverse.dhlab.mit.edu">
+    <meta property="og:title" content="The Wanderverse Project">
+    <meta property="og:description"
+          content="The Wanderverse Project is a collaborative poetry project in MIT's Hayden Library.">
+    <meta property="og:image"
+          content="/static/wanderverse.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://wanderverse.dhlab.mit.edu">
+    <meta property="twitter:title" content="The Wanderverse Project">
+    <meta property="twitter:description"
+          content="The Wanderverse Project is a collaborative poetry project in MIT's Hayden Library.">
+    <meta property="twitter:image"
+          content="/static/wanderverse.png">
     {% render_bundle 'index' 'css' %}
 </head>
+
 <body id="{{ page_metadata.id }}">
 {% csrf_token %}
 <noscript>You need to enable JavaScript to run this app.</noscript>
