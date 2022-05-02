@@ -33,24 +33,25 @@ floor = {
                                                                                "Courtyard Cafe.",
           "Admire the view from the expansive windows of the Hayden Library."],
     # downstairs floor
-    "1": ["Go to the stacks floor of Hayden Library.",
+    "1": ["Go to the basement floor of Hayden Library.",
           "Descend to the basement of Hayden Library.",
+          "Walk through the double doors down the staircase and to the basement",
           "Where are the stacks? We must find them. (pssst they're in the basement)"]
 }
 
 stack = {
     # main floor
     "0": ["Are you on the side of the Courtyard Cafe? Stroll to the other side.",
-          # "Scurry towards the Courtyard Cafe.",
           "Walk to the middle of the room.",
-          "Go to the stacks on the side of the Courtyard Cafe",
-          "Go to the stacks behind the Cafeteria",
+          "Go to the shelves on the side of the Courtyard Cafe",
+          "Go to the bookshelves behind the Cafeteria",
           "function:robot"],
     "1": ["Walk to the middle of the room.",
-          "So many stacks! Find your favorite one.",
+          "So many shelves! Find your favorite one.",
           "Go to the fifth stack on your right",
           "Zig zag through the stacks",
-          "Go to the closest stack.", "Get to the stack across the room.",
+          "Go to the closest bookshelf.",
+          "Get to the bookshelf across the room.",
           "function:robot"]
 }
 
@@ -77,6 +78,7 @@ book_options = ["Find a big book.",
                 "Find a red book.",
                 "Find a strange book",
                 "Find the book that finds you.",
+                "Close your eyes and open them again. Pick up the first book you see.",
                 "Pick up a book with a jacket the color of the sky.",
                 "Pick up a book that looks like it has the answer."]
 
@@ -92,13 +94,16 @@ book_part_options = ["Flip to a random page. Do it again.",
                      "Flip to a random page. Do it again, and again.",
                      "Flip to a random page. Do it again, and again, and once more.",
                      "Flip three pages from the back.",
+                     "Let the book fall open to a page.",
                      "Go to page twelve."]
 
 book_part["0"] += book_part_options
 book_part["1"] += book_part_options
 end = {
-    "0": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse."],
-    "1": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse."]
+    "0": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse "
+          "on the following page."],
+    "1": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse "
+          "on the following page."]
 }
 choices = {
     "floor": floor,
