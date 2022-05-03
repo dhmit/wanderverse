@@ -97,22 +97,23 @@ const Play = ({data}) => {
                                  fill={"#0C00FF"}/>Request another
                 </a>
                 <form onSubmit={handleSubmit}>
-                    <div className={"form-group"}>
-                        <label htmlFor="verse-input" className="text-plain mt-3">
+                    <div className={"form-group row"}>
+                        <label htmlFor="verse-input" className="text-plain mt-3 col-12">
                             Your found text:
                         </label>
-                        <div className={"new-verse box-outer mb-2"}>
+                        <div className={"new-verse box-outer mb-2 col-12"}>
                             <textarea name="newVerse"
                                       required
                                       onChange={e => setNewVerse(e.target.value)}
                                       className={"form-control"}
                                       id={"verse-input"}/>
                         </div>
-                        <div className={"helper-text"}>
+                    </div>
+                    <div className={"form-group row"}>
+                        <div className={"helper-text col"}>
                             <small className="error text-danger">{formErrors["verse"]}</small>
                             <p className={"text-right required-text p-0 small text-blue mb-0"}>&#10045; required</p>
                         </div>
-
                     </div>
                     <div className={"form-group row"}>
                         <label className={"col-auto"}>Page</label>
@@ -122,7 +123,9 @@ const Play = ({data}) => {
                                min="0"
                                max="10000"
                                type={"number"}/>
-                        <div className={"helper-text"}>
+                    </div>
+                    <div className={"form-group row"}>
+                        <div className={"helper-text col"}>
                             <small className="error text-danger">{formErrors["page_number"]}</small>
                         </div>
                     </div>
@@ -132,7 +135,9 @@ const Play = ({data}) => {
                                required
                                onChange={e => setBookTitle(e.target.value)}
                                className={"form-control col"}/>
-                        <div className={"helper-text"}>
+                    </div>
+                    <div className={"form-group row"}>
+                        <div className={"helper-text col"}>
                             <small className="error text-danger">{formErrors["title"]}</small>
                             <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                         </div>
@@ -143,12 +148,13 @@ const Play = ({data}) => {
                                required
                                onChange={e => setBookAuthor(e.target.value)}
                                className={"form-control col"}/>
-                        <div className={"helper-text"}>
+                    </div>
+                    <div className={"form-group row"}>
+                        <div className={"helper-text col"}>
                             <small className="error text-danger">{formErrors["author"]}</small>
                             <p className={"required-text text-right p-0 small text-blue mb-0"}>&#10045; required</p>
                         </div>
                     </div>
-
                     <div className={"form-group row mb-6"}>
                         <label className={"col-auto"}>Genre</label>
                         <input name="genre"

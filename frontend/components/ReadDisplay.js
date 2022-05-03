@@ -47,7 +47,7 @@ const ReadDisplay = ({data}) => {
 
     const constructWanderverseElements = () => {
         let wL = wanderverses.map(line => {
-            let info = getInfo(line, line.id);
+            // let info = getInfo(line, line.id);
             return <>
                 <li className={"verse-container"} key={`verse-container-${line.id}`}>
                         <span key={`verse-${line.id}`} className={"verse"}>
