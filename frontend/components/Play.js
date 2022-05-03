@@ -20,7 +20,7 @@ const Play = ({data}) => {
     const [bookPageNumber, setBookPageNumber] = useState("");
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookGenre, setBookGenre] = useState("");
-    const [startNew, setStartNew] = useState(true);
+    const [startNew, setStartNew] = useState(false);
 
     let errorsTemplate = {
         title: "", author: "", verse: "", page: "", genre: ""
