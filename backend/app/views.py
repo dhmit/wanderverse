@@ -255,7 +255,7 @@ def add_verse(request):
         # do your best to find old verse.
         new_wanderverse = Wanderverse.objects.create()
         # just get the first verse that matches the last_verse text
-        old_verse = Verse.objects.filter(text=submitted_last_verse_text).first()
+        old_verse = Verse.objects.filter(text=submitted_last_verse_text).order_by("date").first()
         try:
             # duplicate old verse
             Verse.objects.create(text=submitted_last_verse_text,
