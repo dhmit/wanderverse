@@ -63,8 +63,12 @@ a:hover {
 }
 
 .fancy-btn-container {
-    max-width: 400px;
-    margin: 0 auto;
+    padding: 1.5em;
+
+    .btn-container {
+        margin: 0 auto;
+        text-align: center;
+    }
 }
 
 .btn-container {
@@ -84,7 +88,7 @@ a:hover {
     font-family: $font-family-calmius-extrabold;
     text-transform: uppercase;
     font-size: 1em;
-    padding: 0.5em 1em;
+    padding: 0.5em;
     letter-spacing: 1px;
 
     &.btn-primary {
@@ -108,7 +112,8 @@ a:hover {
 }
 
 #home {
-    background-color: $color-w-6;
+    //background-color: $color-w-6;
+    background-color: #E9F8FD;
 
     .col-4.p-0 {
         height: 150px !important;
@@ -137,6 +142,9 @@ a:hover {
     color: $color-w-0;
 }
 
+.symbol {
+    position: fixed;
+}
 
 @keyframes changePlayColor {
     0% {
