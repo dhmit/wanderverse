@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from app.models import Verse, Wanderverse, Rules
+from app.models import Verse, Wanderverse, Rules, Rule
 
 
 def verify(modeladmin, request, queryset):
@@ -78,3 +78,8 @@ class WanderverseAdmin(admin.ModelAdmin):
                 reverse("admin:app_verse_change", args=(la.pk,)),
                 la.pk
             ))
+
+@admin.register(Rule)
+class RuleAdmin(admin.ModelAdmin):
+    list_display = ['id', 'text', 'location', 'step']
+

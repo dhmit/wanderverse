@@ -1,0 +1,164 @@
+{
+    "start": {
+        "hayden:default": [
+            "Walk into MIT's glorious, recently remodelled Hayden Library",
+            "Ah, Hayden Library. Named for Mr. Library, this Humanities and Sciences Library has so much to offer. Let's explore.",
+            "Are you not in Hayden Library? Walk/run/ride/drive to Hayden Library",
+            "If you're in Hayden Library already, then there is nothing for you to do on this step. Otherwise, we'll see you in Hayden Library!",
+            "Hayden Library. Have you been there? Let's find it."
+        ],
+        "default": [
+            "Are you somewhere with books? Are those books on various shelves? If not, go to such a place.",
+            "Get to a place with at least, like, five books",
+            "Get to a place with six books or more",
+            "Look around the room. Is there a shelf with books? If so, stay there!! If not, try the next room?",
+            "If you are not in a library but you are located next to one, go there instead. We love libraries."
+        ]
+    },
+    "floor": {
+        "hayden:main": [
+            "Find yourself on the main floor of Hayden Library.",
+            "Amble around the Library on the first floor",
+            "Navigate to the Courtyard Cafe.",
+            "Find The Nexus.",
+            "Admire the view from the expansive windows of the Hayden Library."
+        ],
+        "hayden:stacks": [
+            "Walk down to the basement floor of Hayden Library.",
+            "Descend to the basement of Hayden Library.",
+            "Walk through the double doors down the staircase and to the basement",
+            "Where are the stacks? We must find them (pssst they're in the basement)."
+        ]
+    },
+    "bookshelf": {
+        "hayden:main": [
+            "Are you on the side of the Courtyard Cafe? Stroll to the other side.",
+            "Walk to the middle of the room.",
+            "Find the shelves closest to the circulation desk",
+            "Go to the shelves on the side of the Courtyard Cafe",
+            "Go to the bookshelves behind the Cafeteria",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot"
+        ],
+        "hayden:stacks": [
+            "Walk to the middle of the room.",
+            "So many bookshelves! Find your favorite one.",
+            "Go to the fifth bookshelf on your right",
+            "Zig zag through the bookshelves",
+            "Go to the closest bookshelf.",
+            "Get to the bookshelf across the room.",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot"
+        ]
+    },
+    "shelf": {
+        "hayden:main": [
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot"
+        ],
+        "hayden:stacks": [
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot"
+        ]
+    },
+    "book": {
+        "default": [
+            "Find a big book.",
+            "Pick up a medium-sized book.",
+            "Pick up a small book.",
+            "Search for a book whose jacket is closest to your favorite color.",
+            "Find a book with the loveliest title.",
+            "Find a book with a title that reminds you of yesterday.",
+            "Find a book with a title that reminds you of your favorite person.",
+            "Find a book with a title that sounds heavy.",
+            "Find a book with a title that sounds light.",
+            "Find a mysterious book.",
+            "Find a book with a title has a question.",
+            "Find a blue book.",
+            "Find an orange book.",
+            "Gravitate towards one particular book.",
+            "Pick up the book that's looking at you.",
+            "Find a red book.",
+            "Find a strange book",
+            "Pick up an unassuming book.",
+            "Pick up a book that you think you could learn to love.",
+            "Pick up the book that's winking at you ;-)",
+            "Pick up the book that's looking at you like this :-?",
+            "Find the book that finds you.",
+            "Close your eyes and open them again. Pick up the first book you see.",
+            "Pick up a book with a jacket the color of the sky.",
+            "Pick up a book that looks like it has the answer(s).",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot"
+        ]
+    },
+    "page": {
+        "default": [
+            "Flip to a random page. Do it again.",
+            "Flip to a random page. Do it again, and one final time.",
+            "Flip to a random page. Do it again, and one final time for good measure.",
+            "Flip to a random page. Do it again, and again, and once more.",
+            "Flip to a random page in the book that looks nice.",
+            "Flip ten pages from the back.",
+            "Flip nine pages from the back.",
+            "Flip six pages from the back.",
+            "Flip five pages from the back.",
+            "Flip ten pages from the beginning of the book.",
+            "Flip nine pages from the beginning of the book.",
+            "Flip six pages from the beginning of the book.",
+            "Flip five pages from the beginning of the book.",
+            "Let the book fall open to a page.",
+            "Go to page twelve.",
+            "Go to page thirteen.",
+            "Go to page fourteen.",
+            "Go to page fifteen.",
+            "Go to page twenty-three.",
+            "Flip to the very center of the book.",
+            "Find a page in the back of the book that looks nice.",
+            "Find a page in the first half of the book that looks nice.",
+            "Flip to a page number divisible by two.",
+            "Flip to a page number divisible by three.",
+            "Flip to a page number divisible by four.",
+            "Flip to a page number divisible by five.",
+            "Flip to a page that grabs your attention.",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot",
+            "function:robot"
+        ]
+    },
+    "end": {
+        "default": [
+            "Find a sentence or a fragment of a sentence that you like to continue the Wanderverse on the following page.",
+            "Find a part of a sentence that you like to continue the Wanderverse on the following page."
+        ]
+    }
+}

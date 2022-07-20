@@ -3,116 +3,6 @@ import random
 from django.utils import timezone
 from django.db import models
 
-from app.helpers import get_suffix
-
-# robot options
-options = {
-    "0": {
-        "genres": ["Travel section"],
-        "stack": 5,
-        "shelf": 3,
-        "book": 10,
-        "book_part": ["beginning", "middle", "end"],
-
-    },
-    "1": {
-        "stack": 249,
-        "shelf": 6,
-        "book": 10,
-        "book_part": ["beginning", "middle", "end"],
-
-    }
-}
-
-steps = ["start", "floor", "stack", "shelf", "book", "page", "end"]
-
-floor = {
-    # main floor
-    "0": ["Find yourself on the main floor of Hayden Library.", "Amble around the library on the "
-                                                                "first floor", "Navigate to the "
-                                                                               "Courtyard Cafe.",
-          "Admire the view from the expansive windows of the Hayden Library."],
-    # downstairs floor
-    "1": ["Go to the basement floor of Hayden Library.",
-          "Descend to the basement of Hayden Library.",
-          "Walk through the double doors down the staircase and to the basement",
-          "Where are the stacks? We must find them. (pssst they're in the basement)"]
-}
-
-stack = {
-    # main floor
-    "0": ["Are you on the side of the Courtyard Cafe? Stroll to the other side.",
-          "Walk to the middle of the room.",
-          "Go to the shelves on the side of the Courtyard Cafe",
-          "Go to the bookshelves behind the Cafeteria",
-          "function:robot"],
-    "1": ["Walk to the middle of the room.",
-          "So many shelves! Find your favorite one.",
-          "Go to the fifth stack on your right",
-          "Zig zag through the stacks",
-          "Go to the closest bookshelf.",
-          "Get to the bookshelf across the room.",
-          "function:robot"]
-}
-
-shelf = {
-    "0": ["function:robot"],
-    "1": ["function:robot"]
-}
-
-book = {
-    "0": ["function:robot"],
-    "1": ["function:robot"]
-}
-
-book_options = ["Find a big book.",
-                "Pick up a small book.",
-                "Search for a book whose jacket is closest to your favorite color.",
-                "Find a book with the loveliest title.",
-                "Find a book with a title that reminds you of yesterday.",
-                "Find a book with a title that reminds you of your favorite person.",
-                "Find a book with a title that sounds heavy.",
-                "Find a book with a title that sounds light.",
-                "Find a blue book.",
-                "Find an orange book.",
-                "Find a red book.",
-                "Find a strange book",
-                "Find the book that finds you.",
-                "Close your eyes and open them again. Pick up the first book you see.",
-                "Pick up a book with a jacket the color of the sky.",
-                "Pick up a book that looks like it has the answer."]
-
-book["0"] += book_options
-book["1"] += book_options
-
-book_part = {
-    "0": ["function:robot"],
-    "1": ["function:robot"]
-}
-
-book_part_options = ["Flip to a random page. Do it again.",
-                     "Flip to a random page. Do it again, and again.",
-                     "Flip to a random page. Do it again, and again, and once more.",
-                     "Flip three pages from the back.",
-                     "Let the book fall open to a page.",
-                     "Go to page twelve."]
-
-book_part["0"] += book_part_options
-book_part["1"] += book_part_options
-end = {
-    "0": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse "
-          "on the following page."],
-    "1": ["Find a sentence or a fragment of a sentence that you like to continue the Wanderverse "
-          "on the following page."]
-}
-choices = {
-    "floor": floor,
-    "stack": stack,
-    "shelf": shelf,
-    "book": book,
-    "book_part": book_part,
-    "end": end,
-}
 
 
 class Wanderverse(models.Model):
@@ -168,6 +58,22 @@ class Verse(models.Model):
     def __str__(self):
         return str(self.text)
 
+
+class Rule(models.Model):
+    # TODO:
+    # -- random outside of library instructions
+    # -- only first floor instructions
+    # location = [default, 1st_floor, elsewhere]
+    # robot options
+    CHOICES = (
+        ('a', 'default'),
+        ('b', 'hayden:default'),
+        ('c', 'hayden:main'),
+        ('d', 'hayden:stacks'),
+    )
+    location = models.CharField(max_length=1, choices=CHOICES)
+    text = models.CharField(max_length=1000)
+    step = models.CharField(max_length=100)
 
 class Rules(models.Model):
     """Figuring out complicated rules so that random functions can stop being called
