@@ -129,7 +129,7 @@ def get_random_instance(obj, qs):
     Total.update()
     totals = Total.count()
     if obj == "rules_default":
-        count = totals["rules"]["a"] + totals["rules"]["b"]
+        count = totals["rules"]["c"] + totals["rules"]["d"]
     else:
         count = totals[obj]
     rand = random.randint(0, count)
