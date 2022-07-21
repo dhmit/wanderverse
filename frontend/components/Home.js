@@ -1,11 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import FancyButton from "./FancyButton";
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Logo from "../images/logo2.svg";
 
 const Home = () => {
-    const [location, setLocation] = useState("at MIT");
-
     return (
         <div className={"text-center"}>
             <a href={"/"}>
