@@ -2,8 +2,8 @@ import os
 import json
 import random
 from django.conf import settings
-
 from django.db.models import Q
+
 from app.models import Rules, Rule, Total
 from app.helpers import get_suffix
 

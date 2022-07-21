@@ -3,6 +3,8 @@ import logging
 from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
+from django.db.models import Q
+
 from app.models import Wanderverse, Verse, Rules, Total, get_random_instance
 from app.validators import verse_is_valid
 
@@ -195,7 +197,9 @@ def rules(request):
 
 
 def instructions(request):
-    rules_random = get_random_instance("rules", Rules.objects.all())
+    # default to "hayden:main" and "hayden:stacks"
+    rules_random = get_random_instance("rules_default", Rules.objects.filter(
+        Q(location="c") | Q(location="d")))
     context = {
         'page_metadata': {
             'title': 'How to play Wanderverse',

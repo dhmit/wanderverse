@@ -2,6 +2,7 @@ import random
 
 from django.utils import timezone
 from django.db import models
+from django.db.models import Q
 
 
 class Wanderverse(models.Model):
@@ -88,7 +89,7 @@ class Rules(models.Model):
 
 class Total(models.Model):
     wanderverse = models.IntegerField(default=0)
-    rules = models.IntegerField(default=0)
+    rules = models.JSONField(default={})
     date = models.DateTimeField()
 
     @classmethod
@@ -104,7 +105,10 @@ class Total(models.Model):
             obj = cls.objects.first()
             obj.date = timezone.now()
             obj.wanderverse = Wanderverse.all_valid().count()
-            obj.rules = Rules.objects.count()
+            for location in ["a", "b", "c", "d"]:
+                obj.rules[location] = Rules.objects.filter(location=location).count()
+
+            print(obj)
             obj.save()
 
     @classmethod
@@ -120,5 +124,9 @@ class Total(models.Model):
 def get_random_instance(obj, qs):
     Total.update()
     totals = Total.count()
-    rand = random.randint(1, totals[obj])
-    return qs[rand - 1]
+    if obj == "rules_default":
+        count = totals["rules"]["a"] + totals["rules"]["b"]
+    else:
+        count = totals[obj]
+    rand = random.randint(0, count)
+    return qs[rand]
