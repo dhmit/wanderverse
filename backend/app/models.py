@@ -114,9 +114,13 @@ class Total(models.Model):
     @classmethod
     def count(cls):
         count_obj = cls.objects.first()
+        if type(count_obj.rules) is str:
+            rules_count = json.loads(count_obj.rules)
+        else:
+            rules_count = count_obj.rules
         return {
             "wanderverses": count_obj.wanderverse,
-            "rules": count_obj.rules,
+            "rules": rules_count,
             "date": count_obj.date
         }
 
@@ -124,9 +128,8 @@ class Total(models.Model):
 def get_random_instance(obj, qs):
     Total.update()
     totals = Total.count()
-    rules_count = json.loads(totals["rules"])
     if obj == "rules_default":
-        count = rules_count["a"] + rules_count["b"]
+        count = totals["rules"]["a"] + totals["rules"]["b"]
     else:
         count = totals[obj]
     rand = random.randint(0, count)
