@@ -26,6 +26,10 @@ class About extends React.Component {
                     <a href={"https://digitalhumanities.mit.edu/"}> Digital Humanities Lab</a> in
                     collaboration with Ece Turnator and Mark Szarko of MIT Libraries.
                 </p>
+                <p>Thank you to:<br/>
+                    Brittney Lewer, Ryaan Ahmed, Erica Zimmer, Ken Alba, and Stephanie Frampton for
+                    their support of this project.
+                </p>
                 <p>
                     Say hi: <a href="mailto:wanderverse@mit.edu">wanderverse@mit.edu</a>.
                 </p>

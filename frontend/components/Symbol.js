@@ -84,21 +84,15 @@ const Symbol = ({
         }
     }, []);
 
-    return (<>
+    return (<div className={"symbol-container"}>
             {spanTag
                 ? <span ref={symbolRef} className={extraClass} style={{
-                    position: "relative",
-                    top: top,
-                    left: left,
-                    transform: `rotate(${rotation}deg)`
+                    transform: `rotate(${rotation}deg) translate(${left}, ${top})`
                 }}>{newSymbol}</span>
                 : <div ref={symbolRef} className={extraClass} style={{
-                    position: "relative",
-                    top: top,
-                    left: left,
-                    transform: `rotate(${rotation}deg)`
+                    transform: `rotate(${rotation}deg) translate(${left}, ${top})`
                 }}>{newSymbol}</div>}
-        </>
+        </div>
     )
 }
 
