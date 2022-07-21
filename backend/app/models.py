@@ -1,8 +1,8 @@
+import json
 import random
 
 from django.utils import timezone
 from django.db import models
-from django.db.models import Q
 
 
 class Wanderverse(models.Model):
@@ -124,8 +124,9 @@ class Total(models.Model):
 def get_random_instance(obj, qs):
     Total.update()
     totals = Total.count()
+    rules_count = json.loads(totals["rules"])
     if obj == "rules_default":
-        count = totals["rules"]["a"] + totals["rules"]["b"]
+        count = rules_count["a"] + rules_count["b"]
     else:
         count = totals[obj]
     rand = random.randint(0, count)
