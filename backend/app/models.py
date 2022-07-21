@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.db import models
 
 
-
 class Wanderverse(models.Model):
     id = models.BigAutoField(primary_key=True)
 
@@ -75,115 +74,16 @@ class Rule(models.Model):
     text = models.CharField(max_length=1000)
     step = models.CharField(max_length=100)
 
+
 class Rules(models.Model):
-    """Figuring out complicated rules so that random functions can stop being called
-        - Create number that is at least 3 length
-        - At most 6 length
-
-        - 3:
-            - floor
-            - position
-            - book
-
-        - 4:
-            - floor
-            - position
-            - stack
-            - book
-
-        - 5:
-            - floor
-            - stack
-            - shelf
-            - book
-            - part of book
-        """
-
+    CHOICES = (
+        ('a', 'default'),
+        ('b', 'hayden:default'),
+        ('c', 'hayden:main'),
+        ('d', 'hayden:stacks'),
+    )
     list = models.JSONField()
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.list = []
-            self.floor = self.roll_dice(sides=2)
-            choice = self.choose("floor")
-            choice = self.expand(choice, "floor")
-            self.list.append(choice)
-            # choice = self.choose("stack")
-            # choice = self.expand(choice, "position")
-            # self.all.append(choice)
-            steps_to_take = self.roll_dice(sides=6, min_sides=3)
-
-            # if steps_to_take is 0, we just need to pick a book
-
-            where_we_end = self.choose("end")
-            where_we_end = self.expand(where_we_end, "end")
-
-            if steps_to_take == 0:
-                choice = self.choose("book")
-                choice = self.expand(choice, "book")
-                self.list.append(choice)
-                self.list.append(where_we_end)
-                return
-
-            # if steps_to_take is 1, stack + book
-            choice = self.choose("stack")
-            choice = self.expand(choice, "stack")
-            self.list.append(choice)
-            choice = self.choose("book")
-            choice = self.expand(choice, "book")
-            self.list.append(choice)
-            if steps_to_take == 1:
-                self.list.append(where_we_end)
-                return
-
-            # if steps_to_take is 2, stack + book + part of book
-            choice = self.choose("book_part")
-            choice = self.expand(choice, "book_part")
-            self.list.append(choice)
-            self.list.append(where_we_end)
-
-        super().save(*args, **kwargs)
-
-    def choose(self, place):
-        length_of_possible_choices = len(choices[place][str(self.floor)])
-        choice = self.roll_dice(sides=length_of_possible_choices)
-        return choices[place][str(self.floor)][choice]
-
-    def roll_dice(self, sides=6, min_sides=0):
-        # zero based
-        return random.randint(min_sides, sides - 1)
-
-    def robot_rules(self, step):
-        if step == "book_part":
-            choice = self.roll_dice(sides=len(options[str(self.floor)][step]))
-            return f"Flip to the {options[str(self.floor)][step][choice]} of the book."
-
-        num_of_options = options[str(self.floor)][step]
-        choice = self.roll_dice(num_of_options)
-        if step == "stack":
-            return f"Go to Row {choice + 1}."
-
-        suffixed = get_suffix(choice)
-        if step == "book":
-            return f"Pick up the {suffixed} book you see."
-
-        return ""
-
-    def choose_book(self):
-        # TODO: create more choices for book step
-        # choice = roll_dice()
-        # if choice == 0:
-        self.robot_rules("book")
-
-    def expand(self, choice, step):
-        """Run function if function chosen"""
-        if "function" not in choice:
-            return choice
-        func_name = choice.split("function:")[1]
-        # return func_name
-        if func_name == "robot":
-            return self.robot_rules(step)
-        return func_name
+    location = models.CharField(max_length=1, choices=CHOICES)
 
 
 class Total(models.Model):

@@ -2,37 +2,13 @@ import os
 import json
 import random
 from django.conf import settings
+
+from django.db.models import Q
 from app.models import Rules, Rule, Total
 from app.helpers import get_suffix
 
-# steps = ["start", "floor", "bookshelf", "shelf", "book", "page", "end"]
-#
-# choices = {
-#     "floor": floor,
-#     "stack": stack,
-#     "shelf": shelf,
-#     "book": book,
-#     "book_part": book_part,
-#     "end": end,
-# }
+steps_keys = ["start", "floor", "bookshelf", "shelf", "book", "page", "end"]
 
-options = {
-    "0": {
-        "genres": ["Travel section"],
-        "stack": 5,
-        "shelf": 3,
-        "book": 10,
-        "book_part": ["beginning", "middle", "end"],
-
-    },
-    "1": {
-        "stack": 249,
-        "shelf": 6,
-        "book": 10,
-        "book_part": ["beginning", "middle", "end"],
-
-    }
-}
 LOCATIONS = {'default': 'a',
              'hayden:default': 'b',
              'hayden:main': 'c',
@@ -79,7 +55,7 @@ def roll_dice(sides=6, min_sides=0):
 def robot_rules(step, sides):
     choice = roll_dice(sides=sides)
     if step == "bookshelf":
-        return f"Go to Row {choice + 1}."
+        return f"Go to Row/bookshelf {choice + 1}."
 
     suffixed = get_suffix(choice + 1)
     if step == "shelf":
@@ -93,10 +69,37 @@ def robot_rules(step, sides):
     return ""
 
 
-def create_rules(count=1000):
+def create_rules(count=1000, location="a"):
     i = 0
+    if location == "a":
+        rule_steps = Rule.objects.filter(location="a")
+    elif location == "b":
+        rule_steps = Rule.objects.filter(Q(location="b") | Q(location="a"))
+    elif location == "c" or location == "d":
+        rule_steps = Rule.objects.filter(
+            Q(location=location, step=steps_keys[0]) |
+            Q(location=location, step=steps_keys[1]) |
+            Q(location=location, step=steps_keys[2]) |
+            Q(location=location, step=steps_keys[3]) |
+            Q(location=location, step=steps_keys[4]) |
+            Q(location=location, step=steps_keys[5]) |
+            Q(location=location, step=steps_keys[6]) |
+            Q(location="a", step=steps_keys[4]) |
+            Q(location="a", step=steps_keys[5]) |
+            Q(location="a", step=steps_keys[6])
+        )
+
     while i < count:
-        r = Rules.objects.create()
+        rule_list = []
+        for key in steps_keys:
+            filtered_steps = rule_steps.filter(step=key)
+            possible_choices = filtered_steps.count()
+            if possible_choices > 1:
+                print("choice count", possible_choices, key)
+                random_int = roll_dice(possible_choices)
+                rule_list.append(filtered_steps[random_int].text)
+
+        r = Rules.objects.create(list=rule_list, location=location)
         r.save()
         i += 1
     total = Total.objects.first()

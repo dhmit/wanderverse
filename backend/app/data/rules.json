@@ -1,18 +1,18 @@
 {
     "start": {
-        "hayden:default": [
-            "Walk into MIT's glorious, recently remodelled Hayden Library",
-            "Ah, Hayden Library. Named for Mr. Library, this Humanities and Sciences Library has so much to offer. Let's explore.",
-            "Are you not in Hayden Library? Walk/run/ride/drive to Hayden Library",
-            "If you're in Hayden Library already, then there is nothing for you to do on this step. Otherwise, we'll see you in Hayden Library!",
-            "Hayden Library. Have you been there? Let's find it."
-        ],
         "default": [
             "Are you somewhere with books? Are those books on various shelves? If not, go to such a place.",
             "Get to a place with at least, like, five books",
             "Get to a place with six books or more",
             "Look around the room. Is there a shelf with books? If so, stay there!! If not, try the next room?",
             "If you are not in a library but you are located next to one, go there instead. We love libraries."
+        ],
+        "hayden:default": [
+            "Walk into MIT's glorious, recently remodelled Hayden Library",
+            "Ah, Hayden Library. Named after Mr. Library, this Humanities and Sciences Library has so much to offer. Let's explore.",
+            "Are you in Hayden Library? Walk/skip/ride/drive to Hayden Library",
+            "If you're in Hayden Library already, then there is nothing for you to do on this step. Otherwise, we'll see you in Hayden Library!",
+            "Hayden Library. Have you been there? Let's find it."
         ]
     },
     "floor": {

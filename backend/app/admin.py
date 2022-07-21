@@ -40,7 +40,7 @@ class VerseAdmin(admin.ModelAdmin):
 
 @admin.register(Rules)
 class RulesAdmin(admin.ModelAdmin):
-    list_display = ['list']
+    list_display = ['location', 'list']
 
 
 class VerseInline(admin.TabularInline):
@@ -79,7 +79,7 @@ class WanderverseAdmin(admin.ModelAdmin):
                 la.pk
             ))
 
+
 @admin.register(Rule)
 class RuleAdmin(admin.ModelAdmin):
     list_display = ['id', 'text', 'location', 'step']
-

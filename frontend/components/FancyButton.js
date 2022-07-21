@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Symbol from "./Symbol";
 
-const FancyButton = ({href, extraClass = "", title}) => {
+const FancyButton = ({href, extraClass = "", title, extraClassContainer = ""}) => {
     const [leftSymbols, setLeftSymbols] = useState([]);
     const [rightSymbols, setRightSymbols] = useState([]);
 
@@ -20,10 +20,9 @@ const FancyButton = ({href, extraClass = "", title}) => {
     }
 
     const createRandomSymbols = (side) => {
-        let rand = Math.floor(Math.random() * 10 + 4);
+        let rand = Math.floor(Math.random() * 20 + 4);
         let arr = [];
         for (let i = 0; i < rand; i++) {
-            console.log("Getting position:", side, getPosition(side))
             arr.push(<Symbol extraClass={"symbol"} key={i}
                              top={getPosition("top")}
                              left={getPosition(side)}/>);
@@ -44,7 +43,7 @@ const FancyButton = ({href, extraClass = "", title}) => {
     }, []);
 
     return (
-        <div className={"fancy-btn-container"}>
+        <div className={`fancy-btn-container ${extraClassContainer}`}>
             <div className={"row"}>
                 {leftSymbols}
                 {title &&
@@ -66,6 +65,7 @@ FancyButton.propTypes = {
     title: PropTypes.string,
     href: PropTypes.string,
     extraClass: PropTypes.string,
+    extraClassContainer: PropTypes.string,
 };
 
 export default FancyButton;
