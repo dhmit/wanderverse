@@ -19,7 +19,7 @@ class About extends React.Component {
                 <p>
                     The Wanderverse Project is made with generous support from the <a
                     href={"https://arts.mit.edu/camit/"}>Council for the Arts at MIT</a>. It was
-                    created by Anastasia Aizman
+                    created by Asya Aizman
                     (<a href={"https://digitalhumanities.mit.edu/"}>DH Lab</a>
                     ), Clare Stanton (<a href={"https://lil.law.harvard.edu"}>LIL</a>), and Andy
                     Silva (<a href={"https://lil.law.harvard.edu"}>LIL</a>). It was built at MIT's
