@@ -103,5 +103,12 @@ def create_rules(count=1000, location="a"):
         r.save()
         i += 1
     total = Total.objects.first()
-    total.rules = Rules.objects.count()
+    total.rules = {
+        "a": 0,
+        "b": 0,
+        "c": 0,
+        "d": 0
+    }
+    for location in ["a", "b", "c", "d"]:
+        total.rules[location] = Rules.objects.filter(location=location).count()
     total.save()

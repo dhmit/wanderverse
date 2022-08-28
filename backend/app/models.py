@@ -107,8 +107,6 @@ class Total(models.Model):
             obj.wanderverse = Wanderverse.all_valid().count()
             for location in ["a", "b", "c", "d"]:
                 obj.rules[location] = Rules.objects.filter(location=location).count()
-
-            print(obj)
             obj.save()
 
     @classmethod
@@ -132,5 +130,5 @@ def get_random_instance(obj, qs):
         count = totals["rules"]["c"] + totals["rules"]["d"]
     else:
         count = totals[obj]
-    rand = random.randint(0, count)
+    rand = random.randint(0, count - 1)
     return qs[rand]

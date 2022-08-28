@@ -10,8 +10,8 @@
         "hayden:default": [
             "Walk into MIT's glorious, recently remodelled Hayden Library",
             "Ah, Hayden Library. Named after Mr. Library, this Humanities and Sciences Library has so much to offer. Let's explore.",
-            "Are you in Hayden Library? Walk/skip/ride/drive to Hayden Library",
-            "If you're in Hayden Library already, then there is nothing for you to do on this step. Otherwise, we'll see you in Hayden Library!",
+            "Are you in Hayden Library? If not, walk/skip/ride/drive to Hayden Library",
+            "If you're in Hayden Library already, there is nothing for you to do on this step, great work! If not, we'll see you in Hayden Library.",
             "Hayden Library. Have you been there? Let's find it."
         ]
     },
@@ -21,7 +21,7 @@
             "Amble around the Library on the first floor",
             "Navigate to the Courtyard Cafe.",
             "What treats does the Courtyard Cafe have today? Let's look.",
-            "Are you in Hayden Library? Then find The Nexus.",
+            "Are you in Hayden Library? Then find The Nexus event space. Once there, find the closest bookshelves.",
             "Admire the view from the expansive windows of the Hayden Library."
         ],
         "hayden:stacks": [
@@ -35,7 +35,7 @@
         "hayden:main": [
             "Are you on the side of the Courtyard Cafe? Stroll to the other side.",
             "Walk to the middle of the room.",
-            "Find the shelves closest to the circulation desk",
+            "Find the shelves closest to the Information Desk",
             "Go to the shelves on the side of the Courtyard Cafe",
             "Go to the bookshelves behind the Cafeteria",
             "function:robot",
@@ -142,11 +142,13 @@
             "Flip to the very center of the book.",
             "Find a page in the back of the book that looks nice.",
             "Find a page in the first half of the book that looks nice.",
+            "Flip to a page that's the sum of two squares.",
             "Flip to a page number divisible by two.",
             "Flip to a page number divisible by three.",
             "Flip to a page number divisible by four.",
             "Flip to a page number divisible by five.",
             "Flip to a page that grabs your attention.",
+            "Think of a number that means something to you. Flip to that page.",
             "function:robot",
             "function:robot",
             "function:robot",
